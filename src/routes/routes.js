@@ -12,7 +12,7 @@ import Restaurants from '~/pages/Restaurants';
 import SuccessOrder from '~/pages/SuccessOrder';
 
 const publicRoutes = [
-    { path: config.routes.home, component: Home },
+    { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login },
     { path: config.routes.restaurants, component: Restaurants },
     { path: config.routes.restaurant, component: Restaurant },
