@@ -11,7 +11,7 @@ function DropdownMenu() {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
-                <Menu.Button className="inline-flex w-full h-10 justify-center items-center gap-x-1.5 border rounded-md bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-green-800 hover:bg-green-50">
+                <Menu.Button className="inline-flex w-full h-10 justify-center items-center gap-x-1.5 border rounded-md bg-white px-3 py-2 text-sm shadow-sm ring-0 ring-inset ring-green-800 hover:bg-light-primary/8">
                     EN
                     <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                 </Menu.Button>
