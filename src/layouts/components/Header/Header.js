@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 
 import config from '~/config';
 import images from '~/assets/img';
@@ -10,17 +10,14 @@ import IconButton from '~/components/IconButton';
 import Searchbar from '~/components/Searchbar';
 
 function Header({ hide: customHide = false, breakPointTransition }) {
-    const [isHide, startTransition] = useTransition();
     const [hide, setHide] = useState(customHide);
     if (customHide) {
         const handleScroll = () => {
-            startTransition(() => {
-                if (document.documentElement.scrollTop > breakPointTransition / 2) {
-                    setHide(false);
-                } else {
-                    setHide(true);
-                }
-            });
+            if (document.documentElement.scrollTop > breakPointTransition / 2) {
+                setHide(false);
+            } else {
+                setHide(true);
+            }
         };
 
         window.onscroll = function () {
@@ -34,7 +31,7 @@ function Header({ hide: customHide = false, breakPointTransition }) {
             {hide ? (
                 <header className="fixed px-40 h-32 w-full top-0 py-1 flex items-center justify-between space-x-5 bg-transparent z-50 will-change-scroll transition-colors ease-out">
                     <Link to={config.routes.home}>
-                        <img className="shrink h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
+                        <img className="shrink-0 h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                     </Link>
                 </header>
             ) : (
@@ -48,7 +45,7 @@ function Header({ hide: customHide = false, breakPointTransition }) {
                     <div className="inline-flex items-center space-x-3 flex-shrink-0">
                         <Button title="News" outline />
                         <Button title="Login" outline />
-                        <IconButton icon={faCartShopping} />
+                        <IconButton icon={faCartShopping} outline />
                         <DropdownMenu />
                     </div>
                 </header>

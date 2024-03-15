@@ -3,12 +3,14 @@ import { useState, useRef, useEffect } from 'react';
 
 import images from '~/assets/img';
 import Button from '~/components/Button';
+import DatabaseButton from '~/components/DatabaseButton';
 import { LotusIcon2 } from '~/components/Icons';
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
+import Footer from '~/layouts/components/Footer';
 import Header from '~/layouts/components/Header';
 
-const RESTAURANT_ITEM = [
+const RESTAURANT_ITEMS = [
     {
         img: images.restaurantBanner,
         alt: 'Restaurant Banner',
@@ -50,6 +52,18 @@ const RESTAURANT_ITEM = [
         distanceDelivery: 1.3,
     },
 ];
+
+const DATABASE_ITEMS = [
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+];
 function Homepage() {
     const [heightImage, setHeightImage] = useState(1000);
     const imageRef = useRef();
@@ -66,7 +80,13 @@ function Homepage() {
             <Header hide breakPointTransition={heightImage} />
             {/* Hero Image */}
             <section className="flex relative snap-start snap-normal">
-                <img ref={imageRef} id="heroImage" className={`w-full h-auto`} src={images.heroImage} alt="Hero" />
+                <img
+                    ref={imageRef}
+                    id="heroImage"
+                    className={`w-full h-auto max-h-[${windowHeight}px] object-cover`}
+                    src={images.heroImage}
+                    alt="Hero"
+                />
                 <div
                     className={`flex-col absolute ml-40 top-[${windowHeight / 2}px] max-w-xl w-full space-y-16 -translate-y-1/2`}
                 >
@@ -85,22 +105,27 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <section className="mt-16 mx-40 snap-center snap-always h-96 scroll-mt-2">
-                <div>
-                    <h1 className="text-4xl text-light-on-background">There's something for you!</h1>
-                </div>
-            </section>
-            <section className="mt-16 mx-40 snap-center snap-always h-96 scroll-mt-2">
+            <section className="mt-48 mx-40 snap-center snap-always scroll-mt-2">
                 <div>
                     <h1 className="text-4xl text-light-on-background">Popular restaurants near you</h1>
-                    <div className="inline-flex mt-3 space-x-8 w-full h-auto overscroll-y-auto">
-                        {RESTAURANT_ITEM.map((item, index) => (
+                    <div className="inline-flex mt-9 space-x-8 w-full h-auto overscroll-y-auto">
+                        {RESTAURANT_ITEMS.map((item, index) => (
                             <RestaurantCard data={item} key={index} />
                         ))}
                     </div>
                 </div>
             </section>
-            <section className="mt-16 mx-40 snap-center snap-always h-96 scroll-mt-2">
+            <section className="mt-52 mx-40 snap-center snap-always scroll-mt-2">
+                <div>
+                    <h1 className="text-4xl text-light-on-background">There's something for you!</h1>
+                    <div className="grid grid-cols-6 gap-5 mt-9 w-full h-auto">
+                        {DATABASE_ITEMS.map((item, index) => (
+                            <DatabaseButton data={item} key={index} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+            <section className="mt-64 mx-40 snap-center snap-always h-96 scroll-mt-2">
                 <div>
                     <h1 className="text-4xl text-light-on-background">Why VegFoLos?</h1>
                     <div className="mt-7 flex-col space-y-5">
@@ -127,6 +152,7 @@ function Homepage() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }
