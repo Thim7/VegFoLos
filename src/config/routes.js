@@ -8,6 +8,7 @@ const routes = {
     successOrder: '/successOrder',
     news: '/news',
     newsDetail: '/@:newTitle',
+    test: '/test',
 };
 
 export default routes;

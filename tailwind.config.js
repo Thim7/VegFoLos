@@ -20,6 +20,8 @@ module.exports = {
                     primary: '#ffffff',
                     'primary-container': '#ffffff',
                     secondary: '#ffffff',
+                    'secondary-container': '#1b3811',
+                    'tertiary-container': '#4e523e',
                     surface: '#191c19',
                     'surface-variant': '#414940',
                     background: '#191c19',

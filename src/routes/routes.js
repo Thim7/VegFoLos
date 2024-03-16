@@ -10,6 +10,7 @@ import NewsDetail from '~/pages/NewsDetail';
 import Restaurant from '~/pages/Restaurant';
 import Restaurants from '~/pages/Restaurants';
 import SuccessOrder from '~/pages/SuccessOrder';
+import Test from '~/pages/Test';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
@@ -21,6 +22,7 @@ const publicRoutes = [
     { path: config.routes.successOrder, component: SuccessOrder },
     { path: config.routes.news, component: News },
     { path: config.routes.newsDetail, component: NewsDetail },
+    { path: config.routes.test, component: Test, layout: null },
 ];
 
 const privateRoutes = [];

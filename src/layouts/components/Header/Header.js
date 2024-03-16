@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 import config from '~/config';
@@ -24,25 +24,28 @@ function Header({ hide: customHide = false, breakPointTransition }) {
             handleScroll();
         };
     }
-    console.log('Scrolling');
 
     return (
         <>
             {hide ? (
-                <header className="fixed px-40 h-32 w-full top-0 py-1 flex items-center justify-between space-x-5 bg-transparent z-50 will-change-scroll transition-colors ease-out">
-                    <Link to={config.routes.home}>
-                        <img className="shrink-0 h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
+                <header className=" w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-transparent z-50 transition-colors ease-out">
+                    <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden">
+                        <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                     </Link>
+                    <div className="w-full"></div>
                 </header>
             ) : (
-                <header className="fixed px-40 h-32 w-full top-0 py-1 flex items-center justify-between space-x-5 bg-white shadow-md z-50 will-change-scroll transition-colors ease-in ">
-                    <Link to={config.routes.home}>
-                        <img className="shrink h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
+                <header className="w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in ">
+                    <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden">
+                        <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                     </Link>
 
                     <Searchbar />
 
-                    <div className="inline-flex items-center space-x-3 flex-shrink-0">
+                    <div className="inline-flex items-center space-x-3 shrink-0 lg:hidden">
+                        <IconButton icon={faBars} />
+                    </div>
+                    <div className="lg:inline-flex items-center space-x-3 shrink-0 hidden">
                         <Button title="News" outline />
                         <Button title="Login" outline />
                         <IconButton icon={faCartShopping} outline />
