@@ -1,14 +1,40 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 function Button({
+    to,
+    href,
     title,
     leftIcon,
     rightIcon,
     primary = false,
     outline = false,
     text = false,
+    disabled = false,
+    onClick,
     className: customClass,
+    ...passProps
 }) {
+    let Comp = 'button';
+    const props = {
+        onClick,
+        ...passProps,
+    };
+
+    if (disabled) {
+        Object.keys(props).forEach((key) => {
+            if (key.startsWith('on') && typeof props[key] === 'function') {
+                delete props[key];
+            }
+        });
+    }
+    if (to) {
+        props.to = to;
+        Comp = Link;
+    } else if (href) {
+        props.href = href;
+        Comp = 'a';
+    }
     var classes = `
     inline-flex h-10 px-5 py-2 justify-center items-center rounded-full text-sm gap-2 font-medium
     `;
@@ -28,16 +54,17 @@ function Button({
     }
 
     return (
-        <button className={classes}>
+        <Comp className={classes} {...props}>
             {leftIcon && <FontAwesomeIcon className="mr-2" icon={leftIcon} />}
-            {title}
+            <span> {title}</span>
             {rightIcon && <FontAwesomeIcon className="ml-2" icon={rightIcon} />}
-        </button>
+        </Comp>
     );
 }
 
 Button.propTypes = {
     title: PropTypes.string.isRequired,
     leftIcon: PropTypes.object,
+    rightIcon: PropTypes.object,
 };
 export default Button;

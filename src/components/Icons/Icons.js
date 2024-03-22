@@ -1,6 +1,9 @@
-import images from '~/assets/img';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Icons.module.scss';
+
+import images from '~/assets/img';
 
 const cx = classNames.bind(styles);
 export const LotusIcon = () => (
@@ -16,3 +19,5 @@ export const CustomArrowIcon = (props) => {
     const { className, style, onClick } = props;
     return <div className={cx(className, 'slick-prev', 'slick-next')} style={{ ...style }} onClick={onClick} />;
 };
+
+export const LocationIcon = () => <FontAwesomeIcon className="w-6 h-6 text-light-on-surface" icon={faLocationDot} />;

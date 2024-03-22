@@ -13,7 +13,7 @@ import SuccessOrder from '~/pages/SuccessOrder';
 import Test from '~/pages/Test';
 
 const publicRoutes = [
-    { path: config.routes.home, component: Home, layout: null },
+    { path: config.routes.home, component: Home },
     { path: config.routes.login, component: Login },
     { path: config.routes.restaurants, component: Restaurants },
     { path: config.routes.restaurant, component: Restaurant },

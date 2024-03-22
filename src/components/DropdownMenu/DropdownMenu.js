@@ -1,51 +1,39 @@
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
-}
+import { useState } from 'react';
+import { Menu, MenuHandler, MenuList, Button, MenuItem, Typography } from '@material-tailwind/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import config from '~/config';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 function DropdownMenu() {
-    return (
-        <Menu as="div" className="relative inline-block text-left">
-            <div>
-                <Menu.Button className="inline-flex w-full h-10 justify-center items-center gap-x-1.5 border rounded-md bg-white px-3 py-2 text-sm shadow-sm ring-0 ring-inset ring-green-800 hover:bg-light-primary/8">
-                    EN
-                    <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                </Menu.Button>
-            </div>
+    const [openMenu, setOpenMenu] = useState(false);
 
-            <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-            >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
-                        {menuItems.map((item, key) => (
-                            <Menu.Item key={key}>
-                                {({ active }) => (
-                                    <a
-                                        href="/"
-                                        className={classNames(
-                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                            'block px-4 py-2 text-sm',
-                                        )}
-                                    >
-                                        {item}
-                                    </a>
-                                )}
-                            </Menu.Item>
-                        ))}
-                    </div>
-                </Menu.Items>
-            </Transition>
+    return (
+        <Menu open={openMenu} handler={setOpenMenu} allowHover>
+            <MenuHandler>
+                <Button
+                    variant="outlined"
+                    className="inline-flex h-10 px-5 py-2 justify-center items-center rounded-full text-sm gap-2 font-medium text-light-primary border border-light-outline hover:bg-light-primary/8"
+                >
+                    EN
+                    <FontAwesomeIcon
+                        icon={faChevronDown}
+                        className={`h-3.5 w-3.5 transition-transform ${openMenu ? 'rotate-180' : ''}`}
+                    />
+                </Button>
+            </MenuHandler>
+            <MenuList className="hidden w-full max-w-64 max-h-96 gap-3 overflow-visible lg:grid">
+                <ul className="flex w-full flex-col gap-1">
+                    {menuItems.map((item) => (
+                        <Link to={config.routes.home} className="w-full">
+                            <MenuItem>
+                                <Typography className="text-light-on-surface">{item}</Typography>
+                            </MenuItem>
+                        </Link>
+                    ))}
+                </ul>
+            </MenuList>
         </Menu>
     );
 }

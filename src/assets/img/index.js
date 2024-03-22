@@ -10,6 +10,13 @@ const images = {
     buttonImage: require('./buttonImage.png'),
     btnDownloadGG: require('./Download_GG_Btn.png'),
     btnDownloadAppStore: require('./Download_AppStore_Btn.png'),
+    blogImage: require('./BlogImage.png'),
+    blogImage2: require('./BlogImage2.png'),
+    blogImage3: require('./BlogImage3.png'),
+    blogImage4: require('./BlogImage4.png'),
+    blogImage5: require('./BlogImage5.png'),
+    blogImage6: require('./BlogImage6.png'),
+    blogImage7: require('./BlogImage7.png'),
 };
 
 export default images;

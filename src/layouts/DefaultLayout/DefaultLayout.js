@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import Header from '~/layouts/components/Header';
+import Footer from '../components/Footer';
 
 function DefaultLayout({ children }) {
     return (
-        <div style={{ height: 3000 }}>
-            <Header />
-            <div className="mt-32">{children}</div>
+        <div className="h-max">
+            {children}
+            <Footer />
         </div>
     );
 }

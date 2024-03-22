@@ -9,7 +9,8 @@ import Button from '~/components/Button';
 import IconButton from '~/components/IconButton';
 import Searchbar from '~/components/Searchbar';
 
-function Header({ hide: customHide = false, breakPointTransition }) {
+function Header({ hide: customHide = false, breakPointTransition, isNews = false }) {
+    // const [news,setNews] = useState(isNews);
     const [hide, setHide] = useState(customHide);
     if (customHide) {
         const handleScroll = () => {
@@ -46,9 +47,13 @@ function Header({ hide: customHide = false, breakPointTransition }) {
                         <IconButton icon={faBars} />
                     </div>
                     <div className="lg:inline-flex items-center space-x-3 shrink-0 hidden">
-                        <Button title="News" outline />
+                        {isNews ? (
+                            <Button title="Home" outline to={config.routes.home} />
+                        ) : (
+                            <Button title="News" outline to={config.routes.news} />
+                        )}
                         <Button title="Login" outline />
-                        <IconButton icon={faCartShopping} outline />
+                        {isNews ? <></> : <IconButton icon={faCartShopping} outline />}
                         <DropdownMenu />
                     </div>
                 </header>

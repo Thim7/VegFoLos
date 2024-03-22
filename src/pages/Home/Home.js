@@ -10,7 +10,6 @@ import DatabaseButton from '~/components/DatabaseButton';
 import { CustomArrowIcon, LotusIcon2 } from '~/components/Icons';
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
-import Footer from '~/layouts/components/Footer';
 import Header from '~/layouts/components/Header';
 
 const RESTAURANT_ITEMS = [
@@ -28,7 +27,7 @@ const RESTAURANT_ITEMS = [
         img: images.restaurantBanner,
         alt: 'Restaurant Banner',
         title: 'Fresh Salad - Flower Sun',
-        trusted: true,
+        trusted: false,
         tags: ['Salad', 'Rice', 'Noodle'],
         star: 4.5,
         timeDelivery: 20,
@@ -163,20 +162,15 @@ function Homepage() {
                     alt="Hero"
                 />
                 <div
-                    className={`2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[640px]:mx-2 flex-col absolute self-center max-w-3xl space-y-16`}
+                    className={`2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 sm:w-full flex-col absolute self-center max-w-3xl space-y-16`}
                 >
                     <div className="text-light-on-surface text-center md:text-start">
                         <h1 className="text-4xl">Good Morning!</h1>
                         <h2 className="text-base md:text-xl">Where should we deliver your food today?</h2>
                     </div>
-                    <div className="flex flex-wrap sm:space-x-8 max-[639px]:justify-evenly md:inline-flex items-center ">
+                    <div className="flex flex-wrap shrink w-full sm:space-x-8 max-[639px]:justify-evenly md:inline-flex items-center ">
                         <Searchbar />
-                        <Button
-                            className="ml-8 h-14 text-sm border-transparent font-medium"
-                            title="Search"
-                            leftIcon={faSearch}
-                            primary
-                        />
+                        <Button className="ml-8 h-14 border-transparent" title="Search" leftIcon={faSearch} primary />
                     </div>
                 </div>
             </section>
@@ -227,7 +221,6 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <Footer />
         </div>
     );
 }
