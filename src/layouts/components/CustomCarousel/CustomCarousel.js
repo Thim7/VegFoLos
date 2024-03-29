@@ -8,7 +8,7 @@ function CustomCarousel({ data }) {
             autoplay
             loop
             navigation={({ setActiveIndex, activeIndex, length }) => (
-                <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+                <div className="absolute top-4 right-0 z-50 flex -translate-x-2/4 gap-2 ">
                     {new Array(length).fill('').map((_, i) => (
                         <span
                             key={i}
@@ -28,8 +28,8 @@ function CustomCarousel({ data }) {
                 >
                     <img src={item.img} alt={item.title} className="w-full h-auto max-h-64 object-cover rounded-lg" />
                     <div className="absolute p-2 bottom-2 left-2 w-[calc(100%-16px)] rounded-lg bg-light-tertiary-container text-light-on-surface">
-                        <h1 className="text-xl">{item.title}</h1>
-                        <p className="text-sm truncate">{item.desc}</p>
+                        <h1 className="text-xl font-medium">{item.title}</h1>
+                        <p className="text-sm font-normal text-light-on-surface-variant">{item.desc}</p>
                     </div>
                 </Link>
             ))}

@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 
 function DefaultLayout({ children }) {
     return (
-        <div className="h-max">
+        <div className="h-max bg-light-background">
             {children}
             <Footer />
         </div>

@@ -150,7 +150,7 @@ function Homepage() {
     }, []);
 
     return (
-        <div className="bg-light-background">
+        <div className="">
             <Header hide breakPointTransition={heightImage} />
             {/* Hero Image */}
             <section className="w-full relative flex snap-start snap-normal">

@@ -24,9 +24,9 @@ export default function UnderlineTabs({ data }) {
                 ))}
             </TabsHeader>
             <TabsBody>
-                {data.map(({ value, desc }) => (
+                {data.map(({ value, content }) => (
                     <TabPanel key={value} value={value}>
-                        {desc}
+                        {content}
                     </TabPanel>
                 ))}
             </TabsBody>

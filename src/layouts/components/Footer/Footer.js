@@ -6,7 +6,7 @@ import IconButton from '~/components/IconButton';
 import { faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 function Footer() {
     return (
-        <footer className="mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4 w-full snap-center snap-always scroll-mt-2 bg-light-surface-container-lowest divide-y">
+        <footer className="mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4 w-full snap-end snap-always scroll-mt-2 bg-light-surface-container-lowest divide-y">
             <Link to={config.routes.home} className>
                 <img className="shrink-0 h-auto max-w-full w-36 z-50 py-8" src={images.logo} alt="VegFoLos" />
             </Link>
