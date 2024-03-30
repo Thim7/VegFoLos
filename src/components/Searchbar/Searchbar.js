@@ -19,11 +19,29 @@ function Searchbar() {
 
     const inputRef = useRef();
 
-    const debouncedValue = useDebounce(query, 700);
-
     const handleHideResult = () => {
         setShowResult(false);
     };
+
+    const handleFetchApi = () => {
+        if (!query.trim()) {
+            setSuggestions([]);
+            return;
+        }
+
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const results = await searchServices.search(query);
+            setSuggestions(results);
+
+            setLoading(false);
+        };
+
+        fetchApi();
+    };
+
+    useDebounce(handleFetchApi, 700, [query]);
 
     const handleClear = () => {
         setQuery('');
@@ -44,23 +62,6 @@ function Searchbar() {
         toast.success(`Selected address: ${selectedLocation.place_name}`);
     };
 
-    useEffect(() => {
-        if (!debouncedValue.trim()) {
-            setSuggestions([]);
-            return;
-        }
-
-        const fetchApi = async () => {
-            setLoading(true);
-
-            const results = await searchServices.search(debouncedValue);
-            setSuggestions(results);
-
-            setLoading(false);
-        };
-
-        fetchApi();
-    }, [debouncedValue]);
     return (
         // <div>
         <HeadlessTippy

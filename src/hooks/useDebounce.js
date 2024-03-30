@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useTimeout } from '~/hooks';
 
-function useDebounce(value, delay) {
-    const [debounceValue, setDebounceValue] = useState(value);
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebounceValue(value);
-        }, delay);
-
-        return () => {
-            clearTimeout(handler);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value]);
-    return debounceValue;
+function useDebounce(callback, delay, dependencies) {
+    const { reset, clear } = useTimeout(callback, delay);
+    useEffect(reset, [...dependencies, reset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(clear, []);
 }
 
 export default useDebounce;
