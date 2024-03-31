@@ -15,9 +15,14 @@ export const StarIcon = () => <img className="w-6 h-6 flex-shrink-0" src={images
 export const TimeIcon = () => <img className="w-6 h-6 flex-shrink-0" src={images.timeIcon} alt="Time icon" />;
 export const EllipseIcon = () => <img className="w-1 h-1 flex-shrink-0" src={images.ellipseIcon} alt="Ellipse icon" />;
 
-export const CustomArrowIcon = (props) => {
+export const CustomLeftArrowIcon = (props) => {
     const { className, style, onClick } = props;
-    return <div className={cx(className, 'slick-prev', 'slick-next')} style={{ ...style }} onClick={onClick} />;
+    return <div className={cx(className, 'slick-prev')} style={{ ...style }} onClick={onClick} />;
+};
+
+export const CustomRightArrowIcon = (props) => {
+    const { className, style, onClick } = props;
+    return <div className={cx(className, 'slick-next')} style={{ ...style }} onClick={onClick} />;
 };
 
 export const LocationIcon = () => <FontAwesomeIcon className="w-6 h-6 text-light-on-surface" icon={faLocationDot} />;

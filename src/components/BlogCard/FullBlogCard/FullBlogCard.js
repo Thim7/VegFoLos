@@ -3,7 +3,7 @@ import { BookMarkOutlineIcon } from '~/components/Icons';
 
 export default function FullBlogCard({ data }) {
     return (
-        <Card className="max-w-[352px] h-[334px] overflow-hidden bg-light-surface-container-lowest p-2 space-y-2">
+        <Card className="max-w-[352px] h-[334px] overflow-hidden bg-light-surface-container-lowest p-2 space-y-2 hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] rounded-lg">
             <CardHeader floated={false} shadow={false} color="transparent" className="m-0 h-40">
                 <img src={data.img} alt={data.title} className="w-full h-auto object-cover" />
             </CardHeader>

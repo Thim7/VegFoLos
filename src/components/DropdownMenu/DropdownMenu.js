@@ -25,8 +25,8 @@ function DropdownMenu() {
             </MenuHandler>
             <MenuList className="hidden w-full max-w-64 max-h-96 gap-3 overflow-visible lg:grid">
                 <ul className="flex w-full flex-col gap-1">
-                    {menuItems.map((item) => (
-                        <Link to={config.routes.home} className="w-full">
+                    {menuItems.map((item, index) => (
+                        <Link to={config.routes.home} key={index} className="w-full">
                             <MenuItem>
                                 <Typography className="text-light-on-surface">{item}</Typography>
                             </MenuItem>

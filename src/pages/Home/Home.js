@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import images from '~/assets/img';
 import Button from '~/components/Button';
 import DatabaseButton from '~/components/DatabaseButton';
-import { CustomArrowIcon, LotusIcon2 } from '~/components/Icons';
+import { CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2 } from '~/components/Icons';
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
 import Header from '~/layouts/components/Header';
@@ -109,8 +109,8 @@ function Homepage() {
         slidesToShow: 4,
         slidesToScroll: 1,
         swipeToSlide: true,
-        nextArrow: <CustomArrowIcon />,
-        prevArrow: <CustomArrowIcon />,
+        prevArrow: <CustomLeftArrowIcon />,
+        nextArrow: <CustomRightArrowIcon />,
         responsive: [
             {
                 breakpoint: 1332,
