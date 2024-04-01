@@ -7,7 +7,11 @@ import images from '~/assets/img';
 
 const cx = classNames.bind(styles);
 export const LotusIcon = () => (
-    <img className="w-6 h-6 flex-shrink-0 bg-light-secondary-container" src={images.lotusIcon} alt="Lotus icon" />
+    <img
+        className="w-6 h-6 flex-shrink-0 bg-light-secondary-container rounded"
+        src={images.lotusIcon}
+        alt="Lotus icon"
+    />
 );
 export const LotusIcon2 = () => <img className="w-6 h-6 flex-shrink-0" src={images.lotusIcon2} alt="Lotus icon" />;
 
@@ -51,5 +55,11 @@ export const BookMarkFilledIcon = () => (
             d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
             clipRule="evenodd"
         />
+    </svg>
+);
+
+export const HomeIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="light-on-surface">
+        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
     </svg>
 );
