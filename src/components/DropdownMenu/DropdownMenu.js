@@ -5,18 +5,19 @@ import config from '~/config';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-const menuItems = ['EN (English)', 'VI (Vietnamese)'];
-function DropdownMenu() {
+function DropdownMenu({ variant = 'outlined', title, menuItems, className: customClassName }) {
     const [openMenu, setOpenMenu] = useState(false);
 
+    var classes =
+        'inline-flex h-10 px-5 py-2 justify-center items-center rounded-full text-sm gap-2 font-medium text-light-primary border border-light-outline hover:bg-light-primary/8';
+    if (customClassName) {
+        classes += ` ${customClassName}`;
+    }
     return (
-        <Menu open={openMenu} handler={setOpenMenu} allowHover>
+        <Menu open={openMenu} handler={setOpenMenu}>
             <MenuHandler>
-                <Button
-                    variant="outlined"
-                    className="inline-flex h-10 px-5 py-2 justify-center items-center rounded-full text-sm gap-2 font-medium text-light-primary border border-light-outline hover:bg-light-primary/8"
-                >
-                    EN
+                <Button variant={variant} className={classes}>
+                    {title}
                     <FontAwesomeIcon
                         icon={faChevronDown}
                         className={`h-3.5 w-3.5 transition-transform ${openMenu ? 'rotate-180' : ''}`}
@@ -27,8 +28,10 @@ function DropdownMenu() {
                 <ul className="flex w-full flex-col gap-1">
                     {menuItems.map((item, index) => (
                         <Link to={config.routes.home} key={index} className="w-full">
-                            <MenuItem>
-                                <Typography className="text-light-on-surface">{item}</Typography>
+                            <MenuItem className="bg-light-surface-container-lowest hover:bg-light-tertiary-container transition-colors">
+                                <Typography className="text-light-on-surface hover:text-light-on-tertiary-container">
+                                    {item}
+                                </Typography>
                             </MenuItem>
                         </Link>
                     ))}

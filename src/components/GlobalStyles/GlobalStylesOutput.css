@@ -2011,6 +2011,18 @@ h1,
   column-gap: 2rem;
 }
 
+.space-x-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-10 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -2027,6 +2039,12 @@ h1,
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-8 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]){
@@ -3210,6 +3228,10 @@ h1,
 
 .pb-1\.5{
   padding-bottom: 0.375rem;
+}
+
+.pb-14{
+  padding-bottom: 3.5rem;
 }
 
 .pb-2{
@@ -5156,6 +5178,11 @@ h1,
   background-color: rgb(35 91 47 / .08);
 }
 
+.hover\:bg-light-tertiary-container:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 243 216 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-lime-500\/10:hover{
   background-color: rgb(205 220 57 / 0.1);
 }
@@ -5209,6 +5236,11 @@ h1,
 .hover\:text-light-blue-500:hover{
   --tw-text-opacity: 1;
   color: rgb(3 169 244 / var(--tw-text-opacity));
+}
+
+.hover\:text-light-on-tertiary-container:hover{
+  --tw-text-opacity: 1;
+  color: rgb(78 82 62 / var(--tw-text-opacity));
 }
 
 .hover\:text-light-primary:hover{

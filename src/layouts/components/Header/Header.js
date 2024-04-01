@@ -9,6 +9,8 @@ import Button from '~/components/Button';
 import IconButton from '~/components/IconButton';
 import Searchbar from '~/components/Searchbar';
 
+const menuItems = ['EN (English)', 'VI (Vietnamese)'];
+
 function Header({ hide: customHide = false, breakPointTransition, isNews = false }) {
     // const [news,setNews] = useState(isNews);
     const [hide, setHide] = useState(customHide);
@@ -54,7 +56,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                         )}
                         <Button title="Login" outline />
                         {isNews ? <></> : <IconButton icon={faCartShopping} outline />}
-                        <DropdownMenu />
+                        <DropdownMenu menuItems={menuItems} title="EN" />
                     </div>
                 </header>
             )}

@@ -1,8 +1,12 @@
-import { Breadcrumbs } from '@material-tailwind/react';
+import { Breadcrumbs, Typography } from '@material-tailwind/react';
 import { Link, useLocation } from 'react-router-dom';
-import { HomeIcon, LotusIcon } from '~/components/Icons';
+import DropdownMenu from '~/components/DropdownMenu';
+import { EllipseIcon, HomeIcon, LotusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
 import Header from '~/layouts/components/Header';
+
+const deliveryDate = ['Today', 'Tomorrow'];
+const deliveryTime = ['Now', 'Later'];
 
 function Restaurant() {
     let { state } = useLocation();
@@ -10,7 +14,7 @@ function Restaurant() {
     return (
         <>
             <Header />
-            <section className="w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 pt-40 snap-end snap-always">
+            <section className="bg-light-surface-container-lowest w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 pt-40 pb-14 snap-end snap-always">
                 <div className="flex-col space-y-4">
                     <Breadcrumbs className="bg-light-surface-container-high">
                         <Link
@@ -36,6 +40,45 @@ function Restaurant() {
                     <div className="flex space-x-2 items-center">
                         {data.trusted && <LotusIcon />}
                         <p className="uppercase text-3xl text-ellipsis text-light-on-surface">{data.title}</p>
+                    </div>
+                    <div className="flex space-x-1">
+                        {data.tags &&
+                            data.tags.map((tag, index) => (
+                                <Typography
+                                    className=" text-light-on-surface-variant text-ellipsis px-2 font-normal text-base"
+                                    key={index}
+                                >
+                                    #{tag}
+                                </Typography>
+                            ))}
+                    </div>
+                    <div className="flex space-x-8 items-center">
+                        <div className="flex space-x-2 items-center">
+                            <StarIcon />
+                            <p className="text-sm">{data.star}</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <div className="flex space-x-2 items-center">
+                                <TimeIcon />
+                                <p>{data.timeDelivery} mins</p>
+                            </div>
+                            <EllipseIcon />
+                            <p>{data.distanceDelivery} km</p>
+                        </div>
+                    </div>
+                    <div className="flex space-x-10">
+                        <Typography className="text-base font-bold text-light-on-surface">Openning Hours</Typography>
+                        <Typography className="text-base font-normal text-light-on-surface">
+                            Today 07:00-23:59
+                        </Typography>
+                    </div>
+                    <div className="flex space-x-8">
+                        <DropdownMenu
+                            title="Deliver date: Today"
+                            menuItems={deliveryDate}
+                            className="rounded-lg h-14"
+                        />
+                        <DropdownMenu title="Deliver time: Now" menuItems={deliveryTime} className="rounded-lg h-14" />
                     </div>
                 </div>
             </section>
