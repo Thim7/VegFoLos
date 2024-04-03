@@ -1,4 +1,3 @@
-import CustomCarousel from '~/layouts/components/CustomCarousel';
 import { FullBlogCard, ShortBlogCard } from '../BlogCard';
 import { LotusIcon2 } from '../Icons';
 import { Typography } from '@material-tailwind/react';
@@ -6,6 +5,7 @@ import Slider from 'react-slick';
 import images from '~/assets/img';
 import { CAROUSEL_DATA, FULLBLOGCARD_DATA } from '~/data';
 import { CustomLeftArrowIcon, CustomRightArrowIcon } from '~/components/Icons';
+import CustomCarousel from '../CustomCarousel';
 
 function NewsTabContent({ label = null }) {
     var settings = {

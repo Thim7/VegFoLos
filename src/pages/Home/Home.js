@@ -97,9 +97,6 @@ const DATABASE_ITEMS = [
     { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
 ];
 function Homepage() {
-    const [heightImage, setHeightImage] = useState(1000);
-    const imageRef = useRef();
-
     const screenHeight = window.innerHeight;
 
     var settings = {
@@ -144,18 +141,12 @@ function Homepage() {
         ],
     };
 
-    useEffect(() => {
-        const heroImage = imageRef.current;
-        setHeightImage(heroImage.clientHeight);
-    }, []);
-
     return (
         <div className="">
-            <Header hide breakPointTransition={heightImage} />
+            <Header hide breakPointTransition={screenHeight} />
             {/* Hero Image */}
-            <section className="w-full relative flex snap-start snap-normal">
+            <section className="w-full relative flex ">
                 <img
-                    ref={imageRef}
                     id="heroImage"
                     className={`w-full h-[780px] md:h-auto max-h-[${screenHeight}px] object-cover`}
                     src={images.heroImage}
@@ -174,7 +165,7 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 snap-center snap-always scroll-mt-2">
+            <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2">
                 <h1 className="text-4xl text-light-on-background">Popular restaurants near you</h1>
                 <div className="slider-container max-[848px]:px-8 max-[640px]:px-0">
                     <Slider className="flex mt-9 h-auto" {...settings}>
@@ -184,7 +175,7 @@ function Homepage() {
                     </Slider>
                 </div>
             </section>
-            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10 snap-center snap-always scroll-mt-2 bg-light-tertiary-container">
+            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10  scroll-mt-2 bg-light-tertiary-container">
                 <div>
                     <h1 className="text-4xl text-light-on-tertiary-container">There's something for you!</h1>
                     <div className="grid justify-items-center xl:grid-cols-6 md:grid-cols-4 max-[640px]:grid-cols-2 gap-5 mt-9 w-full h-auto">
@@ -194,7 +185,7 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <section className="w-full mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 snap-center snap-always scroll-mt-2">
+            <section className="w-full mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7  scroll-mt-2">
                 <div>
                     <h1 className="text-4xl text-light-on-background">Why VegFoLos?</h1>
                     <div className="mt-7 flex-col space-y-5">

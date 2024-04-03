@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
 
-export default function UnderlineTabs({ data }) {
+export default function UnderlineTabs({ data, className: customClassName }) {
     const [activeTab, setActiveTab] = useState(data[0].value);
 
+    var classes = 'mt-5 w-full relative';
+    if (customClassName) {
+        classes += ` ${customClassName}`;
+    }
     return (
-        <Tabs value={activeTab} className="mt-5 w-full">
+        <Tabs value={activeTab} className={classes}>
             <TabsHeader
-                className="rounded-lg m-auto max-w-[960px] border-light-surface-container-high border-b bg-light-surface-container-highest"
+                className="sticky h-10 top-32 rounded-lg border-light-surface-container-low border-b bg-light-surface-container-lowest"
                 indicatorProps={{
                     className: 'bg-transparent border-b-2 border-light-primary shadow-none rounded-none',
                 }}
@@ -23,7 +27,7 @@ export default function UnderlineTabs({ data }) {
                     </Tab>
                 ))}
             </TabsHeader>
-            <TabsBody className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4 w-full">
+            <TabsBody className="w-full">
                 {data.map(({ value, content }) => (
                     <TabPanel key={value} value={value}>
                         {content}

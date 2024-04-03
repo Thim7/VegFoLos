@@ -56,7 +56,7 @@ export const FULLBLOGCARD_DATA = [
     },
 ];
 
-export const TABS_DATA = [
+export const NEWS_TABS_DATA = [
     {
         label: 'New Feed',
         value: 'New Feed',

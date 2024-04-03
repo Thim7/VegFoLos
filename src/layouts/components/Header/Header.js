@@ -31,7 +31,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
     return (
         <>
             {hide ? (
-                <header className=" w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-transparent z-50 transition-colors ease-out">
+                <header className="w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-transparent z-50 transition-colors ease-out">
                     <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden">
                         <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                     </Link>

@@ -1,15 +1,18 @@
 import Header from '~/layouts/components/Header';
-import UnderlineTabs from '~/layouts/components/UnderlineTabs';
-import { TABS_DATA } from '~/data';
+import { NEWS_TABS_DATA } from '~/data';
+import UnderlineTabs from '~/components/UnderlineTabs';
 
 function News() {
     return (
-        <div className="">
+        <>
             <Header isNews />
-            <section className=" pt-32 snap-end snap-always w-full">
-                <UnderlineTabs data={TABS_DATA} />
+            <section className="w-full">
+                <UnderlineTabs
+                    className="pt-32 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4"
+                    data={NEWS_TABS_DATA}
+                />
             </section>
-        </div>
+        </>
     );
 }
 
