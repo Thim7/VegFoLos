@@ -1,35 +1,121 @@
 import { Breadcrumbs, IconButton, Typography } from '@material-tailwind/react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import images from '~/assets/img';
 import DropdownMenu from '~/components/DropdownMenu';
-import FoodItemCard from '~/components/FoodItemCard';
+import FoodCard from '~/components/FoodCard';
+import FoodCategory from '~/components/FoodCategory';
 import { EllipseIcon, HomeIcon, LotusIcon, PlusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
 import Header from '~/layouts/components/Header';
 
 const deliveryDate = ['Today', 'Tomorrow'];
 const deliveryTime = ['Now', 'Later'];
-
-const RESTAURANT_ITEM_TAB_DATA = [
+const FOOD_ITEM_TAB_DATA = [
     {
         label: 'Flash Sale',
-        value: 'Flash Sale',
-        content: <div>Hello</div>,
+        value: 'flashSale',
+        content: [
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+        ],
     },
     {
         label: 'Best Seller',
-        value: 'Best Seller',
-        content: <div>Hello</div>,
+        value: 'bestSeller',
+        content: [
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+        ],
     },
     {
         label: 'Best Rating',
-        value: 'Best Rating',
-        content: <div>Hello</div>,
+        value: 'bestRating',
+        content: [
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+            {
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+            },
+        ],
     },
 ];
 function Restaurant() {
+    const [active, setActive] = useState(FOOD_ITEM_TAB_DATA[0]);
+
+    const categoryRef = useRef([]);
+
+    // useEffect(() => {
+    //     categoryRef.current = categoryRef.current.slice(0, FOOD_ITEM_TAB_DATA.length);
+    //     console.log(categoryRef.current);
+    // }, []);
+
     let { state } = useLocation();
     const data = state.data;
+
+    // const listRef = useRef(null);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        const target = e.target;
+        const id = target.getAttribute('href');
+        const element = document.getElementById(String(id));
+        element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
     return (
         <>
             <Header />
@@ -101,357 +187,27 @@ function Restaurant() {
                     </div>
                 </div>
                 <div className="inline-flex">
-                    <button className="border-b-2 border-light-primary py-2 px-5">
-                        <Typography className="font-bold text-xl text-light-primary">Flash Sale</Typography>
-                    </button>
-                    <button className="py-2 px-5 hover:text-light-primary/80 text-light-on-background">
-                        <Typography className="font-medium text-xl ">Best Seller</Typography>
-                    </button>
-                    <button className="py-2 px-5 hover:text-light-primary/80 text-light-on-background">
-                        <Typography className="font-medium text-xl ">Best Rating</Typography>
-                    </button>
+                    {FOOD_ITEM_TAB_DATA.map((item, index) => (
+                        <>
+                            <a
+                                href={`#${item.value}`}
+                                key={index}
+                                onClick={handleClick}
+                                className="border-b-2 border-light-primary py-2 px-5 font-bold text-xl text-light-primary"
+                            >
+                                {item.label}
+                            </a>
+                            <button className="py-2 px-5 hover:text-light-primary/80 text-light-on-background">
+                                <Typography className="font-medium text-xl ">Best Seller</Typography>
+                            </button>
+                        </>
+                    ))}
                 </div>
             </section>
             <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
-                <section>
-                    <Typography className="text-4xl font-normal">Flash Sale</Typography>
-                    <div className="grid grid-cols-3 gap-8 mt-9">
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <Typography className="text-4xl font-normal">Flash Sale</Typography>
-                    <div className="grid grid-cols-3 gap-8 mt-9">
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <Typography className="text-4xl font-normal">Flash Sale</Typography>
-                    <div className="grid grid-cols-3 gap-8 mt-9">
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                            <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-                            <div className="relative flex-col space-y-3 content-between">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-base font-normal text-light-on-surface">
-                                        Salad & Italian bread
-                                    </Typography>
-                                    <Typography className="text-xs text-light-on-surface-variant">
-                                        Order our Salad and Italian Bread combo today and experience the perfect balance
-                                        of freshness, flavor, and tradition. It's a delightful pairing that will leave
-                                        you completely satisfied.
-                                    </Typography>
-                                </div>
-                                <div className="inline-flex items-center space-x-1">
-                                    <div className="bg-light-secondary-container p-1 rounded-lg">
-                                        <Typography className="text-light-on-secondary-container text-xs font-normal">
-                                            Save 5000 VND
-                                        </Typography>
-                                    </div>
-                                    <strike className="text-xs font-light text-light-on-surface-variant">
-                                        55000 VND
-                                    </strike>
-                                </div>
-                                <div>
-                                    <Typography className="font-bold text-base text-light-on-surface">
-                                        50000 VND
-                                    </Typography>
-                                </div>
-                                <IconButton
-                                    size="sm"
-                                    className="absolute right-0 bottom-0 rounded-full bg-light-primary"
-                                >
-                                    <PlusIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                {FOOD_ITEM_TAB_DATA.map((item, index) => (
+                    <FoodCategory id={`#${item.value}`} data={item} key={index} />
+                ))}
             </div>
         </>
     );
