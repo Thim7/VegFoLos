@@ -1,22 +1,11 @@
-import { useRef } from 'react';
-import Searchbar from '~/components/Searchbar';
 import Header from '~/layouts/components/Header';
 
 function Test() {
-    const ref = useRef();
     return (
         <div className="h-[2000px]">
-            <div className="h-full bg-brown-800">
-                <button
-                    onClick={() => {
-                        ref.current?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                >
-                    Click me!!!
-                </button>
-            </div>
-            <div ref={ref} className="bg-green-500 mt-[1500px]">
-                <span>U here!!!</span>
+            <Header />
+            <div className="flex-col bg-brown-400 h-[1000px]">
+                <div className="sticky top-32 mt-40 bg-blue-gray-800 h-32"></div>
             </div>
         </div>
     );

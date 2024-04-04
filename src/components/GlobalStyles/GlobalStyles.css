@@ -43,4 +43,13 @@
         text-overflow: ellipsis;
         /* white-space: nowrap; */
     }
+
+    .active-tab {
+        --tw-border-opacity: 1;
+        border-bottom-width: 2px;
+        border-color: rgb(35 91 47 / var(--tw-border-opacity));
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
 }

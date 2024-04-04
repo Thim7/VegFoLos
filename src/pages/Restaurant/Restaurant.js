@@ -1,9 +1,7 @@
 import { Breadcrumbs, IconButton, Typography } from '@material-tailwind/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import images from '~/assets/img';
 import DropdownMenu from '~/components/DropdownMenu';
-import FoodCard from '~/components/FoodCard';
 import FoodCategory from '~/components/FoodCategory';
 import { EllipseIcon, HomeIcon, LotusIcon, PlusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
@@ -95,31 +93,42 @@ const FOOD_ITEM_TAB_DATA = [
     },
 ];
 function Restaurant() {
-    const [active, setActive] = useState(FOOD_ITEM_TAB_DATA[0]);
-
-    const categoryRef = useRef([]);
-
-    // useEffect(() => {
-    //     categoryRef.current = categoryRef.current.slice(0, FOOD_ITEM_TAB_DATA.length);
-    //     console.log(categoryRef.current);
-    // }, []);
+    const [active, setActive] = useState(false);
 
     let { state } = useLocation();
     const data = state.data;
 
-    // const listRef = useRef(null);
-
     const handleClick = (e) => {
         e.preventDefault();
         const target = e.target;
+        console.log(target);
+        const tabLinkEls = document.querySelectorAll('.tab__link');
+        tabLinkEls.forEach((tabLinkEl) => {
+            tabLinkEl.classList.remove('active-tab');
+            tabLinkEl.classList.remove('text-light-primary');
+            tabLinkEl.classList.add('hover:text-light-primary/80');
+        });
+
+        target.classList.add('active-tab');
+        target.classList.add('text-light-primary');
+        target.classList.remove('hover:text-light-primary/80');
+
         const id = target.getAttribute('href');
         const element = document.getElementById(String(id));
         element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
+
+    useEffect(() => {
+        const tabLinkEls = document.querySelectorAll('.tab__link');
+        tabLinkEls[0].classList.add('active-tab');
+        tabLinkEls[0].classList.add('text-light-primary');
+        tabLinkEls[0].classList.remove('hover:text-light-primary/80');
+    }, []);
+
     return (
         <>
-            <Header />
-            <section className=" flex-col space-y-16 bg-light-surface-container-lowest w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-40 ">
+            <Header className="shadow-none" />
+            <section className="bg-light-surface-container-lowest w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-40 pb-8">
                 <div className="flex-col space-y-4">
                     <Breadcrumbs className="bg-light-surface-container-high">
                         <Link
@@ -186,28 +195,28 @@ function Restaurant() {
                         <DropdownMenu title="Deliver time: Now" menuItems={deliveryTime} className="rounded-lg h-14" />
                     </div>
                 </div>
-                <div className="inline-flex">
+            </section>
+            <div>
+                <ul
+                    className="sticky h-fit z-40 top-32 inline-flex 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 w-full pt-8 shadow-md bg-light-surface-container-lowest text-light-primary"
+                    onClick={handleClick}
+                >
                     {FOOD_ITEM_TAB_DATA.map((item, index) => (
-                        <>
+                        <li key={index} className="pb-2 ">
                             <a
                                 href={`#${item.value}`}
-                                key={index}
-                                onClick={handleClick}
-                                className="border-b-2 border-light-primary py-2 px-5 font-bold text-xl text-light-primary"
+                                className="tab__link py-2 px-5 font-medium text-base hover:text-light-primary/80 text-light-on-background transition-all"
                             >
                                 {item.label}
                             </a>
-                            <button className="py-2 px-5 hover:text-light-primary/80 text-light-on-background">
-                                <Typography className="font-medium text-xl ">Best Seller</Typography>
-                            </button>
-                        </>
+                        </li>
+                    ))}
+                </ul>
+                <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
+                    {FOOD_ITEM_TAB_DATA.map((item, index) => (
+                        <FoodCategory id={`#${item.value}`} data={item} key={index} />
                     ))}
                 </div>
-            </section>
-            <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
-                {FOOD_ITEM_TAB_DATA.map((item, index) => (
-                    <FoodCategory id={`#${item.value}`} data={item} key={index} />
-                ))}
             </div>
         </>
     );

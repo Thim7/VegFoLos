@@ -11,9 +11,15 @@ import Searchbar from '~/components/Searchbar';
 
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
-function Header({ hide: customHide = false, breakPointTransition, isNews = false }) {
+function Header({ hide: customHide = false, breakPointTransition, isNews = false, className: customClassName }) {
     // const [news,setNews] = useState(isNews);
     const [hide, setHide] = useState(customHide);
+
+    var classes =
+        'w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in';
+    if (customClassName) {
+        classes += ` ${customClassName}`;
+    }
     if (customHide) {
         const handleScroll = () => {
             if (document.documentElement.scrollTop > breakPointTransition / 2) {
@@ -38,7 +44,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                     <div className="w-full"></div>
                 </header>
             ) : (
-                <header className="w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in ">
+                <header className={classes}>
                     <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden">
                         <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                     </Link>
