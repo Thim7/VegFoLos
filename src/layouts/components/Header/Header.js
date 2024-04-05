@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 import config from '~/config';
 import images from '~/assets/img';
 import DropdownMenu from '~/components/DropdownMenu';
 import Button from '~/components/Button';
-import IconButton from '~/components/IconButton';
 import Searchbar from '~/components/Searchbar';
+import { IconButton } from '@material-tailwind/react';
+import { BagIcon, BarsIcon } from '~/components/Icons';
+import DrawerCustom from '~/components/DrawerCustom';
 
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
@@ -52,7 +53,14 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                     <Searchbar />
 
                     <div className="inline-flex items-center space-x-3 shrink-0 lg:hidden">
-                        <IconButton icon={faBars} />
+                        <IconButton
+                            ripple
+                            className="rounded-full bg-light-surface-container-high"
+                            variant="filled"
+                            size="lg"
+                        >
+                            <BarsIcon />
+                        </IconButton>
                     </div>
                     <div className="lg:inline-flex items-center space-x-3 shrink-0 hidden">
                         {isNews ? (
@@ -61,7 +69,16 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                             <Button title="News" outline to={config.routes.news} />
                         )}
                         <Button title="Login" outline />
-                        {isNews ? <></> : <IconButton icon={faCartShopping} outline />}
+                        {isNews ? (
+                            <></>
+                        ) : (
+                            <DrawerCustom
+                                ripple
+                                variant="outlined"
+                                className="rounded-full hover:bg-light-primary/8 "
+                                icon={<BagIcon />}
+                            />
+                        )}
                         <DropdownMenu menuItems={menuItems} title="EN" />
                     </div>
                 </header>
