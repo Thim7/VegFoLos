@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import { publicRoutes } from '~/routes';
@@ -8,7 +8,7 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
-            <div className="App">
+            <div className="App relative">
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;

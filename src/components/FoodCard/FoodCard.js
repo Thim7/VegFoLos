@@ -10,7 +10,7 @@ function FoodCard({ data }) {
     return (
         <div className="grid grid-cols-2 gap-x-4 p-2 bg-light-surface-container-lowest rounded-lg shadow-md hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
             <img src={images.blogImage2} alt="food" className="w-full h-auto object-cover rounded-xl" />
-            <div className="relative flex-col space-y-3 content-between">
+            <div className=" flex-col space-y-3 content-between">
                 <div className="flex-col space-y-2">
                     <Typography className="text-base font-normal text-light-on-surface">{data.foodName}</Typography>
                     {data.desc && (

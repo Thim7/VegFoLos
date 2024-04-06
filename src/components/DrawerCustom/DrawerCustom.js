@@ -1,7 +1,15 @@
 import { useState, Fragment } from 'react';
 import { Drawer, Button, Typography, IconButton } from '@material-tailwind/react';
 
-export default function DrawerCustom({ ripple = false, variant = 'filled', className: customClassName, icon }) {
+export default function DrawerCustom({
+    ripple = false,
+    variant = 'filled',
+    className: customClassName,
+    icon,
+    openDrawer: _openDrawer,
+    closeDrawer: _closeDrawer,
+    isOpenDrawer,
+}) {
     const [open, setOpen] = useState(false);
 
     const openDrawer = () => setOpen(true);
@@ -9,16 +17,26 @@ export default function DrawerCustom({ ripple = false, variant = 'filled', class
 
     return (
         <Fragment>
-            <IconButton ripple={ripple} variant={variant} className={customClassName} onClick={openDrawer}>
+            <IconButton
+                ripple={ripple}
+                variant={variant}
+                className={customClassName}
+                onClick={_openDrawer || openDrawer}
+            >
                 {icon}
             </IconButton>
+            {isOpenDrawer && (
+                <div
+                    className="absolute inset-0 w-screen h-screen pointer-events-auto z-[9995] bg-black bg-opacity-60 backdrop-blur-sm opacity-100 transition-all"
+                    style={{ marginLeft: 0 }}
+                ></div>
+            )}
             <Drawer
-                open={open}
-                onClose={closeDrawer}
+                open={isOpenDrawer || open}
+                onClose={_closeDrawer || closeDrawer}
                 className="p-4"
                 placement="right"
-                // overlayProps={{ invisible: true }}
-                overlay={false}
+                overlay={isOpenDrawer ? false : true}
             >
                 <div className="mb-6 flex items-center justify-between">
                     <Typography variant="h5" color="blue-gray">

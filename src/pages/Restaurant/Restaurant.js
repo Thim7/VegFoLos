@@ -101,7 +101,10 @@ function Restaurant() {
     const handleClick = (e) => {
         e.preventDefault();
         const target = e.target;
-        console.log(target);
+        if (target.tagName === 'UL') {
+            return;
+        }
+
         const tabLinkEls = document.querySelectorAll('.tab__link');
         tabLinkEls.forEach((tabLinkEl) => {
             tabLinkEl.classList.remove('active-tab');
@@ -198,6 +201,7 @@ function Restaurant() {
             </section>
             <div>
                 <ul
+                    id="categoryTabContainer"
                     className="sticky h-fit z-40 top-32 inline-flex 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 w-full pt-8 shadow-md bg-light-surface-container-lowest text-light-primary"
                     onClick={handleClick}
                 >
