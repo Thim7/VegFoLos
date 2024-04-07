@@ -1,5 +1,7 @@
 import { useState, Fragment } from 'react';
 import { Drawer, Button, Typography, IconButton } from '@material-tailwind/react';
+import { CloseIcon } from '../Icons';
+import images from '~/assets/img';
 
 export default function DrawerCustom({
     ripple = false,
@@ -34,36 +36,33 @@ export default function DrawerCustom({
             <Drawer
                 open={isOpenDrawer || open}
                 onClose={_closeDrawer || closeDrawer}
-                className="p-4"
+                className="p-4 flex-col divide-y space-y-4 "
+                size={516}
                 placement="right"
                 overlay={isOpenDrawer ? false : true}
             >
-                <div className="mb-6 flex items-center justify-between">
-                    <Typography variant="h5" color="blue-gray">
-                        Material Tailwind
+                <IconButton
+                    variant="text"
+                    className="rounded-full hover:bg-light-primary/8"
+                    onClick={_closeDrawer || closeDrawer}
+                >
+                    <CloseIcon />
+                </IconButton>
+
+                <div className="flex-col space-y-10 text-center flex-grow h-full pt-12">
+                    <img src={images.cartImage} alt="Cart" className="max-w-60 w-full h-auto m-auto" />
+                    <div>
+                        <Typography className="text-3xl font-bold">Start Shopping!</Typography>
+                        <Typography className="text-base font-normal">
+                            Add items to your basket and place order here.
+                        </Typography>
+                    </div>
+                    <Typography
+                        className="text-base text-light-primary font-medium opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
+                        onClick={_closeDrawer || closeDrawer}
+                    >
+                        Continue browsing
                     </Typography>
-                    <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="h-5 w-5"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </IconButton>
-                </div>
-                <Typography color="gray" className="mb-8 pr-4 font-normal">
-                    Material Tailwind features multiple React and HTML components, all written with Tailwind CSS classes
-                    and Material Design guidelines.
-                </Typography>
-                <div className="flex gap-2">
-                    <Button size="sm" variant="outlined">
-                        Documentation
-                    </Button>
-                    <Button size="sm">Get Started</Button>
                 </div>
             </Drawer>
         </Fragment>

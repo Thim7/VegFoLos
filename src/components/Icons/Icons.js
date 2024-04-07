@@ -58,7 +58,7 @@ export const BagIcon = () => (
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
-        stroke="#414940"
+        stroke="#235b2f"
         className="w-6 h-6"
     >
         <path
@@ -124,5 +124,18 @@ export const PlusIcon = () => (
         className="w-6 h-6"
     >
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+);
+
+export const CloseIcon = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2}
+        stroke="#414940"
+        className="h-6 w-6"
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
 );

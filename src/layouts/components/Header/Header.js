@@ -80,7 +80,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                                 <DrawerCustom
                                     ripple
                                     variant="outlined"
-                                    className="rounded-full hover:bg-light-primary/8 "
+                                    className="rounded-full hover:bg-light-primary/8 border-light-outline "
                                     icon={<BagIcon />}
                                     openDrawer={openDrawer}
                                     closeDrawer={closeDrawer}
