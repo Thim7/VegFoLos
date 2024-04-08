@@ -78,3 +78,185 @@ export const NEWS_TABS_DATA = [
         content: <NewsTabContent label="Video" />,
     },
 ];
+export const FOOD_ITEM_TAB_DATA = [
+    {
+        label: 'Flash Sale',
+        value: 'flashSale',
+        content: [
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: 'Best Seller',
+        value: 'bestSeller',
+        content: [
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: 'Best Rating',
+        value: 'bestRating',
+        content: [
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+            {
+                img: images.blogImage2,
+                foodName: 'Salad & Italian bread',
+                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                sale: 5000,
+                originalPrice: 55000,
+                totalPrice: 50000,
+                optional: [
+                    {
+                        toppingName: 'Tomato',
+                        toppingPrice: 10000,
+                    },
+                    {
+                        toppingName: 'Cucumber',
+                        toppingPrice: 5000,
+                    },
+                ],
+            },
+        ],
+    },
+];

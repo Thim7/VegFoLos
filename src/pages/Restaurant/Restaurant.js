@@ -5,93 +5,12 @@ import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
 import { EllipseIcon, HomeIcon, LotusIcon, PlusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
+import { FOOD_ITEM_TAB_DATA } from '~/data';
 import Header from '~/layouts/components/Header';
 
 const deliveryDate = ['Today', 'Tomorrow'];
 const deliveryTime = ['Now', 'Later'];
-const FOOD_ITEM_TAB_DATA = [
-    {
-        label: 'Flash Sale',
-        value: 'flashSale',
-        content: [
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-        ],
-    },
-    {
-        label: 'Best Seller',
-        value: 'bestSeller',
-        content: [
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-        ],
-    },
-    {
-        label: 'Best Rating',
-        value: 'bestRating',
-        content: [
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-            {
-                foodName: 'Salad & Italian bread',
-                desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                sale: 5000,
-                originalPrice: 55000,
-                totalPrice: 50000,
-            },
-        ],
-    },
-];
+
 function Restaurant() {
     const [active, setActive] = useState(false);
 
