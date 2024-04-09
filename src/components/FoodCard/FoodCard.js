@@ -14,7 +14,9 @@ function FoodCard({ data }) {
                 <div className="flex-col space-y-2">
                     <Typography className="text-base font-normal text-light-on-surface">{data.foodName}</Typography>
                     {data.desc && (
-                        <Typography className="text-xs text-light-on-surface-variant">{data.desc}</Typography>
+                        <Typography className="text-xs text-light-on-surface-variant text-pretty">
+                            {data.desc}
+                        </Typography>
                     )}
                 </div>
                 {data.sale && (

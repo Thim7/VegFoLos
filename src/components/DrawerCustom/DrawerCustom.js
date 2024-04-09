@@ -1,5 +1,5 @@
-import { useState, Fragment } from 'react';
-import { Drawer, Button, Typography, IconButton, Checkbox, Input } from '@material-tailwind/react';
+import { useState, Fragment, useReducer, useEffect } from 'react';
+import { Drawer, Button, Typography, IconButton, Checkbox } from '@material-tailwind/react';
 import { CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
 import numeral from 'numeral';
@@ -17,9 +17,50 @@ export default function DrawerCustom({
     isOpenDrawer,
 }) {
     const [open, setOpen] = useState(false);
+    const [isCancel, setCancel] = useState(false);
+    const [disabledBtn, setDisabledBtn] = useState(false);
+    const [totalPriceValue, setTotalPrice] = useState(3000);
 
-    const openDrawer = () => setOpen(true);
-    const closeDrawer = () => setOpen(false);
+    const body = document.body;
+    const openDrawer = () => {
+        setOpen(true);
+        body.classList.add('overflow-hidden');
+    };
+    const closeDrawer = () => {
+        setOpen(false);
+        body.classList.remove('overflow-hidden');
+    };
+
+    const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
+    const [totalPrice, dispatchPrice] = useReducer(reducerPrice, 1000);
+    function reducerPrice(price, action) {}
+    function reducerQuantity(quantity, action) {
+        switch (action.type) {
+            case 'increment':
+                return quantity + 1;
+            case 'decrement':
+                return quantity - 1;
+            case 'reset':
+                return 1;
+            default:
+                return quantity;
+        }
+    }
+    function updatePriceInCart(totalPrice, quantity) {
+        const newPrice = totalPrice * quantity;
+        setTotalPrice(newPrice);
+    }
+
+    useEffect(() => {
+        if (quantity <= 0) {
+            setCancel(true);
+            setDisabledBtn(true);
+            return;
+        }
+        setCancel(false);
+        setDisabledBtn(false);
+        // updatePriceInCart(totalPrice, quantity);
+    }, [quantity]);
 
     return (
         <Fragment>
@@ -39,8 +80,11 @@ export default function DrawerCustom({
             )}
             <Drawer
                 open={isOpenDrawer || open}
-                onClose={_closeDrawer || closeDrawer}
-                className="p-5 flex-col space-y-5 "
+                onClose={() => {
+                    _closeDrawer ? _closeDrawer() : closeDrawer();
+                    dispatchQuantity({ type: 'reset' });
+                }}
+                className="p-5 flex-col space-y-5 z-[9995]"
                 size={DRAWER_SIZE}
                 placement="right"
                 overlay={isOpenDrawer ? false : true}
@@ -50,7 +94,10 @@ export default function DrawerCustom({
                     <IconButton
                         variant="text"
                         className="left-5 rounded-full hover:bg-light-primary/8"
-                        onClick={_closeDrawer || closeDrawer}
+                        onClick={() => {
+                            _closeDrawer ? _closeDrawer() : closeDrawer();
+                            dispatchQuantity({ type: 'reset' });
+                        }}
                     >
                         <CloseIcon />
                     </IconButton>
@@ -132,25 +179,53 @@ export default function DrawerCustom({
                         >
                             <div className="inline-flex justify-between items-center space-x-5 w-full px-5 h-full">
                                 <div className="inline-flex space-x-5 items-center">
-                                    <IconButton size="lg" className="bg-light-primary rounded-full">
-                                        <MinusIcon />
-                                    </IconButton>
+                                    {disabledBtn ? (
+                                        <IconButton disabled size="lg" className="bg-light-primary rounded-full">
+                                            <MinusIcon />
+                                        </IconButton>
+                                    ) : (
+                                        <IconButton
+                                            size="lg"
+                                            className="bg-light-primary rounded-full"
+                                            onClick={() => dispatchQuantity({ type: 'decrement' })}
+                                        >
+                                            <MinusIcon />
+                                        </IconButton>
+                                    )}
                                     <Typography className="text-2xl font-medium text-light-on-tertiary-container">
-                                        1
+                                        {quantity}
                                     </Typography>
-                                    <IconButton size="lg" className="bg-light-primary rounded-full">
+                                    <IconButton
+                                        size="lg"
+                                        className="bg-light-primary rounded-full"
+                                        onClick={() => dispatchQuantity({ type: 'increment' })}
+                                    >
                                         <PlusIcon />
                                     </IconButton>
                                 </div>
                                 <div className="w-full">
-                                    <Button
-                                        size="lg"
-                                        ripple
-                                        fullWidth
-                                        className="bg-light-primary text-light-on-primary font-bolt rounded-full"
-                                    >
-                                        Update Cart - {data.totalPrice}
-                                    </Button>
+                                    {isCancel ? (
+                                        <Button
+                                            size="lg"
+                                            fullWidth
+                                            className="bg-light-error-container text-light-on-error-container font-bolt rounded-full"
+                                            onClick={() => {
+                                                _closeDrawer ? _closeDrawer() : closeDrawer();
+                                                dispatchQuantity({ type: 'reset' });
+                                            }}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            size="lg"
+                                            ripple
+                                            fullWidth
+                                            className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                        >
+                                            Update Cart - {numeral(data.totalPrice).format('0,0')}
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>
