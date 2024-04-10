@@ -1,4 +1,4 @@
-import { useState, Fragment, useReducer, useEffect } from 'react';
+import { useState, Fragment, useReducer, useEffect, useRef } from 'react';
 import { Drawer, Button, Typography, IconButton, Checkbox } from '@material-tailwind/react';
 import { CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
@@ -22,6 +22,9 @@ export default function DrawerCustom({
     const [totalPriceValue, setTotalPrice] = useState(3000);
 
     const body = document.body;
+
+    const checkboxRef = useRef([]);
+    const inputRef = useRef();
     const openDrawer = () => {
         setOpen(true);
         body.classList.add('overflow-hidden');
@@ -32,15 +35,25 @@ export default function DrawerCustom({
     };
 
     const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
-    const [totalPrice, dispatchPrice] = useReducer(reducerPrice, 1000);
-    function reducerPrice(price, action) {}
     function reducerQuantity(quantity, action) {
         switch (action.type) {
             case 'increment':
-                return quantity + 1;
+                const newQuantity = quantity + 1;
+                const totalPrice = data.totalPrice;
+                // totalPrice *= newQuantity
+                return newQuantity;
             case 'decrement':
                 return quantity - 1;
             case 'reset':
+                // Reset Optional checkbox
+                checkboxRef.current.forEach((item) => {
+                    if (item.checked === true) item.checked = false;
+                });
+
+                // Reset Note
+                if (!!inputRef.current.value) inputRef.current.value = '';
+
+                // Reset quantity
                 return 1;
             default:
                 return quantity;
@@ -139,6 +152,9 @@ export default function DrawerCustom({
                                             className="flex justify-between items-center pt-1 border-t border-light-outline-variant"
                                         >
                                             <Checkbox
+                                                inputRef={(el) => {
+                                                    checkboxRef.current[index] = el;
+                                                }}
                                                 ripple
                                                 label={item.toppingName}
                                                 labelProps={{
@@ -165,6 +181,7 @@ export default function DrawerCustom({
                                     </div>
                                     <div>
                                         <input
+                                            ref={inputRef}
                                             type="text"
                                             placeholder="E.g. Less sugar, please"
                                             className="h-11 w-full px-3 border border-light-outline focus:outline focus:shadow-md bg-light-surface-container-lowest text-light-on-surface text-base font-medium focus:placeholder:font-medium placeholder:font-normal  placeholder:text-light-on-surface-variant placeholder:opacity-80 transition-opacity rounded-lg"

@@ -2337,6 +2337,10 @@ h1,
   white-space: nowrap;
 }
 
+.text-pretty{
+  text-wrap: pretty;
+}
+
 .break-words{
   overflow-wrap: break-word;
 }
@@ -2805,6 +2809,11 @@ h1,
   background-color: rgb(3 169 244 / 0.2);
 }
 
+.bg-light-error-container{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 218 214 / var(--tw-bg-opacity));
+}
+
 .bg-light-green-200{
   --tw-bg-opacity: 1;
   background-color: rgb(197 225 165 / var(--tw-bg-opacity));
@@ -2959,11 +2968,6 @@ h1,
 
 .bg-yellow-500\/20{
   background-color: rgb(255 235 59 / 0.2);
-}
-
-.bg-light-error-container{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 218 214 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-60{
@@ -3772,6 +3776,11 @@ h1,
   color: rgb(25 28 25 / var(--tw-text-opacity));
 }
 
+.text-light-on-error-container{
+  --tw-text-opacity: 1;
+  color: rgb(65 0 2 / var(--tw-text-opacity));
+}
+
 .text-light-on-primary{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -3919,11 +3928,6 @@ h1,
 .text-yellow-900{
   --tw-text-opacity: 1;
   color: rgb(245 127 23 / var(--tw-text-opacity));
-}
-
-.text-light-on-error-container{
-  --tw-text-opacity: 1;
-  color: rgb(65 0 2 / var(--tw-text-opacity));
 }
 
 .antialiased{

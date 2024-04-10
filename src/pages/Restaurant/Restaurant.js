@@ -1,9 +1,9 @@
-import { Breadcrumbs, IconButton, Typography } from '@material-tailwind/react';
-import { useEffect, useState } from 'react';
+import { Breadcrumbs, Typography } from '@material-tailwind/react';
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
-import { EllipseIcon, HomeIcon, LotusIcon, PlusIcon, StarIcon, TimeIcon } from '~/components/Icons';
+import { EllipseIcon, HomeIcon, LotusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
 import { FOOD_ITEM_TAB_DATA } from '~/data';
 import Header from '~/layouts/components/Header';
@@ -12,7 +12,7 @@ const deliveryDate = ['Today', 'Tomorrow'];
 const deliveryTime = ['Now', 'Later'];
 
 function Restaurant() {
-    const [active, setActive] = useState(false);
+    // const [active, setActive] = useState(false);
 
     let { state } = useLocation();
     const data = state.data;

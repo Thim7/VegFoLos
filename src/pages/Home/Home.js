@@ -1,5 +1,4 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';

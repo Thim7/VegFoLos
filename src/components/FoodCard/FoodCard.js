@@ -1,5 +1,4 @@
 import { Typography } from '@material-tailwind/react';
-import images from '~/assets/img';
 import { PlusIcon } from '~/components/Icons';
 import DrawerCustom from '../DrawerCustom';
 
