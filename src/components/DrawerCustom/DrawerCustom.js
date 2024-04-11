@@ -16,15 +16,17 @@ export default function DrawerCustom({
     closeDrawer: _closeDrawer,
     isOpenDrawer,
 }) {
+    const initialPrice = data?.totalPrice;
     const [open, setOpen] = useState(false);
     const [isCancel, setCancel] = useState(false);
     const [disabledBtn, setDisabledBtn] = useState(false);
-    const [totalPriceValue, setTotalPrice] = useState(3000);
-
+    const [totalPriceValue, setTotalPrice] = useState(initialPrice);
     const body = document.body;
 
+    const nameCheckboxRef = useRef([]);
     const checkboxRef = useRef([]);
     const inputRef = useRef();
+
     const openDrawer = () => {
         setOpen(true);
         body.classList.add('overflow-hidden');
@@ -38,12 +40,14 @@ export default function DrawerCustom({
     function reducerQuantity(quantity, action) {
         switch (action.type) {
             case 'increment':
-                const newQuantity = quantity + 1;
-                const totalPrice = data.totalPrice;
+                var newQuantity = quantity + 1;
+                updatePriceInCart(initialPrice, newQuantity);
                 // totalPrice *= newQuantity
                 return newQuantity;
             case 'decrement':
-                return quantity - 1;
+                newQuantity = quantity - 1;
+                updatePriceInCart(initialPrice, newQuantity);
+                return newQuantity;
             case 'reset':
                 // Reset Optional checkbox
                 checkboxRef.current.forEach((item) => {
@@ -51,7 +55,13 @@ export default function DrawerCustom({
                 });
 
                 // Reset Note
-                if (!!inputRef.current.value) inputRef.current.value = '';
+                var valueRef = inputRef.current?.value;
+                if (!!valueRef) {
+                    inputRef.current.value = '';
+                }
+
+                // Reset price
+                updatePriceInCart(initialPrice, 1);
 
                 // Reset quantity
                 return 1;
@@ -59,8 +69,8 @@ export default function DrawerCustom({
                 return quantity;
         }
     }
-    function updatePriceInCart(totalPrice, quantity) {
-        const newPrice = totalPrice * quantity;
+    function updatePriceInCart(totalPrice, quantity, bonus = 0) {
+        const newPrice = totalPrice * quantity + bonus;
         setTotalPrice(newPrice);
     }
 
@@ -75,6 +85,14 @@ export default function DrawerCustom({
         // updatePriceInCart(totalPrice, quantity);
     }, [quantity]);
 
+    // useEffect(() => {
+    //     checkboxRef.current.map((item) => {
+    //         if (item.checked) {
+    //             const currentElement = item.parentNode;
+    //             console.log(currentElement);
+    //         }
+    //     });
+    // }, [checkboxRef]);
     return (
         <Fragment>
             <IconButton
@@ -148,6 +166,9 @@ export default function DrawerCustom({
                                 <div className="flex-col space-y-2">
                                     {data.optional.map((item, index) => (
                                         <div
+                                            ref={(el) => {
+                                                nameCheckboxRef.current[index] = el;
+                                            }}
                                             key={index}
                                             className="flex justify-between items-center pt-1 border-t border-light-outline-variant"
                                         >
@@ -240,7 +261,7 @@ export default function DrawerCustom({
                                             fullWidth
                                             className="bg-light-primary text-light-on-primary font-bolt rounded-full"
                                         >
-                                            Update Cart - {numeral(data.totalPrice).format('0,0')}
+                                            Update Cart - {numeral(totalPriceValue).format('0,0')}
                                         </Button>
                                     )}
                                 </div>

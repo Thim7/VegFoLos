@@ -9,6 +9,7 @@ import Searchbar from '~/components/Searchbar';
 import { IconButton } from '@material-tailwind/react';
 import { BagIcon, BarsIcon } from '~/components/Icons';
 import DrawerCustom from '~/components/DrawerCustom';
+import { createPortal } from 'react-dom';
 
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
@@ -38,6 +39,8 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
             handleScroll();
         };
     }
+
+    const positionApp = document.getElementsByClassName('App');
 
     return (
         <>
