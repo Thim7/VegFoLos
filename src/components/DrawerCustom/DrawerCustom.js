@@ -2,10 +2,19 @@ import { useState, Fragment, useReducer, useEffect, useRef } from 'react';
 import { Drawer, Button, Typography, IconButton, Checkbox } from '@material-tailwind/react';
 import { CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
-import numeral from 'numeral';
+import numeral, { options } from 'numeral';
 
 const DRAWER_SIZE = 516;
 
+// quantity actions
+const INCREMENT = 'increment';
+const DECREMENT = 'decrement';
+const RESET = 'reset';
+
+// order actions
+const SET_ORDER = 'set_order';
+const ADD_ORDER = 'add_order';
+const REMOVE_ORDER = 'remove_order';
 export default function DrawerCustom({
     ripple = false,
     variant = 'filled',
@@ -36,19 +45,71 @@ export default function DrawerCustom({
         body.classList.remove('overflow-hidden');
     };
 
-    const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
-    function reducerQuantity(quantity, action) {
+    const initOrderInfo = {
+        order: {
+            img: data?.img,
+            foodName: data?.foodName,
+            totalPrice: data?.totalPrice,
+            quantity: 1,
+            note: '',
+            options: [],
+        },
+        orders: [],
+    };
+
+    const [orderInfo, dispatchOrderInfo] = useReducer(reducerOrderInfo, initOrderInfo);
+    const { order, orders } = orderInfo;
+
+    var newState;
+
+    function reducerOrderInfo(orderInfo, action) {
         switch (action.type) {
-            case 'increment':
-                var newQuantity = quantity + 1;
+            case SET_ORDER:
+                return (newState = {
+                    ...orderInfo,
+                    order: {
+                        ...orderInfo.order,
+                        totalPrice: action.payload.price,
+                        quantity: action.payload.quantity,
+                        note: action.payload.note,
+                    },
+                });
+            case ADD_ORDER: {
+                return;
+            }
+            case REMOVE_ORDER:
+                return;
+            default:
+                return order;
+        }
+    }
+    console.log(newState);
+
+    const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
+
+    function reducerQuantity(quantity, action) {
+        var newQuantity;
+        switch (action.type) {
+            case INCREMENT:
+                newQuantity = quantity + 1;
                 updatePriceInCart(initialPrice, newQuantity);
+                dispatchOrderInfo({
+                    type: 'set_order',
+                    payload: { quantity: newQuantity, price: initialPrice * newQuantity },
+                });
+
                 // totalPrice *= newQuantity
                 return newQuantity;
-            case 'decrement':
+            case DECREMENT:
                 newQuantity = quantity - 1;
                 updatePriceInCart(initialPrice, newQuantity);
+                dispatchOrderInfo({
+                    type: 'set_order',
+                    payload: { quantity: newQuantity, price: initialPrice * newQuantity },
+                });
+
                 return newQuantity;
-            case 'reset':
+            case RESET:
                 // Reset Optional checkbox
                 checkboxRef.current.forEach((item) => {
                     if (item.checked === true) item.checked = false;
@@ -69,9 +130,15 @@ export default function DrawerCustom({
                 return quantity;
         }
     }
+
     function updatePriceInCart(totalPrice, quantity, bonus = 0) {
         const newPrice = totalPrice * quantity + bonus;
         setTotalPrice(newPrice);
+    }
+
+    function handleClickAddToCart() {
+        _closeDrawer ? _closeDrawer() : closeDrawer();
+        dispatchQuantity({ type: 'reset' });
     }
 
     useEffect(() => {
@@ -82,7 +149,6 @@ export default function DrawerCustom({
         }
         setCancel(false);
         setDisabledBtn(false);
-        // updatePriceInCart(totalPrice, quantity);
     }, [quantity]);
 
     // useEffect(() => {
@@ -93,6 +159,7 @@ export default function DrawerCustom({
     //         }
     //     });
     // }, [checkboxRef]);
+
     return (
         <Fragment>
             <IconButton
@@ -202,6 +269,12 @@ export default function DrawerCustom({
                                     </div>
                                     <div>
                                         <input
+                                            onChange={(e) => {
+                                                dispatchOrderInfo({
+                                                    type: 'set_order',
+                                                    payload: { note: e.target.value },
+                                                });
+                                            }}
                                             ref={inputRef}
                                             type="text"
                                             placeholder="E.g. Less sugar, please"
@@ -256,6 +329,7 @@ export default function DrawerCustom({
                                         </Button>
                                     ) : (
                                         <Button
+                                            onClick={handleClickAddToCart}
                                             size="lg"
                                             ripple
                                             fullWidth
