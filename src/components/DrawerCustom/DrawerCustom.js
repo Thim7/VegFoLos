@@ -26,10 +26,12 @@ export default function DrawerCustom({
     isOpenDrawer,
 }) {
     const initialPrice = data?.totalPrice;
+
     const [open, setOpen] = useState(false);
     const [isCancel, setCancel] = useState(false);
     const [disabledBtn, setDisabledBtn] = useState(false);
     const [totalPriceValue, setTotalPrice] = useState(initialPrice);
+
     const body = document.body;
 
     const nameCheckboxRef = useRef([]);
@@ -65,15 +67,27 @@ export default function DrawerCustom({
     function reducerOrderInfo(orderInfo, action) {
         switch (action.type) {
             case SET_ORDER:
-                return (newState = {
-                    ...orderInfo,
-                    order: {
-                        ...orderInfo.order,
-                        totalPrice: action.payload.price,
-                        quantity: action.payload.quantity,
-                        note: action.payload.note,
-                    },
-                });
+                if (action.payload.from === 'quantity') {
+                    return (newState = {
+                        ...orderInfo,
+                        order: {
+                            ...orderInfo.order,
+                            totalPrice: action.payload.price,
+                            quantity: action.payload.quantity,
+                        },
+                    });
+                }
+                if (action.payload.from === 'note') {
+                    return (newState = {
+                        ...orderInfo,
+                        order: {
+                            ...orderInfo.order,
+                            note: action.payload.note,
+                        },
+                    });
+                }
+                break;
+
             case ADD_ORDER: {
                 return;
             }
@@ -83,7 +97,6 @@ export default function DrawerCustom({
                 return order;
         }
     }
-    console.log(newState);
 
     const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
 
@@ -95,7 +108,7 @@ export default function DrawerCustom({
                 updatePriceInCart(initialPrice, newQuantity);
                 dispatchOrderInfo({
                     type: 'set_order',
-                    payload: { quantity: newQuantity, price: initialPrice * newQuantity },
+                    payload: { from: 'quantity', quantity: newQuantity, price: initialPrice * newQuantity },
                 });
 
                 // totalPrice *= newQuantity
@@ -105,7 +118,7 @@ export default function DrawerCustom({
                 updatePriceInCart(initialPrice, newQuantity);
                 dispatchOrderInfo({
                     type: 'set_order',
-                    payload: { quantity: newQuantity, price: initialPrice * newQuantity },
+                    payload: { from: 'quantity', quantity: newQuantity, price: initialPrice * newQuantity },
                 });
 
                 return newQuantity;
@@ -271,6 +284,7 @@ export default function DrawerCustom({
                                         <input
                                             onChange={(e) => {
                                                 dispatchOrderInfo({
+                                                    from: 'note',
                                                     type: 'set_order',
                                                     payload: { note: e.target.value },
                                                 });

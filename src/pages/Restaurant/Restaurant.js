@@ -5,7 +5,6 @@ import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
 import { EllipseIcon, HomeIcon, LotusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';
-import { FOOD_ITEM_TAB_DATA } from '~/data';
 import Header from '~/layouts/components/Header';
 
 const deliveryDate = ['Today', 'Tomorrow'];
@@ -124,7 +123,7 @@ function Restaurant() {
                     className="sticky h-fit z-40 top-32 inline-flex 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 w-full pt-8 shadow-md bg-light-surface-container-lowest text-light-primary"
                     onClick={handleClick}
                 >
-                    {FOOD_ITEM_TAB_DATA.map((item, index) => (
+                    {data.foodTabData.map((item, index) => (
                         <li key={index} className="pb-2 ">
                             <a
                                 href={`#${item.value}`}
@@ -136,7 +135,7 @@ function Restaurant() {
                     ))}
                 </ul>
                 <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
-                    {FOOD_ITEM_TAB_DATA.map((item, index) => (
+                    {data.foodTabData.map((item, index) => (
                         <FoodCategory id={`#${item.value}`} data={item} key={index} />
                     ))}
                 </div>
