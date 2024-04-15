@@ -23,6 +23,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -41,6 +42,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -59,6 +61,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -83,6 +86,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -101,6 +105,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -119,6 +124,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -143,6 +149,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -161,6 +168,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -179,6 +187,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -215,6 +224,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -233,6 +243,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -251,6 +262,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -275,6 +287,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -293,6 +306,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -311,6 +325,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -335,6 +350,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -353,6 +369,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -371,6 +388,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -407,6 +425,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -425,6 +444,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -443,6 +463,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -467,6 +488,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -485,6 +507,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -503,6 +526,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -527,6 +551,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -545,6 +570,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -563,6 +589,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -599,6 +626,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -617,6 +645,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -635,6 +664,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -659,6 +689,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -677,6 +708,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -695,6 +727,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -719,6 +752,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -737,6 +771,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -755,6 +790,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -791,6 +827,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -809,6 +846,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -827,6 +865,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -851,6 +890,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -869,6 +909,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -887,6 +928,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -911,6 +953,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -929,6 +972,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -947,6 +991,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -983,6 +1028,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1001,6 +1047,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1019,6 +1066,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1043,6 +1091,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1061,6 +1110,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1079,6 +1129,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1103,6 +1154,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1121,6 +1173,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',
@@ -1139,6 +1192,7 @@ export const RESTAURANT_ITEMS = [
                         sale: 5000,
                         originalPrice: 55000,
                         totalPrice: 50000,
+                        note: '',
                         optional: [
                             {
                                 toppingName: 'Tomato',

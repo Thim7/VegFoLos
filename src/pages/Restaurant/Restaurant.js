@@ -1,5 +1,5 @@
 import { Breadcrumbs, Typography } from '@material-tailwind/react';
-import { useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
@@ -9,7 +9,7 @@ import Header from '~/layouts/components/Header';
 
 const deliveryDate = ['Today', 'Tomorrow'];
 const deliveryTime = ['Now', 'Later'];
-
+export const RestaurantDataContext = createContext();
 function Restaurant() {
     // const [active, setActive] = useState(false);
 
@@ -48,98 +48,106 @@ function Restaurant() {
 
     return (
         <>
-            <Header className="shadow-none" />
-            <section className="bg-light-surface-container-lowest w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-40 pb-8">
-                <div className="flex-col space-y-4">
-                    <Breadcrumbs className="bg-light-surface-container-high">
-                        <Link
-                            to={config.routes.home}
-                            className="opacity-60 hover:text-light-primary text-light-on-surface transition-colors "
-                        >
-                            <HomeIcon />
-                        </Link>
-                        <Link
-                            to={config.routes.restaurants}
-                            className="hover:text-light-primary text-light-on-surface transition-colors opacity-60"
-                        >
-                            <span>Restaurants</span>
-                        </Link>
-
-                        <Link
-                            to={config.routes.restaurants}
-                            className="hover:text-light-primary text-light-on-surface transition-colors"
-                        >
-                            <span>{data.title}</span>
-                        </Link>
-                    </Breadcrumbs>
-                    <div className="flex space-x-2 items-center">
-                        {data.trusted && <LotusIcon />}
-                        <p className="uppercase text-3xl text-ellipsis text-light-on-surface">{data.title}</p>
-                    </div>
-                    <div className="flex space-x-1">
-                        {data.tags &&
-                            data.tags.map((tag, index) => (
-                                <Typography
-                                    className=" text-light-on-surface-variant text-ellipsis px-2 font-normal text-base"
-                                    key={index}
-                                >
-                                    #{tag}
-                                </Typography>
-                            ))}
-                    </div>
-                    <div className="flex space-x-8 items-center">
-                        <div className="flex space-x-2 items-center">
-                            <StarIcon />
-                            <p className="text-sm">{data.star}</p>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <div className="flex space-x-2 items-center">
-                                <TimeIcon />
-                                <p>{data.timeDelivery} mins</p>
-                            </div>
-                            <EllipseIcon />
-                            <p>{data.distanceDelivery} km</p>
-                        </div>
-                    </div>
-                    <div className="flex space-x-10">
-                        <Typography className="text-base font-bold text-light-on-surface">Openning Hours</Typography>
-                        <Typography className="text-base font-normal text-light-on-surface">
-                            Today 07:00-23:59
-                        </Typography>
-                    </div>
-                    <div className="flex space-x-8">
-                        <DropdownMenu
-                            title="Deliver date: Today"
-                            menuItems={deliveryDate}
-                            className="rounded-lg h-14"
-                        />
-                        <DropdownMenu title="Deliver time: Now" menuItems={deliveryTime} className="rounded-lg h-14" />
-                    </div>
-                </div>
-            </section>
-            <div>
-                <ul
-                    id="categoryTabContainer"
-                    className="sticky h-fit z-40 top-32 inline-flex 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 w-full pt-8 shadow-md bg-light-surface-container-lowest text-light-primary"
-                    onClick={handleClick}
-                >
-                    {data.foodTabData.map((item, index) => (
-                        <li key={index} className="pb-2 ">
-                            <a
-                                href={`#${item.value}`}
-                                className="tab__link py-2 px-5 font-medium text-base hover:text-light-primary/80 text-light-on-background transition-all"
+            <RestaurantDataContext.Provider value={data}>
+                <Header className="shadow-none" />
+                <section className="bg-light-surface-container-lowest w-full 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-40 pb-8">
+                    <div className="flex-col space-y-4">
+                        <Breadcrumbs className="bg-light-surface-container-high">
+                            <Link
+                                to={config.routes.home}
+                                className="opacity-60 hover:text-light-primary text-light-on-surface transition-colors "
                             >
-                                {item.label}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-                <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
-                    {data.foodTabData.map((item, index) => (
-                        <FoodCategory id={`#${item.value}`} data={item} key={index} />
-                    ))}
+                                <HomeIcon />
+                            </Link>
+                            <Link
+                                to={config.routes.restaurants}
+                                className="hover:text-light-primary text-light-on-surface transition-colors opacity-60"
+                            >
+                                <span>Restaurants</span>
+                            </Link>
+
+                            <Link
+                                to={config.routes.restaurants}
+                                className="hover:text-light-primary text-light-on-surface transition-colors"
+                            >
+                                <span>{data.title}</span>
+                            </Link>
+                        </Breadcrumbs>
+                        <div className="flex space-x-2 items-center">
+                            {data.trusted && <LotusIcon />}
+                            <p className="uppercase text-3xl text-ellipsis text-light-on-surface">{data.title}</p>
+                        </div>
+                        <div className="flex space-x-1">
+                            {data.tags &&
+                                data.tags.map((tag, index) => (
+                                    <Typography
+                                        className=" text-light-on-surface-variant text-ellipsis px-2 font-normal text-base"
+                                        key={index}
+                                    >
+                                        #{tag}
+                                    </Typography>
+                                ))}
+                        </div>
+                        <div className="flex space-x-8 items-center">
+                            <div className="flex space-x-2 items-center">
+                                <StarIcon />
+                                <p className="text-sm">{data.star}</p>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <div className="flex space-x-2 items-center">
+                                    <TimeIcon />
+                                    <p>{data.timeDelivery} mins</p>
+                                </div>
+                                <EllipseIcon />
+                                <p>{data.distanceDelivery} km</p>
+                            </div>
+                        </div>
+                        <div className="flex space-x-10">
+                            <Typography className="text-base font-bold text-light-on-surface">
+                                Openning Hours
+                            </Typography>
+                            <Typography className="text-base font-normal text-light-on-surface">
+                                Today 07:00-23:59
+                            </Typography>
+                        </div>
+                        <div className="flex space-x-8">
+                            <DropdownMenu
+                                title="Deliver date: Today"
+                                menuItems={deliveryDate}
+                                className="rounded-lg h-14"
+                            />
+                            <DropdownMenu
+                                title="Deliver time: Now"
+                                menuItems={deliveryTime}
+                                className="rounded-lg h-14"
+                            />
+                        </div>
+                    </div>
+                </section>
+                <div>
+                    <ul
+                        id="categoryTabContainer"
+                        className="sticky h-fit z-40 top-32 inline-flex 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 w-full pt-8 shadow-md bg-light-surface-container-lowest text-light-primary"
+                        onClick={handleClick}
+                    >
+                        {data.foodTabData.map((item, index) => (
+                            <li key={index} className="pb-2 ">
+                                <a
+                                    href={`#${item.value}`}
+                                    className="tab__link py-2 px-5 font-medium text-base hover:text-light-primary/80 text-light-on-background transition-all"
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 mt-16 flex-col space-y-16">
+                        {data.foodTabData.map((item, index) => {
+                            return <FoodCategory id={`#${item.value}`} data={item} key={index} />;
+                        })}
+                    </div>
                 </div>
-            </div>
+            </RestaurantDataContext.Provider>
         </>
     );
 }

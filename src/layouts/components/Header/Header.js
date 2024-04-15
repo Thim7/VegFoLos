@@ -9,12 +9,10 @@ import Searchbar from '~/components/Searchbar';
 import { IconButton } from '@material-tailwind/react';
 import { BagIcon, BarsIcon } from '~/components/Icons';
 import DrawerCustom from '~/components/DrawerCustom';
-import { createPortal } from 'react-dom';
 
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
 function Header({ hide: customHide = false, breakPointTransition, isNews = false, className: customClassName }) {
-    // const [news,setNews] = useState(isNews);
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
 
@@ -88,6 +86,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                                     openDrawer={openDrawer}
                                     closeDrawer={closeDrawer}
                                     isOpenDrawer={isOpenDrawer}
+                                    isCartBtn
                                 />
                             )}
                             <DropdownMenu menuItems={menuItems} title="EN" />

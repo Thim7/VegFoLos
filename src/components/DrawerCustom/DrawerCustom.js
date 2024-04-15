@@ -1,9 +1,12 @@
-import { useState, Fragment, useReducer, useEffect, useRef } from 'react';
+import { useState, Fragment, useReducer, useEffect, useRef, useContext } from 'react';
 import { Drawer, Button, Typography, IconButton, Checkbox } from '@material-tailwind/react';
-import { CloseIcon, MinusIcon, PlusIcon } from '../Icons';
+import { BagIcon, CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
-import numeral, { options } from 'numeral';
-
+import numeral from 'numeral';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderAdded } from '~/features/orders/ordersSlice';
+import { nanoid } from '@reduxjs/toolkit';
+import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 const DRAWER_SIZE = 516;
 
 // quantity actions
@@ -11,10 +14,17 @@ const INCREMENT = 'increment';
 const DECREMENT = 'decrement';
 const RESET = 'reset';
 
-// order actions
-const SET_ORDER = 'set_order';
-const ADD_ORDER = 'add_order';
-const REMOVE_ORDER = 'remove_order';
+// Selector
+const getTotalPriceInCart = (state) => {
+    const orders = state.orders;
+    let result = 0;
+    const priceArr = orders.map((order) => order.totalPrice);
+    priceArr.forEach((item) => (result += item));
+    return result;
+};
+
+const getOrdersInCart = (state) => state.orders;
+
 export default function DrawerCustom({
     ripple = false,
     variant = 'filled',
@@ -24,19 +34,32 @@ export default function DrawerCustom({
     openDrawer: _openDrawer,
     closeDrawer: _closeDrawer,
     isOpenDrawer,
+    isCartBtn = false,
 }) {
-    const initialPrice = data?.totalPrice;
+    const totalPrice = data?.totalPrice;
+    const originalPrice = data?.originalPrice;
 
     const [open, setOpen] = useState(false);
     const [isCancel, setCancel] = useState(false);
     const [disabledBtn, setDisabledBtn] = useState(false);
-    const [totalPriceValue, setTotalPrice] = useState(initialPrice);
+    const [totalPriceValue, setTotalPrice] = useState(totalPrice);
+    const [originalPriceValue, setOriginalPrice] = useState(originalPrice);
+    const [haveOrders, setHaveOrders] = useState(false);
 
     const body = document.body;
+
+    const { title } = useContext(RestaurantDataContext);
+
+    const totalPriceInCart = useSelector(getTotalPriceInCart);
+    const haveOrdersInCart = useSelector(getOrdersInCart);
 
     const nameCheckboxRef = useRef([]);
     const checkboxRef = useRef([]);
     const inputRef = useRef();
+
+    const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
+
+    const dispatch = useDispatch();
 
     const openDrawer = () => {
         setOpen(true);
@@ -45,113 +68,71 @@ export default function DrawerCustom({
     const closeDrawer = () => {
         setOpen(false);
         body.classList.remove('overflow-hidden');
-    };
 
-    const initOrderInfo = {
-        order: {
-            img: data?.img,
-            foodName: data?.foodName,
-            totalPrice: data?.totalPrice,
-            quantity: 1,
-            note: '',
-            options: [],
-        },
-        orders: [],
-    };
+        // Reset Optional checkbox
+        checkboxRef.current.forEach((item) => {
+            if (item.checked === true) item.checked = false;
+        });
 
-    const [orderInfo, dispatchOrderInfo] = useReducer(reducerOrderInfo, initOrderInfo);
-    const { order, orders } = orderInfo;
-
-    var newState;
-
-    function reducerOrderInfo(orderInfo, action) {
-        switch (action.type) {
-            case SET_ORDER:
-                if (action.payload.from === 'quantity') {
-                    return (newState = {
-                        ...orderInfo,
-                        order: {
-                            ...orderInfo.order,
-                            totalPrice: action.payload.price,
-                            quantity: action.payload.quantity,
-                        },
-                    });
-                }
-                if (action.payload.from === 'note') {
-                    return (newState = {
-                        ...orderInfo,
-                        order: {
-                            ...orderInfo.order,
-                            note: action.payload.note,
-                        },
-                    });
-                }
-                break;
-
-            case ADD_ORDER: {
-                return;
-            }
-            case REMOVE_ORDER:
-                return;
-            default:
-                return order;
+        // Reset Note
+        var valueRef = inputRef.current?.value;
+        if (!!valueRef) {
+            inputRef.current.value = '';
         }
-    }
 
-    const [quantity, dispatchQuantity] = useReducer(reducerQuantity, 1);
+        // Reset price
+        updatePriceInCart(totalPrice, originalPrice, 1);
+
+        // Reset quantity
+        dispatchQuantity({ type: 'reset' });
+    };
+
+    const handleClickMinusBtn = () => {
+        dispatchQuantity({ type: 'decrement' });
+    };
+
+    const handleClickPlusBtn = () => {
+        dispatchQuantity({ type: 'increment' });
+    };
 
     function reducerQuantity(quantity, action) {
-        var newQuantity;
         switch (action.type) {
             case INCREMENT:
-                newQuantity = quantity + 1;
-                updatePriceInCart(initialPrice, newQuantity);
-                dispatchOrderInfo({
-                    type: 'set_order',
-                    payload: { from: 'quantity', quantity: newQuantity, price: initialPrice * newQuantity },
-                });
+                return quantity + 1;
 
-                // totalPrice *= newQuantity
-                return newQuantity;
             case DECREMENT:
-                newQuantity = quantity - 1;
-                updatePriceInCart(initialPrice, newQuantity);
-                dispatchOrderInfo({
-                    type: 'set_order',
-                    payload: { from: 'quantity', quantity: newQuantity, price: initialPrice * newQuantity },
-                });
+                return quantity - 1;
 
-                return newQuantity;
             case RESET:
-                // Reset Optional checkbox
-                checkboxRef.current.forEach((item) => {
-                    if (item.checked === true) item.checked = false;
-                });
-
-                // Reset Note
-                var valueRef = inputRef.current?.value;
-                if (!!valueRef) {
-                    inputRef.current.value = '';
-                }
-
-                // Reset price
-                updatePriceInCart(initialPrice, 1);
-
-                // Reset quantity
                 return 1;
             default:
                 return quantity;
         }
     }
 
-    function updatePriceInCart(totalPrice, quantity, bonus = 0) {
-        const newPrice = totalPrice * quantity + bonus;
-        setTotalPrice(newPrice);
+    function updatePriceInCart(totalPrice, originalPrice, quantity, bonus = 0) {
+        const newTotalPrice = totalPrice * quantity + bonus;
+        const newOriginalPrice = originalPrice * quantity;
+        setTotalPrice(newTotalPrice);
+        setOriginalPrice(newOriginalPrice);
     }
 
     function handleClickAddToCart() {
-        _closeDrawer ? _closeDrawer() : closeDrawer();
-        dispatchQuantity({ type: 'reset' });
+        dispatch(
+            orderAdded({
+                id: nanoid(),
+                title,
+                img: data.img,
+                foodName: data.foodName,
+                quantity,
+                originalPrice: originalPriceValue,
+                totalPrice: totalPriceValue,
+                note: inputRef.current?.value,
+                optional: data.optional,
+            }),
+        );
+        setHaveOrders(true);
+        closeDrawer();
     }
 
     useEffect(() => {
@@ -162,6 +143,8 @@ export default function DrawerCustom({
         }
         setCancel(false);
         setDisabledBtn(false);
+        updatePriceInCart(totalPrice, originalPrice, quantity);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quantity]);
 
     // useEffect(() => {
@@ -172,17 +155,27 @@ export default function DrawerCustom({
     //         }
     //     });
     // }, [checkboxRef]);
-
     return (
         <Fragment>
-            <IconButton
-                ripple={ripple}
-                variant={variant}
-                className={customClassName}
-                onClick={_openDrawer || openDrawer}
-            >
-                {icon}
-            </IconButton>
+            {isCartBtn && haveOrdersInCart.length > 0 ? (
+                <Button
+                    onClick={_openDrawer || openDrawer}
+                    size="sm"
+                    className="flex items-center gap-3 rounded-full bg-light-primary"
+                >
+                    <BagIcon color="#ffffff" />
+                    {numeral(totalPriceInCart).format('0,0')}
+                </Button>
+            ) : (
+                <IconButton
+                    ripple={ripple}
+                    variant={variant}
+                    className={customClassName}
+                    onClick={_openDrawer || openDrawer}
+                >
+                    {icon}
+                </IconButton>
+            )}
             {isOpenDrawer && (
                 <div
                     className="absolute inset-0 w-screen h-screen pointer-events-auto z-[9995] bg-black bg-opacity-60 backdrop-blur-sm opacity-100 transition-all"
@@ -191,54 +184,51 @@ export default function DrawerCustom({
             )}
             <Drawer
                 open={isOpenDrawer || open}
-                onClose={() => {
-                    _closeDrawer ? _closeDrawer() : closeDrawer();
-                    dispatchQuantity({ type: 'reset' });
-                }}
+                onClose={_closeDrawer || closeDrawer}
                 className="p-5 flex-col space-y-5 z-[9995]"
                 size={DRAWER_SIZE}
                 placement="right"
                 overlay={isOpenDrawer ? false : true}
             >
                 {/* Close Button */}
-                <div className="fixed top-5 pb-5 border-b w-full mx-[-20px]">
+                <div className="fixed top-0 py-5 border-b w-full mx-[-20px] z-50 bg-light-surface-container-lowest">
                     <IconButton
                         variant="text"
                         className="left-5 rounded-full hover:bg-light-primary/8"
-                        onClick={() => {
-                            _closeDrawer ? _closeDrawer() : closeDrawer();
-                            dispatchQuantity({ type: 'reset' });
-                        }}
+                        onClick={_closeDrawer || closeDrawer}
                     >
                         <CloseIcon />
                     </IconButton>
                 </div>
                 {data && data.optional && (
                     <>
-                        <div className="inline-flex space-x-5 justify-between items-center pt-16">
-                            <img
-                                src={data.img}
-                                alt={data.foodName}
-                                className="max-w-36 w-full h-auto object-cover rounded-xl"
-                            ></img>
-                            <div className="inline-flex">
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-light-on-surface font-bold text-xl">
-                                        {data.foodName}
-                                    </Typography>
-                                    <p className="text-light-on-surface-variant font-normal text-base">{data.desc}</p>
-                                </div>
-                                <div className="flex-col space-y-2">
-                                    <Typography className="text-light-on-surface font-bold text-xl">
-                                        {numeral(data.totalPrice).format('0,0')}
-                                    </Typography>
-                                    <strike className="text-light-on-surface-variant font-light text-base justify-self-start">
-                                        {numeral(data.originalPrice).format('0,0')}
-                                    </strike>
+                        <div className="flex-col space-y-5 h-screen pt-16 mx-[-20px] overflow-auto">
+                            <div className="inline-flex space-x-5 justify-between items-center px-5">
+                                <img
+                                    src={data.img}
+                                    alt={data.foodName}
+                                    className="max-w-36 w-full h-auto object-cover rounded-xl"
+                                ></img>
+                                <div className="inline-flex">
+                                    <div className="flex-col space-y-2">
+                                        <Typography className="text-light-on-surface font-bold text-xl">
+                                            {data.foodName}
+                                        </Typography>
+                                        <p className="text-light-on-surface-variant font-normal text-base">
+                                            {data.desc}
+                                        </p>
+                                    </div>
+                                    <div className="flex-col space-y-2">
+                                        <Typography className="text-light-on-surface font-bold text-xl">
+                                            {numeral(totalPriceValue).format('0,0')}
+                                        </Typography>
+                                        <strike className="text-light-on-surface-variant font-light text-base justify-self-start">
+                                            {numeral(originalPriceValue).format('0,0')}
+                                        </strike>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="pt-5 border-t-8 border-light-outline-variant mx-[-20px]">
+                            <div className="pt-5 border-t-8 border-light-outline-variant"></div>
                             <div className="mx-5">
                                 <Typography className="mb-3 font-medium text-light-on-surface">
                                     Optional ({data.optional.length})
@@ -270,32 +260,25 @@ export default function DrawerCustom({
                                     ))}
                                 </div>
                             </div>
-                        </div>
-                        <div className="pt-5 border-t-8 border-light-outline-variant mx-[-20px]">
-                            <div className="mx-5">
-                                <div className="flex-col space-y-2">
-                                    <div className="inline-flex space-x-2 items-center">
-                                        <Typography className="font-medium text-light-on-surface">Note</Typography>
-                                        <Typography className="font-light text-light-on-surface-variant text-xs">
-                                            Optional
-                                        </Typography>
+                            <div className="pt-5 border-t-8 border-light-outline-variant">
+                                <div className="mx-5">
+                                    <div className="flex-col space-y-2">
+                                        <div className="inline-flex space-x-2 items-center">
+                                            <Typography className="font-medium text-light-on-surface">Note</Typography>
+                                            <Typography className="font-light text-light-on-surface-variant text-xs">
+                                                Optional
+                                            </Typography>
+                                        </div>
+                                        <div>
+                                            <input
+                                                ref={inputRef}
+                                                type="text"
+                                                placeholder="E.g. Less sugar, please"
+                                                className="h-11 w-full px-3 border border-light-outline focus:outline focus:shadow-md bg-light-surface-container-lowest text-light-on-surface text-base font-medium focus:placeholder:font-medium placeholder:font-normal  placeholder:text-light-on-surface-variant placeholder:opacity-80 transition-opacity rounded-lg"
+                                            />
+                                        </div>
+                                        <div></div>
                                     </div>
-                                    <div>
-                                        <input
-                                            onChange={(e) => {
-                                                dispatchOrderInfo({
-                                                    from: 'note',
-                                                    type: 'set_order',
-                                                    payload: { note: e.target.value },
-                                                });
-                                            }}
-                                            ref={inputRef}
-                                            type="text"
-                                            placeholder="E.g. Less sugar, please"
-                                            className="h-11 w-full px-3 border border-light-outline focus:outline focus:shadow-md bg-light-surface-container-lowest text-light-on-surface text-base font-medium focus:placeholder:font-medium placeholder:font-normal  placeholder:text-light-on-surface-variant placeholder:opacity-80 transition-opacity rounded-lg"
-                                        />
-                                    </div>
-                                    <div></div>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +295,7 @@ export default function DrawerCustom({
                                         <IconButton
                                             size="lg"
                                             className="bg-light-primary rounded-full"
-                                            onClick={() => dispatchQuantity({ type: 'decrement' })}
+                                            onClick={handleClickMinusBtn}
                                         >
                                             <MinusIcon />
                                         </IconButton>
@@ -323,7 +306,7 @@ export default function DrawerCustom({
                                     <IconButton
                                         size="lg"
                                         className="bg-light-primary rounded-full"
-                                        onClick={() => dispatchQuantity({ type: 'increment' })}
+                                        onClick={handleClickPlusBtn}
                                     >
                                         <PlusIcon />
                                     </IconButton>
@@ -334,10 +317,7 @@ export default function DrawerCustom({
                                             size="lg"
                                             fullWidth
                                             className="bg-light-error-container text-light-on-error-container font-bolt rounded-full"
-                                            onClick={() => {
-                                                _closeDrawer ? _closeDrawer() : closeDrawer();
-                                                dispatchQuantity({ type: 'reset' });
-                                            }}
+                                            onClick={_closeDrawer || closeDrawer}
                                         >
                                             Cancel
                                         </Button>
@@ -357,9 +337,16 @@ export default function DrawerCustom({
                         </div>
                     </>
                 )}
+                {!data && haveOrdersInCart.length > 0 && (
+                    <>
+                        <div className="h-full pt-12">
+                            <Typography>You have orders</Typography>
+                        </div>
+                    </>
+                )}
                 {!data && (
                     <>
-                        <div className="flex-col space-y-10 text-center flex-grow h-full pt-12">
+                        <div className="flex-col space-y-10 text-center flex-grow h-full pt-20">
                             <img src={images.cartImage} alt="Cart" className="max-w-60 w-full h-auto m-auto" />
                             <div>
                                 <Typography className="text-3xl font-bold">Start Shopping!</Typography>

@@ -52,13 +52,13 @@ export const LocationIcon = () => (
     <FontAwesomeIcon className="w-6 h-6 text-light-on-surface-variant" icon={faLocationDot} />
 );
 
-export const BagIcon = () => (
+export const BagIcon = ({ color = '#235b2f' }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
-        stroke="#235b2f"
+        stroke={color}
         className="w-6 h-6"
     >
         <path
