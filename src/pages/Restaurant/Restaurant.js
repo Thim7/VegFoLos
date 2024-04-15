@@ -103,9 +103,7 @@ function Restaurant() {
                             </div>
                         </div>
                         <div className="flex space-x-10">
-                            <Typography className="text-base font-bold text-light-on-surface">
-                                Openning Hours
-                            </Typography>
+                            <Typography className="text-base font-bold text-light-on-surface">Opening Hours</Typography>
                             <Typography className="text-base font-normal text-light-on-surface">
                                 Today 07:00-23:59
                             </Typography>

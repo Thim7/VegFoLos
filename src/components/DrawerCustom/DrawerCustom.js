@@ -6,7 +6,8 @@ import numeral from 'numeral';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderAdded } from '~/features/orders/ordersSlice';
 import { nanoid } from '@reduxjs/toolkit';
-import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
+
+// import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 const DRAWER_SIZE = 516;
 
 // quantity actions
@@ -48,7 +49,7 @@ export default function DrawerCustom({
 
     const body = document.body;
 
-    const { title } = useContext(RestaurantDataContext);
+    // const { title } = useContext(RestaurantDataContext);
 
     const totalPriceInCart = useSelector(getTotalPriceInCart);
     const haveOrdersInCart = useSelector(getOrdersInCart);
@@ -121,7 +122,7 @@ export default function DrawerCustom({
         dispatch(
             orderAdded({
                 id: nanoid(),
-                title,
+                // title,
                 img: data.img,
                 foodName: data.foodName,
                 quantity,
@@ -202,7 +203,7 @@ export default function DrawerCustom({
                 </div>
                 {data && data.optional && (
                     <>
-                        <div className="flex-col space-y-5 h-screen pt-16 mx-[-20px] overflow-auto">
+                        <div className="flex-col space-y-5 h-screen pt-16 pb-32 mx-[-20px] overflow-auto">
                             <div className="inline-flex space-x-5 justify-between items-center px-5">
                                 <img
                                     src={data.img}

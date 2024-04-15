@@ -17,6 +17,8 @@ const images = {
     blogImage5: require('./BlogImage5.png'),
     blogImage6: require('./BlogImage6.png'),
     blogImage7: require('./BlogImage7.png'),
+    blogImage8: require('./BlogImage8.png'),
+    blogImage9: require('./BlogImage9.png'),
     cartImage: require('./Cart.png'),
 };
 

@@ -204,26 +204,499 @@ export const RESTAURANT_ITEMS = [
         ],
     },
     {
-        img: images.restaurantBanner,
+        img: images.blogImage4,
         alt: 'Restaurant Banner',
-        title: 'Fresh Salad - Flower Sun',
-        trusted: true,
-        tags: ['Salad', 'Rice', 'Noodle'],
-        star: 4.5,
-        timeDelivery: 20,
-        distanceDelivery: 1.3,
+        title: 'Goi Cuon - Do Thuy',
+        trusted: false,
+        tags: ['Spring Roll'],
+        star: 4.3,
+        timeDelivery: 30,
+        distanceDelivery: 2.6,
         foodTabData: [
             {
                 label: 'Flash Sale',
                 value: 'flashSale',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
                         sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                label: 'Best Seller',
+                value: 'bestSeller',
+                content: [
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                label: 'Best Rating',
+                value: 'bestRating',
+                content: [
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage4,
+                        foodName: 'Five-color Spring Roll',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 5000,
+                        originalPrice: 35000,
+                        totalPrice: 30000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Carrot',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Cucumber',
+                                toppingPrice: 5000,
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        img: images.blogImage5,
+        alt: 'Restaurant Banner',
+        title: 'Healthy Breakfast - YumYum',
+        trusted: true,
+        tags: ['Soup', 'Fruit', 'Nutrition'],
+        star: 4.9,
+        timeDelivery: 10,
+        distanceDelivery: 0.7,
+        foodTabData: [
+            {
+                label: 'Flash Sale',
+                value: 'flashSale',
+                content: [
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                label: 'Best Seller',
+                value: 'bestSeller',
+                content: [
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                label: 'Best Rating',
+                value: 'bestRating',
+                content: [
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                    {
+                        img: images.blogImage5,
+                        foodName: 'Tropical Soup',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 49000,
+                        totalPrice: 40000,
+                        note: '',
+                        optional: [
+                            {
+                                toppingName: 'Banana',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Walnut',
+                                toppingPrice: 15000,
+                            },
+                            {
+                                toppingName: 'Almond',
+                                toppingPrice: 10000,
+                            },
+                            {
+                                toppingName: 'Macadamia',
+                                toppingPrice: 15000,
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        img: images.blogImage8,
+        alt: 'Restaurant Banner',
+        title: 'Vegetarian Hamburger - ViVi',
+        tags: ['Salad', 'Hamburger', 'Bread'],
+        star: 4.4,
+        timeDelivery: 22,
+        distanceDelivery: 1.5,
+        foodTabData: [
+            {
+                label: 'Flash Sale',
+                value: 'flashSale',
+                content: [
+                    {
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -237,12 +710,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -256,12 +729,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -281,12 +754,12 @@ export const RESTAURANT_ITEMS = [
                 value: 'bestSeller',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -300,12 +773,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -319,12 +792,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -344,12 +817,12 @@ export const RESTAURANT_ITEMS = [
                 value: 'bestRating',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -363,12 +836,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -382,12 +855,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage8,
+                        foodName: 'Peach Burger',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 9000,
+                        originalPrice: 39000,
+                        totalPrice: 30000,
                         note: '',
                         optional: [
                             {
@@ -405,26 +878,26 @@ export const RESTAURANT_ITEMS = [
         ],
     },
     {
-        img: images.restaurantBanner,
+        img: images.blogImage9,
         alt: 'Restaurant Banner',
-        title: 'Fresh Salad - Flower Sun',
-        trusted: true,
-        tags: ['Salad', 'Rice', 'Noodle'],
-        star: 4.5,
-        timeDelivery: 20,
-        distanceDelivery: 1.3,
+        title: 'Pan-fried Bread - Hula',
+        trusted: false,
+        tags: ['Salad', 'Fry', 'Bread'],
+        star: 4.1,
+        timeDelivery: 10,
+        distanceDelivery: 0.7,
         foodTabData: [
             {
                 label: 'Flash Sale',
                 value: 'flashSale',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -438,12 +911,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -457,12 +930,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -482,12 +955,12 @@ export const RESTAURANT_ITEMS = [
                 value: 'bestSeller',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -501,12 +974,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -520,213 +993,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Rating',
-                value: 'bestRating',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        img: images.restaurantBanner,
-        alt: 'Restaurant Banner',
-        title: 'Fresh Salad - Flower Sun',
-        trusted: true,
-        tags: ['Salad', 'Rice', 'Noodle'],
-        star: 4.5,
-        timeDelivery: 20,
-        distanceDelivery: 1.3,
-        foodTabData: [
-            {
-                label: 'Flash Sale',
-                value: 'flashSale',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Seller',
-                value: 'bestSeller',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -746,12 +1018,12 @@ export const RESTAURANT_ITEMS = [
                 value: 'bestRating',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -765,12 +1037,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {
@@ -784,414 +1056,12 @@ export const RESTAURANT_ITEMS = [
                         ],
                     },
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        img: images.restaurantBanner,
-        alt: 'Restaurant Banner',
-        title: 'Fresh Salad - Flower Sun',
-        trusted: true,
-        tags: ['Salad', 'Rice', 'Noodle'],
-        star: 4.5,
-        timeDelivery: 20,
-        distanceDelivery: 1.3,
-        foodTabData: [
-            {
-                label: 'Flash Sale',
-                value: 'flashSale',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Seller',
-                value: 'bestSeller',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Rating',
-                value: 'bestRating',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        img: images.restaurantBanner,
-        alt: 'Restaurant Banner',
-        title: 'Fresh Salad - Flower Sun',
-        trusted: true,
-        tags: ['Salad', 'Rice', 'Noodle'],
-        star: 4.5,
-        timeDelivery: 20,
-        distanceDelivery: 1.3,
-        foodTabData: [
-            {
-                label: 'Flash Sale',
-                value: 'flashSale',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Seller',
-                value: 'bestSeller',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Best Rating',
-                value: 'bestRating',
-                content: [
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
-                        note: '',
-                        optional: [
-                            {
-                                toppingName: 'Tomato',
-                                toppingPrice: 10000,
-                            },
-                            {
-                                toppingName: 'Cucumber',
-                                toppingPrice: 5000,
-                            },
-                        ],
-                    },
-                    {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
-                        desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
-                        sale: 5000,
-                        originalPrice: 55000,
-                        totalPrice: 50000,
+                        img: images.blogImage9,
+                        foodName: 'Special Pan-fried Bread',
+                        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo.',
+                        sale: 3000,
+                        originalPrice: 25000,
+                        totalPrice: 22000,
                         note: '',
                         optional: [
                             {

@@ -16,8 +16,14 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
 
-    const openDrawer = () => setOpenDrawer(true);
-    const closeDrawer = () => setOpenDrawer(false);
+    const openDrawer = () => {
+        setOpenDrawer(true);
+        document.body.classList.add('overflow-hidden');
+    };
+    const closeDrawer = () => {
+        setOpenDrawer(false);
+        document.body.classList.remove('overflow-hidden');
+    };
 
     var classes =
         'w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in';
