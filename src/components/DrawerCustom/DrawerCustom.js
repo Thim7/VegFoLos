@@ -53,7 +53,6 @@ export default function DrawerCustom({
 
     const totalPriceInCart = useSelector(getTotalPriceInCart);
     const haveOrdersInCart = useSelector(getOrdersInCart);
-
     const nameCheckboxRef = useRef([]);
     const checkboxRef = useRef([]);
     const inputRef = useRef();
@@ -123,13 +122,13 @@ export default function DrawerCustom({
             orderAdded({
                 id: nanoid(),
                 // title,
-                img: data.img,
-                foodName: data.foodName,
+                img: data?.img,
+                foodName: data?.foodName,
                 quantity,
                 originalPrice: originalPriceValue,
                 totalPrice: totalPriceValue,
                 note: inputRef.current?.value,
-                optional: data.optional,
+                optional: data?.optional,
             }),
         );
         setHaveOrders(true);
@@ -340,8 +339,72 @@ export default function DrawerCustom({
                 )}
                 {!data && haveOrdersInCart.length > 0 && (
                     <>
-                        <div className="h-full pt-12">
-                            <Typography>You have orders</Typography>
+                        <div className="flex-col space-y-5 h-screen pt-12 pb-48 mx-[-20px] overflow-auto px-5 divide-y">
+                            {haveOrdersInCart.map((order) => (
+                                <div
+                                    key={order.id}
+                                    className="inline-flex items-center justify-between space-x-2 w-full pt-5"
+                                >
+                                    <div className="flex space-x-2 items-center w-full ">
+                                        <IconButton size="sm" className="rounded-full" variant="text">
+                                            <MinusIcon color="#a6ca94" strokeWidth={2} />
+                                        </IconButton>
+                                        <Typography className="text-base font-normal">{order.quantity}</Typography>
+                                        <IconButton size="sm" className="rounded-full" variant="text">
+                                            <PlusIcon color="#a6ca94" strokeWidth={2} />
+                                        </IconButton>
+                                        <img
+                                            src={order.img}
+                                            alt={order.foodName}
+                                            className="max-w-28 w-full h-auto object-cover rounded-xl"
+                                        />
+                                        <Typography className="text-base font-medium">{order.foodName}</Typography>
+                                    </div>
+                                    <div className="flex-col">
+                                        <Typography className="text-base font-normal text-light-on-surface">
+                                            {numeral(order.totalPrice).format('0,0')}
+                                        </Typography>
+                                        <strike className="text-base font-light text-light-on-surface-variant">
+                                            {numeral(order.originalPrice).format('0,0')}
+                                        </strike>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="pt-5 inline-flex justify-between w-full">
+                                <div className="flex-col">
+                                    <Typography className="text-base font-medium text-light-on-surface">
+                                        Subtotal
+                                    </Typography>
+                                    <Typography className="text-base font-normal text-light-on-surface-variant">
+                                        *Delivery Fee will be shown after you review order
+                                    </Typography>
+                                </div>
+                                <Typography className="text-base font-normal text-light-on-surface-variant">
+                                    {totalPriceInCart}
+                                </Typography>
+                            </div>
+                        </div>
+                        <div
+                            className={`fixed bottom-0 bg-light-tertiary-container mx-[-20px] w-full max-w-[${DRAWER_SIZE}px] h-32 shadow-inner`}
+                        >
+                            <div className="flex-col space-y-5 items-center w-full px-5 py-5 h-full">
+                                <div className="inline-flex w-full items-center justify-between">
+                                    <Typography className="text-xl font-normal text-light-on-tertiary-container">
+                                        Total
+                                    </Typography>
+                                    <Typography className="text-xl font-bold text-light-on-tertiary-container">
+                                        {totalPriceInCart} VND
+                                    </Typography>
+                                </div>
+                                <Button
+                                    size="lg"
+                                    ripple
+                                    fullWidth
+                                    className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                >
+                                    Log in to place order
+                                </Button>
+                            </div>
                         </div>
                     </>
                 )}

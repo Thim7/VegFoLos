@@ -114,26 +114,26 @@ export const HomeIcon = () => (
     </svg>
 );
 
-export const PlusIcon = () => (
+export const PlusIcon = ({ color = '#ffffff', strokeWidth = 1.5 }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="#ffffff"
+        strokeWidth={strokeWidth}
+        stroke={color}
         className="w-6 h-6"
     >
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
     </svg>
 );
 
-export const MinusIcon = () => (
+export const MinusIcon = ({ color = '#ffffff', strokeWidth = 1.5 }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="#ffffff"
+        strokeWidth={strokeWidth}
+        stroke={color}
         className="w-6 h-6"
     >
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />

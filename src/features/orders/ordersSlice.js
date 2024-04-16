@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import images from '~/assets/img';
-const initialState = [];
+const initialState = [
+    // { id: '', img: '', foodName: '', quantity: 1, originalPrice: 0, totalPrice: 0, note: '', optional: [] },
+];
 
 const ordersSlice = createSlice({
     name: 'orders',

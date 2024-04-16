@@ -1186,10 +1186,6 @@ h1,
   top: 1rem;
 }
 
-.top-5{
-  top: 1.25rem;
-}
-
 .top-\[14\%\]{
   top: 14%;
 }
@@ -2315,10 +2311,6 @@ h1,
   overflow: visible;
 }
 
-.overflow-y-auto{
-  overflow-y: auto;
-}
-
 .overflow-x-hidden{
   overflow-x: hidden;
 }
@@ -2974,6 +2966,11 @@ h1,
   background-color: rgb(255 235 59 / 0.2);
 }
 
+.bg-deep-orange-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 81 30 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-60{
   --tw-bg-opacity: 0.6;
 }
@@ -3358,8 +3355,8 @@ h1,
   padding-bottom: 0.5rem;
 }
 
-.pb-5{
-  padding-bottom: 1.25rem;
+.pb-32{
+  padding-bottom: 8rem;
 }
 
 .pb-8{
@@ -3384,6 +3381,10 @@ h1,
 
 .pt-16{
   padding-top: 4rem;
+}
+
+.pt-20{
+  padding-top: 5rem;
 }
 
 .pt-3{
