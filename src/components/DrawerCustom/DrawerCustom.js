@@ -4,7 +4,7 @@ import { BagIcon, CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
 import numeral from 'numeral';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderAdded } from '~/features/orders/ordersSlice';
+import { orderAdded, orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
 // import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
@@ -125,6 +125,8 @@ export default function DrawerCustom({
                 img: data?.img,
                 foodName: data?.foodName,
                 quantity,
+                originalPricePerUnit: originalPrice,
+                salePrice: totalPrice,
                 originalPrice: originalPriceValue,
                 totalPrice: totalPriceValue,
                 note: inputRef.current?.value,
@@ -345,12 +347,37 @@ export default function DrawerCustom({
                                     key={order.id}
                                     className="inline-flex items-center justify-between space-x-2 w-full pt-5"
                                 >
-                                    <div className="flex space-x-2 items-center w-full ">
-                                        <IconButton size="sm" className="rounded-full" variant="text">
+                                    <div className="flex space-x-2 items-center w-full min-h-20 h-fit">
+                                        <IconButton
+                                            size="sm"
+                                            className="rounded-full"
+                                            variant="text"
+                                            disabled={order.quantity <= 0}
+                                            onClick={() => {
+                                                dispatch(
+                                                    orderQuantityUpdated({
+                                                        id: order.id,
+                                                        quantity: order.quantity - 1,
+                                                    }),
+                                                );
+                                            }}
+                                        >
                                             <MinusIcon color="#a6ca94" strokeWidth={2} />
                                         </IconButton>
                                         <Typography className="text-base font-normal">{order.quantity}</Typography>
-                                        <IconButton size="sm" className="rounded-full" variant="text">
+                                        <IconButton
+                                            size="sm"
+                                            className="rounded-full"
+                                            variant="text"
+                                            onClick={() => {
+                                                dispatch(
+                                                    orderQuantityUpdated({
+                                                        id: order.id,
+                                                        quantity: order.quantity + 1,
+                                                    }),
+                                                );
+                                            }}
+                                        >
                                             <PlusIcon color="#a6ca94" strokeWidth={2} />
                                         </IconButton>
                                         <img
@@ -358,16 +385,37 @@ export default function DrawerCustom({
                                             alt={order.foodName}
                                             className="max-w-28 w-full h-auto object-cover rounded-xl"
                                         />
-                                        <Typography className="text-base font-medium">{order.foodName}</Typography>
+
+                                        <div className="flex-col space-y-5 justify-between">
+                                            <Typography className="text-base font-medium text-light-on-surface">
+                                                {order.foodName}
+                                            </Typography>
+                                            <Typography className="text-base font-light text-light-on-surface-variant">
+                                                {order.note}
+                                            </Typography>
+                                        </div>
                                     </div>
-                                    <div className="flex-col">
-                                        <Typography className="text-base font-normal text-light-on-surface">
-                                            {numeral(order.totalPrice).format('0,0')}
-                                        </Typography>
-                                        <strike className="text-base font-light text-light-on-surface-variant">
-                                            {numeral(order.originalPrice).format('0,0')}
-                                        </strike>
-                                    </div>
+                                    {order.quantity <= 0 ? (
+                                        <Button
+                                            size="sm"
+                                            variant="text"
+                                            className="rounded-full text-light-error hover:bg-light-error-container"
+                                            onClick={() => {
+                                                dispatch(orderRemoved({ id: order.id }));
+                                            }}
+                                        >
+                                            Remove
+                                        </Button>
+                                    ) : (
+                                        <div className="flex-col">
+                                            <Typography className="text-base font-normal text-light-on-surface">
+                                                {numeral(order.totalPrice).format('0,0')}
+                                            </Typography>
+                                            <strike className="text-base font-light text-light-on-surface-variant">
+                                                {numeral(order.originalPrice).format('0,0')}
+                                            </strike>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                             <div className="pt-5 inline-flex justify-between w-full">
@@ -411,7 +459,7 @@ export default function DrawerCustom({
                 {!data && (
                     <>
                         <div className="flex-col space-y-10 text-center flex-grow h-full pt-20">
-                            <img src={images.cartImage} alt="Cart" className="max-w-60 w-full h-auto m-auto" />
+                            <img src={images.cartImage} alt="Cart" className="max-w-48 w-full h-auto m-auto" />
                             <div>
                                 <Typography className="text-3xl font-bold">Start Shopping!</Typography>
                                 <Typography className="text-base font-normal">

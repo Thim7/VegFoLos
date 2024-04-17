@@ -15,7 +15,15 @@ const ordersSlice = createSlice({
             const { id, quantity } = action.payload;
             const existingOrder = state.find((order) => order.id === id);
             if (existingOrder) {
+                if (quantity <= 0) {
+                    existingOrder.quantity = 0;
+                    existingOrder.originalPrice = existingOrder.originalPricePerUnit;
+                    existingOrder.totalPrice = existingOrder.salePrice;
+                    return;
+                }
                 existingOrder.quantity = quantity;
+                existingOrder.originalPrice = existingOrder.originalPricePerUnit * quantity;
+                existingOrder.totalPrice = existingOrder.salePrice * quantity;
             }
         },
         orderOptionalUpdated: (state, action) => {
@@ -23,6 +31,8 @@ const ordersSlice = createSlice({
             const existingOrder = state.find((order) => order.id === id);
             if (existingOrder) {
                 existingOrder.optional = optional;
+                existingOrder.originalPrice += optional;
+                existingOrder.totalPrice += optional;
             }
         },
         orderNoteUpdated: (state, action) => {

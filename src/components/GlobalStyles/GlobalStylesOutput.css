@@ -1595,6 +1595,10 @@ h1,
   max-height: 48px;
 }
 
+.min-h-20{
+  min-height: 5rem;
+}
+
 .min-h-\[100px\]{
   min-height: 100px;
 }
@@ -1780,6 +1784,10 @@ h1,
   min-width: 95%;
 }
 
+.max-w-28{
+  max-width: 7rem;
+}
+
 .max-w-36{
   max-width: 9rem;
 }
@@ -1838,6 +1846,14 @@ h1,
 
 .max-w-screen-2xl{
   max-width: 1320px;
+}
+
+.max-w-52{
+  max-width: 13rem;
+}
+
+.max-w-48{
+  max-width: 12rem;
 }
 
 .flex-1{
@@ -2966,11 +2982,6 @@ h1,
   background-color: rgb(255 235 59 / 0.2);
 }
 
-.bg-deep-orange-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(244 81 30 / var(--tw-bg-opacity));
-}
-
 .bg-opacity-60{
   --tw-bg-opacity: 0.6;
 }
@@ -3357,6 +3368,10 @@ h1,
 
 .pb-32{
   padding-bottom: 8rem;
+}
+
+.pb-48{
+  padding-bottom: 12rem;
 }
 
 .pb-8{
@@ -3933,6 +3948,11 @@ h1,
 .text-yellow-900{
   --tw-text-opacity: 1;
   color: rgb(245 127 23 / var(--tw-text-opacity));
+}
+
+.text-light-error{
+  --tw-text-opacity: 1;
+  color: rgb(186 26 26 / var(--tw-text-opacity));
 }
 
 .antialiased{
@@ -5392,6 +5412,11 @@ h1,
 
 .hover\:bg-yellow-500\/10:hover{
   background-color: rgb(255 235 59 / 0.1);
+}
+
+.hover\:bg-light-error-container:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 218 214 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-80:hover{
