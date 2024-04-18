@@ -8,8 +8,18 @@ const ordersSlice = createSlice({
     name: 'orders',
     initialState,
     reducers: {
-        orderAdded: (state, action) => {
-            state.push(action.payload);
+        orderAdded: {
+            reducer(state, action) {
+                const existingOrder = state.find((order) => order.title);
+                console.log(existingOrder);
+                if (existingOrder && action.payload.title !== existingOrder.title) {
+                    state.forEach((item) => (item = null));
+                    state.length = 0;
+                    state.push(action.payload);
+                } else {
+                    state.push(action.payload);
+                }
+            },
         },
         orderQuantityUpdated: (state, action) => {
             const { id, quantity } = action.payload;

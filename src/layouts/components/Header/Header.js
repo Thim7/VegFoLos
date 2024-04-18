@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import numeral from 'numeral';
 
@@ -116,7 +116,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                                 />
 
                                 // Drawer Cart
-                                // <>
+                                // <Fragment>
                                 //     {haveOrdersInCart.length > 0 ? (
                                 //         <Button
                                 //             onClick={openDrawer}
@@ -305,7 +305,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                                 //         </>
                                 //         )
                                 //     </Drawer>
-                                // </>
+                                // </Fragment>
                             )}
                             <DropdownMenu menuItems={menuItems} title="EN" />
                         </div>

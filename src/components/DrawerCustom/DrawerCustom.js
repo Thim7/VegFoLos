@@ -1,5 +1,15 @@
 import { useState, Fragment, useReducer, useEffect, useRef, useContext } from 'react';
-import { Drawer, Button, Typography, IconButton, Checkbox } from '@material-tailwind/react';
+import {
+    Drawer,
+    Button,
+    Typography,
+    IconButton,
+    Checkbox,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+} from '@material-tailwind/react';
 import { BagIcon, CloseIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
 import numeral from 'numeral';
@@ -7,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { orderAdded, orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
-// import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
+import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 const DRAWER_SIZE = 516;
 
 // quantity actions
@@ -46,10 +56,11 @@ export default function DrawerCustom({
     const [totalPriceValue, setTotalPrice] = useState(totalPrice);
     const [originalPriceValue, setOriginalPrice] = useState(originalPrice);
     const [haveOrders, setHaveOrders] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
 
     const body = document.body;
 
-    // const { title } = useContext(RestaurantDataContext);
+    const { title } = useContext(RestaurantDataContext);
 
     const totalPriceInCart = useSelector(getTotalPriceInCart);
     const haveOrdersInCart = useSelector(getOrdersInCart);
@@ -61,6 +72,9 @@ export default function DrawerCustom({
 
     const dispatch = useDispatch();
 
+    const handleOpenDialog = () => {
+        setOpenDialog(!openDialog);
+    };
     const openDrawer = () => {
         setOpen(true);
         body.classList.add('overflow-hidden');
@@ -118,10 +132,40 @@ export default function DrawerCustom({
     }
 
     function handleClickAddToCart() {
+        if (haveOrdersInCart.length > 0 && title !== haveOrdersInCart[haveOrdersInCart.length - 1].title) {
+            // if (
+            //     window.confirm(
+            //         "You're adding an order from another restaurant to your cart. This action will delete previous orders in your cart. Do you want to continue?",
+            //     )
+            // ) {
+            // dispatch(
+            //     orderAdded({
+            //         id: nanoid(),
+            //         title,
+            //         img: data?.img,
+            //         foodName: data?.foodName,
+            //         quantity,
+            //         originalPricePerUnit: originalPrice,
+            //         salePrice: totalPrice,
+            //         originalPrice: originalPriceValue,
+            //         totalPrice: totalPriceValue,
+            //         note: inputRef.current?.value,
+            //         optional: data?.optional,
+            //     }),
+            // );
+            // setHaveOrders(true);
+            // closeDrawer();
+            //     return;
+            // }
+            // return;
+
+            setOpenDialog(true);
+            return;
+        }
         dispatch(
             orderAdded({
                 id: nanoid(),
-                // title,
+                title,
                 img: data?.img,
                 foodName: data?.foodName,
                 quantity,
@@ -159,6 +203,50 @@ export default function DrawerCustom({
     // }, [checkboxRef]);
     return (
         <Fragment>
+            {openDialog && (
+                <Dialog open className="bg-light-surface-container-lowest">
+                    <DialogHeader className="text-light-on-surface">You changed restaurant!</DialogHeader>
+                    <DialogBody className="text-light-on-surface-variant ">
+                        You're adding an order from another restaurant to your cart. This action will delete previous
+                        orders in your cart. Do you want to continue?
+                    </DialogBody>
+                    <DialogFooter className="gap-x-3">
+                        <Button
+                            variant="text"
+                            onClick={handleOpenDialog}
+                            className="text-light-error hover:bg-light-error-container"
+                        >
+                            No
+                        </Button>
+                        <Button
+                            ripple
+                            className="bg-light-primary-container text-light-on-primary"
+                            onClick={() => {
+                                dispatch(
+                                    orderAdded({
+                                        id: nanoid(),
+                                        title,
+                                        img: data?.img,
+                                        foodName: data?.foodName,
+                                        quantity,
+                                        originalPricePerUnit: originalPrice,
+                                        salePrice: totalPrice,
+                                        originalPrice: originalPriceValue,
+                                        totalPrice: totalPriceValue,
+                                        note: inputRef.current?.value,
+                                        optional: data?.optional,
+                                    }),
+                                );
+                                setHaveOrders(true);
+                                handleOpenDialog();
+                                closeDrawer();
+                            }}
+                        >
+                            Yes
+                        </Button>
+                    </DialogFooter>
+                </Dialog>
+            )}
             {isCartBtn && haveOrdersInCart.length > 0 ? (
                 <Button
                     onClick={_openDrawer || openDrawer}
@@ -186,7 +274,7 @@ export default function DrawerCustom({
             )}
             <Drawer
                 open={isOpenDrawer || open}
-                onClose={_closeDrawer || closeDrawer}
+                onClose={openDialog ? () => {} : _closeDrawer || closeDrawer}
                 className="p-5 flex-col space-y-5 z-[9995]"
                 size={DRAWER_SIZE}
                 placement="right"
@@ -342,6 +430,7 @@ export default function DrawerCustom({
                 {!data && haveOrdersInCart.length > 0 && (
                     <>
                         <div className="flex-col space-y-5 h-screen pt-12 pb-48 mx-[-20px] overflow-auto px-5 divide-y">
+                            <Typography className="text-xl text-light-on-surface pt-5 font-medium">{title}</Typography>
                             {haveOrdersInCart.map((order) => (
                                 <div
                                     key={order.id}

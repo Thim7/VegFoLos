@@ -9,7 +9,8 @@ import Header from '~/layouts/components/Header';
 
 const deliveryDate = ['Today', 'Tomorrow'];
 const deliveryTime = ['Now', 'Later'];
-export const RestaurantDataContext = createContext();
+
+export const RestaurantDataContext = createContext({});
 function Restaurant() {
     // const [active, setActive] = useState(false);
 
