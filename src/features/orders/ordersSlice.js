@@ -22,18 +22,22 @@ const ordersSlice = createSlice({
             },
         },
         orderQuantityUpdated: (state, action) => {
-            const { id, quantity } = action.payload;
+            const { id, quantity, optional } = action.payload;
             const existingOrder = state.find((order) => order.id === id);
+            const bonus = optional.reduce(
+                (accumulator, item) => accumulator + Number(item.toppingPrice.replace(',', '')),
+                0,
+            );
             if (existingOrder) {
                 if (quantity <= 0) {
                     existingOrder.quantity = 0;
-                    existingOrder.originalPrice = existingOrder.originalPricePerUnit;
-                    existingOrder.totalPrice = existingOrder.salePrice;
+                    existingOrder.originalPrice = existingOrder.originalPricePerUnit + bonus;
+                    existingOrder.totalPrice = existingOrder.salePrice + bonus;
                     return;
                 }
                 existingOrder.quantity = quantity;
-                existingOrder.originalPrice = existingOrder.originalPricePerUnit * quantity;
-                existingOrder.totalPrice = existingOrder.salePrice * quantity;
+                existingOrder.originalPrice = (existingOrder.originalPricePerUnit + bonus) * quantity;
+                existingOrder.totalPrice = (existingOrder.salePrice + bonus) * quantity;
             }
         },
         orderOptionalUpdated: (state, action) => {

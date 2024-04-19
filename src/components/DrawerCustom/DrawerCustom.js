@@ -126,39 +126,27 @@ export default function DrawerCustom({
 
     function updatePriceInCart(totalPrice, originalPrice, quantity, bonus = 0) {
         const newTotalPrice = totalPrice * quantity + bonus;
-        const newOriginalPrice = originalPrice * quantity;
+        const newOriginalPrice = originalPrice * quantity + bonus;
         setTotalPrice(newTotalPrice);
         setOriginalPrice(newOriginalPrice);
     }
 
+    function handleAddOptionalToCart() {
+        const result = [];
+        checkboxRef.current.forEach((item) => {
+            if (item.checked === true) {
+                const parentNode = item.closest('.optional-bar');
+                const optional = {};
+                optional.toppingName = parentNode.children[0].children[1]?.innerHTML;
+                optional.toppingPrice = parentNode.children[1]?.innerHTML;
+                result.push(optional);
+            }
+        });
+        return result;
+    }
+
     function handleClickAddToCart() {
         if (haveOrdersInCart.length > 0 && title !== haveOrdersInCart[haveOrdersInCart.length - 1].title) {
-            // if (
-            //     window.confirm(
-            //         "You're adding an order from another restaurant to your cart. This action will delete previous orders in your cart. Do you want to continue?",
-            //     )
-            // ) {
-            // dispatch(
-            //     orderAdded({
-            //         id: nanoid(),
-            //         title,
-            //         img: data?.img,
-            //         foodName: data?.foodName,
-            //         quantity,
-            //         originalPricePerUnit: originalPrice,
-            //         salePrice: totalPrice,
-            //         originalPrice: originalPriceValue,
-            //         totalPrice: totalPriceValue,
-            //         note: inputRef.current?.value,
-            //         optional: data?.optional,
-            //     }),
-            // );
-            // setHaveOrders(true);
-            // closeDrawer();
-            //     return;
-            // }
-            // return;
-
             setOpenDialog(true);
             return;
         }
@@ -174,13 +162,28 @@ export default function DrawerCustom({
                 originalPrice: originalPriceValue,
                 totalPrice: totalPriceValue,
                 note: inputRef.current?.value,
-                optional: data?.optional,
+                optional: handleAddOptionalToCart(),
             }),
         );
         setHaveOrders(true);
         closeDrawer();
     }
 
+    function handleClickCheckBox(e) {
+        const containerNode = e.target.closest('.optional-bar');
+        const checkboxValue = containerNode.children[1].innerHTML;
+        if (e.target.checked) {
+            const newTotalPrice = totalPriceValue + Number(checkboxValue.replace(',', ''));
+            const newOriginalPrice = originalPriceValue + Number(checkboxValue.replace(',', ''));
+            setTotalPrice(newTotalPrice);
+            setOriginalPrice(newOriginalPrice);
+        } else if (e.target.checked === false) {
+            const newTotalPrice = totalPriceValue - Number(checkboxValue.replace(',', ''));
+            const newOriginalPrice = originalPriceValue - Number(checkboxValue.replace(',', ''));
+            setTotalPrice(newTotalPrice);
+            setOriginalPrice(newOriginalPrice);
+        }
+    }
     useEffect(() => {
         if (quantity <= 0) {
             setCancel(true);
@@ -208,7 +211,7 @@ export default function DrawerCustom({
                     <DialogHeader className="text-light-on-surface">You changed restaurant!</DialogHeader>
                     <DialogBody className="text-light-on-surface-variant ">
                         You're adding an order from another restaurant to your cart. This action will delete previous
-                        orders in your cart. Do you want to continue?
+                        orders in cart. Do you want to continue?
                     </DialogBody>
                     <DialogFooter className="gap-x-3">
                         <Button
@@ -330,9 +333,10 @@ export default function DrawerCustom({
                                                 nameCheckboxRef.current[index] = el;
                                             }}
                                             key={index}
-                                            className="flex justify-between items-center pt-1 border-t border-light-outline-variant"
+                                            className="optional-bar flex justify-between items-center pt-1 border-t border-light-outline-variant"
                                         >
                                             <Checkbox
+                                                onClick={handleClickCheckBox}
                                                 inputRef={(el) => {
                                                     checkboxRef.current[index] = el;
                                                 }}
@@ -437,6 +441,7 @@ export default function DrawerCustom({
                                     className="inline-flex items-center justify-between space-x-2 w-full pt-5"
                                 >
                                     <div className="flex space-x-2 items-center w-full min-h-20 h-fit">
+                                        {console.log(order.optional)}
                                         <IconButton
                                             size="sm"
                                             className="rounded-full"
@@ -447,6 +452,7 @@ export default function DrawerCustom({
                                                     orderQuantityUpdated({
                                                         id: order.id,
                                                         quantity: order.quantity - 1,
+                                                        optional: order.optional,
                                                     }),
                                                 );
                                             }}
@@ -463,6 +469,7 @@ export default function DrawerCustom({
                                                     orderQuantityUpdated({
                                                         id: order.id,
                                                         quantity: order.quantity + 1,
+                                                        optional: order.optional,
                                                     }),
                                                 );
                                             }}
@@ -475,11 +482,21 @@ export default function DrawerCustom({
                                             className="max-w-28 w-full h-auto object-cover rounded-xl"
                                         />
 
-                                        <div className="flex-col space-y-5 justify-between">
+                                        <div className="flex-col space-y-2 justify-between">
                                             <Typography className="text-base font-medium text-light-on-surface">
                                                 {order.foodName}
                                             </Typography>
-                                            <Typography className="text-base font-light text-light-on-surface-variant">
+                                            <div className="flex space-x-2">
+                                                {order.optional.map((option, index) => (
+                                                    <Typography
+                                                        className="text-sm text-light-on-surface font-normal"
+                                                        key={index}
+                                                    >
+                                                        {option.toppingName}
+                                                    </Typography>
+                                                ))}
+                                            </div>
+                                            <Typography className="text-sm font-light text-light-on-surface-variant">
                                                 {order.note}
                                             </Typography>
                                         </div>
@@ -517,7 +534,7 @@ export default function DrawerCustom({
                                     </Typography>
                                 </div>
                                 <Typography className="text-base font-normal text-light-on-surface-variant">
-                                    {totalPriceInCart}
+                                    {numeral(totalPriceInCart).format('0,0')}
                                 </Typography>
                             </div>
                         </div>
@@ -530,7 +547,7 @@ export default function DrawerCustom({
                                         Total
                                     </Typography>
                                     <Typography className="text-xl font-bold text-light-on-tertiary-container">
-                                        {totalPriceInCart} VND
+                                        {numeral(totalPriceInCart).format('0,0')} VND
                                     </Typography>
                                 </div>
                                 <Button
