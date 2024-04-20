@@ -24,7 +24,7 @@ const ordersSlice = createSlice({
         orderQuantityUpdated: (state, action) => {
             const { id, quantity, optional } = action.payload;
             const existingOrder = state.find((order) => order.id === id);
-            const bonus = optional.reduce(
+            const bonus = optional?.reduce(
                 (accumulator, item) => accumulator + Number(item.toppingPrice.replace(',', '')),
                 0,
             );

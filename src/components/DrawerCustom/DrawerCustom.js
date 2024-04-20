@@ -10,13 +10,14 @@ import {
     DialogBody,
     DialogFooter,
 } from '@material-tailwind/react';
-import { BagIcon, CloseIcon, MinusIcon, PlusIcon } from '../Icons';
+import { BagIcon, CloseIcon, DeleteIcon, MinusIcon, PlusIcon } from '../Icons';
 import images from '~/assets/img';
 import numeral from 'numeral';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderAdded, orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
+import { getTotalPriceInCart, getOrdersInCart } from '~/selector/orders';
 import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 const DRAWER_SIZE = 516;
 
@@ -24,17 +25,6 @@ const DRAWER_SIZE = 516;
 const INCREMENT = 'increment';
 const DECREMENT = 'decrement';
 const RESET = 'reset';
-
-// Selector
-const getTotalPriceInCart = (state) => {
-    const orders = state.orders;
-    let result = 0;
-    const priceArr = orders.map((order) => order.totalPrice);
-    priceArr.forEach((item) => (result += item));
-    return result;
-};
-
-const getOrdersInCart = (state) => state.orders;
 
 export default function DrawerCustom({
     ripple = false,
@@ -46,12 +36,14 @@ export default function DrawerCustom({
     closeDrawer: _closeDrawer,
     isOpenDrawer,
     isCartBtn = false,
+    isAdded = undefined,
 }) {
     const totalPrice = data?.totalPrice;
     const originalPrice = data?.originalPrice;
 
     const [open, setOpen] = useState(false);
     const [isCancel, setCancel] = useState(false);
+    const [isCancelOutside, setCancelOutside] = useState(false);
     const [disabledBtn, setDisabledBtn] = useState(false);
     const [totalPriceValue, setTotalPrice] = useState(totalPrice);
     const [originalPriceValue, setOriginalPrice] = useState(originalPrice);
@@ -124,9 +116,25 @@ export default function DrawerCustom({
         }
     }
 
-    function updatePriceInCart(totalPrice, originalPrice, quantity, bonus = 0) {
-        const newTotalPrice = totalPrice * quantity + bonus;
-        const newOriginalPrice = originalPrice * quantity + bonus;
+    function updatePriceInCart(totalPrice, originalPrice, quantity, checkBox = []) {
+        const selectedOptional = [];
+        if (checkBox.length > 0) {
+            checkBox?.forEach((item, index) => {
+                const containerNode = item.closest('.optional-bar');
+                const checkboxValue = containerNode.children[1].innerHTML;
+                if (item.checked) {
+                    selectedOptional.push(Number(checkboxValue.replace(',', '')));
+                } else if (item.checked === false) {
+                    selectedOptional.splice(index, 1);
+                }
+            });
+        }
+        const optional = selectedOptional.reduce((accumulator, value) => {
+            return accumulator + value;
+        }, 0);
+
+        const newTotalPrice = (totalPrice + optional) * quantity;
+        const newOriginalPrice = (originalPrice + optional) * quantity;
         setTotalPrice(newTotalPrice);
         setOriginalPrice(newOriginalPrice);
     }
@@ -173,17 +181,18 @@ export default function DrawerCustom({
         const containerNode = e.target.closest('.optional-bar');
         const checkboxValue = containerNode.children[1].innerHTML;
         if (e.target.checked) {
-            const newTotalPrice = totalPriceValue + Number(checkboxValue.replace(',', ''));
-            const newOriginalPrice = originalPriceValue + Number(checkboxValue.replace(',', ''));
+            const newTotalPrice = totalPriceValue + Number(checkboxValue.replace(',', '')) * quantity;
+            const newOriginalPrice = originalPriceValue + Number(checkboxValue.replace(',', '')) * quantity;
             setTotalPrice(newTotalPrice);
             setOriginalPrice(newOriginalPrice);
         } else if (e.target.checked === false) {
-            const newTotalPrice = totalPriceValue - Number(checkboxValue.replace(',', ''));
-            const newOriginalPrice = originalPriceValue - Number(checkboxValue.replace(',', ''));
+            const newTotalPrice = totalPriceValue - Number(checkboxValue.replace(',', '')) * quantity;
+            const newOriginalPrice = originalPriceValue - Number(checkboxValue.replace(',', '')) * quantity;
             setTotalPrice(newTotalPrice);
             setOriginalPrice(newOriginalPrice);
         }
     }
+
     useEffect(() => {
         if (quantity <= 0) {
             setCancel(true);
@@ -192,18 +201,18 @@ export default function DrawerCustom({
         }
         setCancel(false);
         setDisabledBtn(false);
-        updatePriceInCart(totalPrice, originalPrice, quantity);
+        updatePriceInCart(totalPrice, originalPrice, quantity, checkboxRef.current);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quantity]);
 
-    // useEffect(() => {
-    //     checkboxRef.current.map((item) => {
-    //         if (item.checked) {
-    //             const currentElement = item.parentNode;
-    //             console.log(currentElement);
-    //         }
-    //     });
-    // }, [checkboxRef]);
+    useEffect(() => {
+        if (isAdded?.quantity <= 0) {
+            setCancelOutside(true);
+            return;
+        }
+        setCancelOutside(false);
+    }, [isAdded]);
+
     return (
         <Fragment>
             {openDialog && (
@@ -259,6 +268,55 @@ export default function DrawerCustom({
                     <BagIcon color="#ffffff" />
                     {numeral(totalPriceInCart).format('0,0')}
                 </Button>
+            ) : isAdded ? (
+                <div className="inline-flex space-x-2 items-center border-2 border-light-outline rounded-xl p-2">
+                    {isCancelOutside ? (
+                        <IconButton
+                            size="sm"
+                            variant="text"
+                            className="rounded-full hover:bg-light-error-container"
+                            onClick={() => {
+                                dispatch(orderRemoved({ id: isAdded.id }));
+                            }}
+                        >
+                            <DeleteIcon color="#ba1a1a" />
+                        </IconButton>
+                    ) : (
+                        <IconButton
+                            size="sm"
+                            onClick={() => {
+                                dispatch(
+                                    orderQuantityUpdated({
+                                        id: isAdded.id,
+                                        quantity: isAdded.quantity - 1,
+                                        optional: isAdded.optional,
+                                    }),
+                                );
+                            }}
+                            variant="text"
+                            className="rounded-full border-light-primary text-light-primary hover:bg-light-primary/8"
+                        >
+                            <MinusIcon color="#191c19" />
+                        </IconButton>
+                    )}
+                    <Typography className="text-sm font-normal text-light-on-surface">{isAdded.quantity}</Typography>
+                    <IconButton
+                        size="sm"
+                        onClick={() => {
+                            dispatch(
+                                orderQuantityUpdated({
+                                    id: isAdded.id,
+                                    quantity: isAdded.quantity + 1,
+                                    optional: isAdded.optional,
+                                }),
+                            );
+                        }}
+                        variant="text"
+                        className="rounded-full border-light-primary text-light-primary hover:bg-light-primary/8"
+                    >
+                        <PlusIcon color="#191c19" />
+                    </IconButton>
+                </div>
             ) : (
                 <IconButton
                     ripple={ripple}
