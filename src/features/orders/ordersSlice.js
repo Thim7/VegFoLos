@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { array } from 'i/lib/util';
 import images from '~/assets/img';
 const initialState = [
     // { id: '', img: '', foodName: '', quantity: 1, originalPrice: 0, totalPrice: 0, note: '', optional: [] },
@@ -59,8 +60,9 @@ const ordersSlice = createSlice({
         orderRemoved: (state, action) => {
             const { id } = action.payload;
             const existingOrder = state.find((order) => order.id === id);
+            const index = state.indexOf(existingOrder);
             if (existingOrder) {
-                state.splice(existingOrder, 1);
+                if (index > -1) state.splice(index, 1);
             }
         },
     },

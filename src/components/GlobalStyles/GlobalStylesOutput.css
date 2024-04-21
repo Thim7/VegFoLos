@@ -1400,6 +1400,10 @@ h1,
   margin-top: 1px;
 }
 
+.mt-32{
+  margin-top: 8rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -1738,6 +1742,10 @@ h1,
 
 .w-screen{
   width: 100vw;
+}
+
+.w-\[428px\]{
+  width: 428px;
 }
 
 .min-w-64{
@@ -3434,6 +3442,14 @@ h1,
 
 .pt-px{
   padding-top: 1px;
+}
+
+.pt-64{
+  padding-top: 16rem;
+}
+
+.pt-96{
+  padding-top: 24rem;
 }
 
 .text-left{

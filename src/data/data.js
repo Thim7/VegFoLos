@@ -17,8 +17,8 @@ export const RESTAURANT_ITEMS = [
                 value: 'flashSale',
                 content: [
                     {
-                        img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
+                        img: images.restaurantBanner,
+                        foodName: 'Four Seasons Mixed Salad',
                         desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
                         sale: 5000,
                         originalPrice: 55000,
@@ -37,7 +37,7 @@ export const RESTAURANT_ITEMS = [
                     },
                     {
                         img: images.blogImage2,
-                        foodName: 'Salad & Italian bread',
+                        foodName: 'Salad & Italian bread 2',
                         desc: 'Order our Salad and Italian Bread combo today and experience the perfect balance of freshness, flavor, and tradition. It&apos;s a delightful pairing that will leave you completely satisfied.',
                         sale: 5000,
                         originalPrice: 55000,

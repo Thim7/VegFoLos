@@ -19,6 +19,8 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { getTotalPriceInCart, getOrdersInCart } from '~/selector/orders';
 import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
+import { Link } from 'react-router-dom';
+import config from '~/config';
 const DRAWER_SIZE = 516;
 
 // quantity actions
@@ -608,14 +610,18 @@ export default function DrawerCustom({
                                         {numeral(totalPriceInCart).format('0,0')} VND
                                     </Typography>
                                 </div>
-                                <Button
-                                    size="lg"
-                                    ripple
-                                    fullWidth
-                                    className="bg-light-primary text-light-on-primary font-bolt rounded-full"
-                                >
-                                    Log in to place order
-                                </Button>
+                                <div>
+                                    <Link to={config.routes.login} state={{ haveOrdersInCart }}>
+                                        <Button
+                                            size="lg"
+                                            ripple
+                                            fullWidth
+                                            className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                        >
+                                            Log in to place order
+                                        </Button>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </>

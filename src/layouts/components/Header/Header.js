@@ -27,7 +27,13 @@ const getTotalPriceInCart = (state) => {
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
 const DRAWER_SIZE = 516;
-function Header({ hide: customHide = false, breakPointTransition, isNews = false, className: customClassName }) {
+function Header({
+    hide: customHide = false,
+    breakPointTransition,
+    isNews = false,
+    isLogin = false,
+    className: customClassName,
+}) {
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
 
@@ -82,7 +88,7 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                             <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                         </Link>
 
-                        <Searchbar />
+                        {!isLogin && <Searchbar />}
 
                         <div className="inline-flex items-center space-x-3 shrink-0 lg:hidden">
                             <IconButton
@@ -98,22 +104,24 @@ function Header({ hide: customHide = false, breakPointTransition, isNews = false
                             {isNews ? (
                                 <Button title="Home" outline to={config.routes.home} />
                             ) : (
-                                <Button title="News" outline to={config.routes.news} />
+                                !isLogin && <Button title="News" outline to={config.routes.news} />
                             )}
-                            <Button title="Login" outline />
+                            {!isLogin && <Button title="Login" outline />}
                             {isNews ? (
                                 <></>
                             ) : (
-                                <DrawerCustom
-                                    ripple
-                                    variant="outlined"
-                                    className="rounded-full hover:bg-light-primary/8 border-light-outline "
-                                    icon={<BagIcon />}
-                                    openDrawer={openDrawer}
-                                    closeDrawer={closeDrawer}
-                                    isOpenDrawer={isOpenDrawer}
-                                    isCartBtn
-                                />
+                                !isLogin && (
+                                    <DrawerCustom
+                                        ripple
+                                        variant="outlined"
+                                        className="rounded-full hover:bg-light-primary/8 border-light-outline "
+                                        icon={<BagIcon />}
+                                        openDrawer={openDrawer}
+                                        closeDrawer={closeDrawer}
+                                        isOpenDrawer={isOpenDrawer}
+                                        isCartBtn
+                                    />
+                                )
 
                                 // Drawer Cart
                                 // <Fragment>
