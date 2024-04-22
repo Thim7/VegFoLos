@@ -52,4 +52,26 @@
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
     }
+
+    .or {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #191c19;
+    }
+    .or:after,
+    .or:before {
+        content: '';
+        display: block;
+        background: #c1c9bd;
+        width: 46%;
+        height: 1px;
+        margin: 0 10px;
+    }
+    .or:before {
+        margin-left: 0;
+    }
+    .or:after {
+        margin-right: 0;
+    }
 }

@@ -106,7 +106,11 @@ function Header({
                             ) : (
                                 !isLogin && <Button title="News" outline to={config.routes.news} />
                             )}
-                            {!isLogin && <Button title="Login" outline />}
+                            {!isLogin && (
+                                <Link to={config.routes.login}>
+                                    <Button title="Login" outline />
+                                </Link>
+                            )}
                             {isNews ? (
                                 <></>
                             ) : (
