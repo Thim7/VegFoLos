@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
-import { Fragment, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import numeral from 'numeral';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import axios from 'axios';
 
 import { orderAdded, orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import config from '~/config';
@@ -9,7 +11,16 @@ import images from '~/assets/img';
 import DropdownMenu from '~/components/DropdownMenu';
 import Button from '~/components/Button';
 import Searchbar from '~/components/Searchbar';
-import { Drawer, IconButton, Typography } from '@material-tailwind/react';
+import {
+    Avatar,
+    Drawer,
+    IconButton,
+    Menu,
+    MenuHandler,
+    MenuItem,
+    MenuList,
+    Typography,
+} from '@material-tailwind/react';
 import { BagIcon, BarsIcon, CloseIcon, MinusIcon, PlusIcon } from '~/components/Icons';
 import DrawerCustom from '~/components/DrawerCustom';
 
@@ -27,6 +38,7 @@ const getTotalPriceInCart = (state) => {
 const menuItems = ['EN (English)', 'VI (Vietnamese)'];
 
 const DRAWER_SIZE = 516;
+
 function Header({
     hide: customHide = false,
     breakPointTransition,
@@ -34,9 +46,17 @@ function Header({
     isLogin = false,
     className: customClassName,
 }) {
+    let location = useLocation();
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
+    const [user, setUser] = useState(location.state?.user);
+    const [profile, setProfile] = useState([]);
 
+    // log out function to log the user out of google and set the profile array to null
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };
     const openDrawer = () => {
         setOpenDrawer(true);
         document.body.classList.add('overflow-hidden');
@@ -56,6 +76,7 @@ function Header({
     if (customClassName) {
         classes += ` ${customClassName}`;
     }
+
     if (customHide) {
         const handleScroll = () => {
             if (document.documentElement.scrollTop > breakPointTransition / 2) {
@@ -71,6 +92,22 @@ function Header({
     }
 
     const positionApp = document.getElementsByClassName('App');
+
+    useEffect(() => {
+        if (user) {
+            axios
+                .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.access_token}`,
+                        Accept: 'application/json',
+                    },
+                })
+                .then((res) => {
+                    setProfile(res.data);
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [user]);
 
     return (
         <>
@@ -106,11 +143,30 @@ function Header({
                             ) : (
                                 !isLogin && <Button title="News" outline to={config.routes.news} />
                             )}
-                            {!isLogin && (
-                                <Link to={config.routes.login}>
-                                    <Button title="Login" outline />
-                                </Link>
-                            )}
+                            {!isLogin &&
+                                (profile ? (
+                                    <Menu>
+                                        <MenuHandler>
+                                            <Avatar size="sm" src={profile.picture} className="w-10 h-10" />
+                                        </MenuHandler>
+                                        <MenuList className="text-light-on-surface bg-light-surface-container-lowest">
+                                            <MenuItem className="  hover:!bg-light-tertiary-container hover:!text-light-on-tertiary-container transition-colors">
+                                                My Profile
+                                            </MenuItem>
+
+                                            <MenuItem
+                                                onClick={logOut}
+                                                className=" hover:!bg-light-tertiary-container hover:!text-light-on-tertiary-container"
+                                            >
+                                                Log out
+                                            </MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                ) : (
+                                    <Link to={config.routes.login}>
+                                        <Button title="Login" outline />
+                                    </Link>
+                                ))}
                             {isNews ? (
                                 <></>
                             ) : (

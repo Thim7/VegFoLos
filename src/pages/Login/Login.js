@@ -1,9 +1,27 @@
 import { Button, Checkbox, Typography } from '@material-tailwind/react';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FacebookIcon, GoogleIcon } from '~/components/Icons';
 import InputDropDownCountry from '~/components/InputDropDownCountry';
+import config from '~/config';
 import Header from '~/layouts/components/Header';
 
 function Login() {
+    const navigate = useNavigate();
+    const GoogleLogin = useGoogleLogin({
+        onSuccess: (tokenResponse) => {
+            console.log(tokenResponse);
+            navigate(config.routes.home, { state: { user: tokenResponse } });
+        },
+        onError: (err) => {
+            alert('Login failed: ', err);
+        },
+    });
+
+    // useEffect(() => {
+    //     if (GoogleLogin.onSuccess) navigate(config.routes.home);
+    // }, []);
     return (
         <div>
             <Header isLogin />
@@ -28,6 +46,7 @@ function Login() {
                 <div className="or">or</div>
                 <div className="flex-col space-y-4">
                     <Button
+                        onClick={() => GoogleLogin()}
                         fullWidth
                         variant="outlined"
                         className="flex items-center gap-2 justify-center border-light-outline text-light-on-surface"
@@ -35,6 +54,7 @@ function Login() {
                         <GoogleIcon />
                         Continue with Google
                     </Button>
+
                     <Button
                         fullWidth
                         variant="outlined"

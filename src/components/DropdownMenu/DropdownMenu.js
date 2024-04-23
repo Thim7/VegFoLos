@@ -24,14 +24,12 @@ function DropdownMenu({ variant = 'outlined', title, menuItems, className: custo
                     />
                 </Button>
             </MenuHandler>
-            <MenuList className="hidden w-full max-w-64 max-h-96 gap-3 overflow-visible lg:grid">
+            <MenuList className="hidden max-h-96 gap-3 overflow-visible lg:grid bg-light-surface-container-lowest">
                 <ul className="flex w-full flex-col gap-1 hover:outline-none">
                     {menuItems.map((item, index) => (
                         <Link to={config.routes.home} key={index} className="w-full">
-                            <MenuItem className="bg-light-surface-container-lowest hover:bg-light-tertiary-container transition-colors ">
-                                <Typography className="text-light-on-surface hover:text-light-on-tertiary-container">
-                                    {item}
-                                </Typography>
+                            <MenuItem className=" hover:bg-light-tertiary-container transition-colors text-light-on-surface hover:text-light-on-tertiary-container">
+                                {item}
                             </MenuItem>
                         </Link>
                     ))}

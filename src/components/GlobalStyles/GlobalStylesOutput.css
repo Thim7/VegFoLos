@@ -1385,8 +1385,8 @@ h1,
   margin-top: 4rem;
 }
 
-.mt-32{
-  margin-top: 8rem;
+.mt-24{
+  margin-top: 6rem;
 }
 
 .mt-4{
@@ -1427,22 +1427,6 @@ h1,
 
 .mt-px{
   margin-top: 1px;
-}
-
-.mt-28{
-  margin-top: 7rem;
-}
-
-.mt-24{
-  margin-top: 6rem;
-}
-
-.mt-\[-8px\]{
-  margin-top: -8px;
-}
-
-.mt-\[-12px\]{
-  margin-top: -12px;
 }
 
 .box-border{
@@ -3522,10 +3506,6 @@ h1,
   padding-top: 1px;
 }
 
-.pt-\[-12px\]{
-  padding-top: -12px;
-}
-
 .text-left{
   text-align: left;
 }
@@ -5418,10 +5398,6 @@ h1,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:border-none:hover{
-  border-style: none;
-}
-
 .hover\:bg-amber-500\/10:hover{
   background-color: rgb(255 193 7 / 0.1);
 }
@@ -5529,6 +5505,11 @@ h1,
   background-color: rgb(255 235 59 / 0.1);
 }
 
+.hover\:\!bg-light-tertiary-container:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(239 243 216 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-opacity-80:hover{
   --tw-bg-opacity: 0.8;
 }
@@ -5560,6 +5541,16 @@ h1,
 
 .hover\:text-light-primary\/80:hover{
   color: rgb(35 91 47 / 0.8);
+}
+
+.hover\:text-light-tertiary-container:hover{
+  --tw-text-opacity: 1;
+  color: rgb(239 243 216 / var(--tw-text-opacity));
+}
+
+.hover\:\!text-light-on-tertiary-container:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(78 82 62 / var(--tw-text-opacity)) !important;
 }
 
 .hover\:opacity-100:hover{
