@@ -1,17 +1,24 @@
 import { Button, Checkbox, Typography } from '@material-tailwind/react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { useEffect } from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { FacebookIcon, GoogleIcon } from '~/components/Icons';
 import InputDropDownCountry from '~/components/InputDropDownCountry';
 import config from '~/config';
 import Header from '~/layouts/components/Header';
 
 function Login() {
+    // const [login, setLogin] = useState(false);
+    // const [data, setData] = useState({});
+    // const [picture, setPicture] = useState('');
+
     const navigate = useNavigate();
+
     const GoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
-            console.log(tokenResponse);
+            tokenResponse.type = 'google_login';
             navigate(config.routes.home, { state: { user: tokenResponse } });
         },
         onError: (err) => {
@@ -19,9 +26,18 @@ function Login() {
         },
     });
 
-    // useEffect(() => {
-    //     if (GoogleLogin.onSuccess) navigate(config.routes.home);
-    // }, []);
+    const responseFacebook = (response) => {
+        // setData(response);
+        // setPicture(response.picture?.data.url);
+        if (response.accessToken) {
+            response.type = 'facebook_login';
+            // setLogin(true);
+            navigate(config.routes.home, { state: { userFaceBook: response } });
+        } else {
+            alert('Login Facebook failed!');
+        }
+    };
+
     return (
         <div>
             <Header isLogin />
@@ -55,14 +71,25 @@ function Login() {
                         Continue with Google
                     </Button>
 
-                    <Button
-                        fullWidth
-                        variant="outlined"
-                        className="flex items-center gap-2 justify-center border-light-outline text-light-on-surface"
-                    >
-                        <FacebookIcon />
-                        Continue with Facebook
-                    </Button>
+                    <FacebookLogin
+                        appId="827534635896116"
+                        // autoLoad={true}
+                        fields="name,email,picture"
+                        scope="public_profile,user_friends"
+                        callback={responseFacebook}
+                        render={(renderProps) => (
+                            <Button
+                                onClick={renderProps.onClick}
+                                fullWidth
+                                variant="outlined"
+                                className="flex items-center gap-2 justify-center border-light-outline text-light-on-surface"
+                            >
+                                <FacebookIcon />
+                                Continue with Facebook
+                            </Button>
+                        )}
+                        icon="fa-facebook"
+                    />
                 </div>
                 <Typography className="text-xs font-normal text-light-on-surface-variant text-center">
                     © 2023 VegFoLos Inc.

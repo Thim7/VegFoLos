@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import numeral from 'numeral';
-import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import { googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 
 import { orderAdded, orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
@@ -49,13 +49,16 @@ function Header({
     let location = useLocation();
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
-    const [user, setUser] = useState(location.state?.user);
-    const [profile, setProfile] = useState([]);
-
+    const [user, setUser] = useState(location.state?.user || location.state?.userFaceBook);
+    const [profile, setProfile] = useState({});
     // log out function to log the user out of google and set the profile array to null
+
     const logOut = () => {
-        googleLogout();
-        setProfile(null);
+        if (user.type === 'google_login') {
+            googleLogout();
+        } else {
+        }
+        setProfile({});
     };
     const openDrawer = () => {
         setOpenDrawer(true);
@@ -94,7 +97,7 @@ function Header({
     const positionApp = document.getElementsByClassName('App');
 
     useEffect(() => {
-        if (user) {
+        if (user?.type === 'google_login') {
             axios
                 .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
                     headers: {
@@ -106,6 +109,8 @@ function Header({
                     setProfile(res.data);
                 })
                 .catch((err) => console.log(err));
+        } else if (user?.type === 'facebook_login') {
+            setProfile(user);
         }
     }, [user]);
 
@@ -144,10 +149,14 @@ function Header({
                                 !isLogin && <Button title="News" outline to={config.routes.news} />
                             )}
                             {!isLogin &&
-                                (profile ? (
+                                (Object.keys(profile).length > 0 ? (
                                     <Menu>
                                         <MenuHandler>
-                                            <Avatar size="sm" src={profile.picture} className="w-10 h-10" />
+                                            <Avatar
+                                                size="sm"
+                                                src={profile.picture || profile.picture.data.url}
+                                                className="w-10 h-10"
+                                            />
                                         </MenuHandler>
                                         <MenuList className="text-light-on-surface bg-light-surface-container-lowest">
                                             <MenuItem className="  hover:!bg-light-tertiary-container hover:!text-light-on-tertiary-container transition-colors">
