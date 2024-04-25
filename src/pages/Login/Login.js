@@ -2,7 +2,7 @@ import { Button, Checkbox, Typography } from '@material-tailwind/react';
 import { useGoogleLogin } from '@react-oauth/google';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { FacebookIcon, GoogleIcon } from '~/components/Icons';
 import InputDropDownCountry from '~/components/InputDropDownCountry';
@@ -10,15 +10,19 @@ import config from '~/config';
 import Header from '~/layouts/components/Header';
 
 function Login() {
-    // const [login, setLogin] = useState(false);
-    // const [data, setData] = useState({});
-    // const [picture, setPicture] = useState('');
-
+    const location = useLocation();
+    console.log(location);
     const navigate = useNavigate();
 
     const GoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             tokenResponse.type = 'google_login';
+            if (location.state?.haveOrdersInCart?.length > 0) {
+                navigate(config.routes.checkout, {
+                    state: { user: tokenResponse, haveOrdersInCart: location.state?.haveOrdersInCart },
+                });
+                return;
+            }
             navigate(config.routes.home, { state: { user: tokenResponse } });
         },
         onError: (err) => {
@@ -27,11 +31,14 @@ function Login() {
     });
 
     const responseFacebook = (response) => {
-        // setData(response);
-        // setPicture(response.picture?.data.url);
         if (response.accessToken) {
             response.type = 'facebook_login';
-            // setLogin(true);
+            if (location.state?.haveOrdersInCart?.length > 0) {
+                navigate(config.routes.checkout, {
+                    state: { userFaceBook: response, haveOrdersInCart: location.state?.haveOrdersInCart },
+                });
+                return;
+            }
             navigate(config.routes.home, { state: { userFaceBook: response } });
         } else {
             alert('Login Facebook failed!');
