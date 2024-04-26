@@ -46,17 +46,21 @@ function Header({
     isLogin = false,
     className: customClassName,
 }) {
-    let location = useLocation();
+    // let location = useLocation();
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
-    const [user, setUser] = useState(location.state?.user || location.state?.userFaceBook);
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem('authGoogleInfo')) || JSON.parse(localStorage.getItem('authFacebookInfo')),
+    );
     const [profile, setProfile] = useState({});
     // log out function to log the user out of google and set the profile array to null
 
     const logOut = () => {
         if (user.type === 'google_login') {
+            localStorage.removeItem('authGoogleInfo');
             googleLogout();
-        } else {
+        } else if (user.type === 'facebook_login') {
+            localStorage.removeItem('authFacebookInfo');
         }
         setProfile({});
     };
@@ -69,10 +73,10 @@ function Header({
         document.body.classList.remove('overflow-hidden');
     };
 
-    const totalPriceInCart = useSelector(getTotalPriceInCart);
-    const haveOrdersInCart = useSelector(getOrdersInCart);
+    // const totalPriceInCart = useSelector(getTotalPriceInCart);
+    // const haveOrdersInCart = useSelector(getOrdersInCart);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     var classes =
         'w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in';
@@ -94,7 +98,7 @@ function Header({
         };
     }
 
-    const positionApp = document.getElementsByClassName('App');
+    // const positionApp = document.getElementsByClassName('App');
 
     useEffect(() => {
         if (user?.type === 'google_login') {

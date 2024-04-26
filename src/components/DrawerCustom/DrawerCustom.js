@@ -55,6 +55,8 @@ export default function DrawerCustom({
     const body = document.body;
 
     const { title } = useContext(RestaurantDataContext);
+    const user =
+        JSON.parse(localStorage.getItem('authGoogleInfo')) || JSON.parse(localStorage.getItem('authFacebookInfo'));
 
     const totalPriceInCart = useSelector(getTotalPriceInCart);
     const haveOrdersInCart = useSelector(getOrdersInCart);
@@ -160,6 +162,7 @@ export default function DrawerCustom({
             setOpenDialog(true);
             return;
         }
+        // let itemsInCart = [];
         dispatch(
             orderAdded({
                 id: nanoid(),
@@ -175,6 +178,12 @@ export default function DrawerCustom({
                 optional: handleAddOptionalToCart(),
             }),
         );
+
+        // if (localStorage.getItem('itemsInCart')) {
+        //     itemsInCart = JSON.parse(localStorage.getItem('itemsInCart'));
+        // }
+        // itemsInCart.push(haveOrdersInCart[haveOrdersInCart.length - 1]);
+        // localStorage.setItem('itemsInCart', JSON.stringify(itemsInCart));
         setHaveOrders(true);
         closeDrawer();
     }
@@ -215,6 +224,14 @@ export default function DrawerCustom({
         setCancelOutside(false);
     }, [isAdded]);
 
+    // useEffect(() => {
+    //     let itemsInCart = [];
+    //     if (localStorage.getItem('itemsInCart')) {
+    //         itemsInCart = JSON.parse(localStorage.getItem('itemsInCart'));
+    //     }
+    //     itemsInCart.push(haveOrdersInCart[haveOrdersInCart.length - 1]);
+    //     localStorage.setItem('itemsInCart', JSON.stringify(itemsInCart));
+    // }, [haveOrdersInCart]);
     return (
         <Fragment>
             {openDialog && (
@@ -611,16 +628,29 @@ export default function DrawerCustom({
                                     </Typography>
                                 </div>
                                 <div>
-                                    <Link to={config.routes.login} state={{ haveOrdersInCart }}>
-                                        <Button
-                                            size="lg"
-                                            ripple
-                                            fullWidth
-                                            className="bg-light-primary text-light-on-primary font-bolt rounded-full"
-                                        >
-                                            Log in to place order
-                                        </Button>
-                                    </Link>
+                                    {user ? (
+                                        <Link to={config.routes.checkout} state={{ haveOrdersInCart }}>
+                                            <Button
+                                                size="lg"
+                                                ripple
+                                                fullWidth
+                                                className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                            >
+                                                Checkout
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Link to={config.routes.login} state={{ haveOrdersInCart }}>
+                                            <Button
+                                                size="lg"
+                                                ripple
+                                                fullWidth
+                                                className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                            >
+                                                Log in to place order
+                                            </Button>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>
