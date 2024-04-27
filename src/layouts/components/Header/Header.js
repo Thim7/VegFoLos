@@ -44,6 +44,7 @@ function Header({
     breakPointTransition,
     isNews = false,
     isLogin = false,
+    isCheckout = false,
     className: customClassName,
 }) {
     // let location = useLocation();
@@ -150,7 +151,7 @@ function Header({
                             {isNews ? (
                                 <Button title="Home" outline to={config.routes.home} />
                             ) : (
-                                !isLogin && <Button title="News" outline to={config.routes.news} />
+                                !isLogin && !isCheckout && <Button title="News" outline to={config.routes.news} />
                             )}
                             {!isLogin &&
                                 (Object.keys(profile).length > 0 ? (
@@ -183,7 +184,8 @@ function Header({
                             {isNews ? (
                                 <></>
                             ) : (
-                                !isLogin && (
+                                !isLogin &&
+                                !isCheckout && (
                                     <DrawerCustom
                                         ripple
                                         variant="outlined"

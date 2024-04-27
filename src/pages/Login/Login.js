@@ -13,13 +13,15 @@ function Login() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const order = location.state?.haveOrdersInCart;
     const GoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             tokenResponse.type = 'google_login';
             localStorage.setItem('authGoogleInfo', JSON.stringify(tokenResponse));
-            if (location.state?.haveOrdersInCart?.length > 0) {
+            if (order.length > 0) {
+                order.title = order[order.length - 1].title;
                 navigate(config.routes.checkout, {
-                    state: { user: tokenResponse, haveOrdersInCart: location.state?.haveOrdersInCart },
+                    state: { user: tokenResponse, order },
                 });
                 return;
             }
@@ -34,9 +36,9 @@ function Login() {
         if (response.accessToken) {
             response.type = 'facebook_login';
             localStorage.setItem('authFacebookInfo', JSON.stringify(response));
-            if (location.state?.haveOrdersInCart?.length > 0) {
+            if (order.length > 0) {
                 navigate(config.routes.checkout, {
-                    state: { userFaceBook: response, haveOrdersInCart: location.state?.haveOrdersInCart },
+                    state: { userFaceBook: response, order },
                 });
                 return;
             }

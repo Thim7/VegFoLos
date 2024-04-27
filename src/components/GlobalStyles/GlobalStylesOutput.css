@@ -2352,6 +2352,11 @@ h1,
   border-color: rgb(253 216 53 / var(--tw-divide-opacity));
 }
 
+.divide-light-outline-variant > :not([hidden]) ~ :not([hidden]){
+  --tw-divide-opacity: 1;
+  border-color: rgb(193 201 189 / var(--tw-divide-opacity));
+}
+
 .self-center{
   align-self: center;
 }
@@ -3048,6 +3053,11 @@ h1,
 
 .bg-yellow-500\/20{
   background-color: rgb(255 235 59 / 0.2);
+}
+
+.bg-light-surface-container-highest{
+  --tw-bg-opacity: 1;
+  background-color: rgb(225 227 221 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-60{
