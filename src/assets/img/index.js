@@ -8,8 +8,6 @@ const images = {
     timeIcon: require('./TimeIcon.png'),
     ellipseIcon: require('./EllipseSpace.png'),
     buttonImage: require('./buttonImage.png'),
-    btnDownloadGG: require('./Download_GG_Btn.png'),
-    btnDownloadAppStore: require('./Download_AppStore_Btn.png'),
     blogImage: require('./BlogImage.png'),
     blogImage2: require('./BlogImage2.png'),
     blogImage3: require('./BlogImage3.png'),
@@ -20,6 +18,9 @@ const images = {
     blogImage8: require('./BlogImage8.png'),
     blogImage9: require('./BlogImage9.png'),
     cartImage: require('./Cart.png'),
+    trackingOrder: require('./TrackingOrder.png'),
+    googlePlayBadge: require('./google-play-badge.png'),
+    appStoreBadge: require('./appStore_badge.png'),
 };
 
 export default images;

@@ -18,7 +18,7 @@ function Login() {
         onSuccess: (tokenResponse) => {
             tokenResponse.type = 'google_login';
             localStorage.setItem('authGoogleInfo', JSON.stringify(tokenResponse));
-            if (order.length > 0) {
+            if (order.length > 0 && order !== undefined) {
                 order.title = order[order.length - 1].title;
                 navigate(config.routes.checkout, {
                     state: { user: tokenResponse, order },

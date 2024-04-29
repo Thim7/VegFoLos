@@ -518,7 +518,6 @@ export default function DrawerCustom({
                                     className="inline-flex items-center justify-between space-x-2 w-full pt-5"
                                 >
                                     <div className="flex space-x-2 items-center w-full min-h-20 h-fit">
-                                        {console.log(order.optional)}
                                         <IconButton
                                             size="sm"
                                             className="rounded-full"
