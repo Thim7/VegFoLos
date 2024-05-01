@@ -1600,10 +1600,6 @@ h1,
   height: 100vh;
 }
 
-.h-\[48px\]{
-  height: 48px;
-}
-
 .max-h-64{
   max-height: 16rem;
 }
@@ -1756,6 +1752,10 @@ h1,
   width: 110px;
 }
 
+.w-\[120px\]{
+  width: 120px;
+}
+
 .w-\[160px\]{
   width: 160px;
 }
@@ -1791,14 +1791,6 @@ h1,
 
 .w-screen{
   width: 100vw;
-}
-
-.w-\[120px\]{
-  width: 120px;
-}
-
-.w-\[10px\]{
-  width: 10px;
 }
 
 .min-w-0{

@@ -18,7 +18,10 @@ function Login() {
         onSuccess: (tokenResponse) => {
             tokenResponse.type = 'google_login';
             localStorage.setItem('authGoogleInfo', JSON.stringify(tokenResponse));
-            if (order.length > 0 && order !== undefined) {
+            setTimeout(() => {
+                localStorage.removeItem('authGoogleInfo');
+            }, tokenResponse.expires_in * 1000);
+            if (order?.length > 0 && order !== undefined) {
                 order.title = order[order.length - 1].title;
                 navigate(config.routes.checkout, {
                     state: { user: tokenResponse, order },
@@ -36,7 +39,10 @@ function Login() {
         if (response.accessToken) {
             response.type = 'facebook_login';
             localStorage.setItem('authFacebookInfo', JSON.stringify(response));
-            if (order.length > 0) {
+            setTimeout(() => {
+                localStorage.removeItem('authFacebookInfo');
+            }, response.expiresIn * 1000);
+            if (order?.length > 0) {
                 navigate(config.routes.checkout, {
                     state: { userFaceBook: response, order },
                 });
@@ -72,7 +78,7 @@ function Login() {
                 <div className="or">or</div>
                 <div className="flex-col space-y-4">
                     <Button
-                        onClick={() => GoogleLogin()}
+                        onClick={GoogleLogin}
                         fullWidth
                         variant="outlined"
                         className="flex items-center gap-2 justify-center border-light-outline text-light-on-surface"

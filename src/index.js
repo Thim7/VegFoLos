@@ -4,7 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { store } from '~/app/store';
+import { persistor, store } from '~/app/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import GlobalStyles from '~/components/GlobalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,9 +13,11 @@ root.render(
     <GoogleOAuthProvider clientId="756642481515-ane3pa6i3o5l0noot3nnhd3hv2pl1sq4.apps.googleusercontent.com">
         <React.StrictMode>
             <Provider store={store}>
-                <GlobalStyles>
-                    <App />
-                </GlobalStyles>
+                <PersistGate loading={null} persistor={persistor}>
+                    <GlobalStyles>
+                        <App />
+                    </GlobalStyles>
+                </PersistGate>
             </Provider>
         </React.StrictMode>
     </GoogleOAuthProvider>,
