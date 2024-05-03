@@ -1,23 +1,51 @@
-import { Button, IconButton, Input, Option, Select, Typography } from '@material-tailwind/react';
+import {
+    Button,
+    Dialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    IconButton,
+    Input,
+    Option,
+    Select,
+    Typography,
+} from '@material-tailwind/react';
 import classNames from 'classnames';
 import { cloneElement, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import images from '~/assets/img';
 import CustomInput from '~/components/CustomInput';
-import { CashIcon, CreditCardIcon, InfoIcon, MinusIcon, PlusIcon } from '~/components/Icons';
+import { CashIcon, CreditCardIcon, DeleteIcon, InfoIcon, MinusIcon, PlusIcon } from '~/components/Icons';
+import config from '~/config';
+import { orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import Header from '~/layouts/components/Header';
+import { getOrdersInCart, getTotalPriceInCart } from '~/selector/orders';
 
 function Checkout() {
-    const location = useLocation();
-    const order = location.state?.haveOrdersInCart;
-
+    // const location = useLocation();
+    // const order = location.state?.haveOrdersInCart;
     const [inputValue, setInputValue] = useState('');
+    const [openConfirmDeleteDialog, setOpenConfirmDeleteDialog] = useState(false);
+    const order = useSelector(getOrdersInCart);
+    const totalPriceInCart = useSelector(getTotalPriceInCart);
+
+    const dispatch = useDispatch();
+    const navigation = useNavigate();
 
     function handleOnChange(e) {
-        console.log(e.target.value);
         setInputValue(e.target.value);
     }
 
+    function handleOpenDialog() {
+        setOpenConfirmDeleteDialog(!openConfirmDeleteDialog);
+    }
+
+    useEffect(() => {
+        if (order.length <= 0) {
+            navigation(config.routes.home);
+        }
+    }, [order]);
     return (
         <>
             <Header isCheckout />
@@ -25,7 +53,7 @@ function Checkout() {
                 <div>
                     <Typography className="text-4xl font-normal text-light-on-surface">Last Step - Checkout</Typography>
                     <Typography className="text-xl font-normal text-light-on-surface-variant">
-                        {order[order?.length - 1].title}
+                        {order[order?.length - 1]?.title}
                     </Typography>
                 </div>
                 <div className="w-full flex-col space-y-4 bg-light-surface-container-lowest rounded-lg divide-y divide-light-outline-variant p-4">
@@ -49,60 +77,136 @@ function Checkout() {
                         />
                     </div>
                 </div>
-                <div className="w-full flex-col space-y-4 bg-light-surface-container-lowest rounded-lg divide-y divide-light-outline-variant p-4">
+                <div className="w-full flex-col space-y-4 bg-light-surface-container-lowest rounded-lg divide-y-2 divide-light-outline-variant p-4">
                     <Typography className="text-xl font-medium">Order Summary</Typography>
-                    <div className="inline-flex w-full items-center justify-between pt-4">
-                        <div className="inline-flex items-center space-x-3">
-                            <div className="inline-flex items-center space-x-1">
-                                <IconButton
-                                    size="sm"
-                                    className="rounded-full"
-                                    variant="text"
-                                    disabled={order.quantity <= 0}
-                                    // onClick={() => {
-                                    //     dispatch(
-                                    //         orderQuantityUpdated({
-                                    //             id: order.id,
-                                    //             quantity: order.quantity - 1,
-                                    //             optional: order.optional,
-                                    //         }),
-                                    //     );
-                                    // }}
-                                >
-                                    <MinusIcon color="#a6ca94" strokeWidth={2} />
-                                </IconButton>
-                                <Typography className="text-sm font-normal">{order?.length}</Typography>
-                                <IconButton
-                                    size="sm"
-                                    className="rounded-full"
-                                    variant="text"
-                                    // onClick={() => {
-                                    //     dispatch(
-                                    //         orderQuantityUpdated({
-                                    //             id: order.id,
-                                    //             quantity: order.quantity + 1,
-                                    //             optional: order.optional,
-                                    //         }),
-                                    //     );
-                                    // }}
-                                >
-                                    <PlusIcon color="#a6ca94" strokeWidth={2} />
-                                </IconButton>
+                    <div className="flex-col space-y-2 divide-y divide-light-outline-variant">
+                        {order.map((item) => (
+                            <div className="inline-flex w-full items-center justify-between pt-4">
+                                <div className="inline-flex items-center space-x-3">
+                                    <div className="inline-flex items-center space-x-1">
+                                        {item.quantity <= 0 ? (
+                                            <>
+                                                <IconButton
+                                                    size="sm"
+                                                    variant="text"
+                                                    className="rounded-full hover:bg-light-error-container"
+                                                    onClick={() => {
+                                                        setOpenConfirmDeleteDialog(true);
+                                                    }}
+                                                >
+                                                    <DeleteIcon color="#ba1a1a" />
+                                                </IconButton>
+                                                {openConfirmDeleteDialog && (
+                                                    <Dialog open className="bg-light-surface-container-lowest">
+                                                        <DialogHeader className="text-light-on-surface">
+                                                            Remove item from your order?
+                                                        </DialogHeader>
+                                                        {order.length === 1 && (
+                                                            <DialogBody className="text-light-on-surface-variant ">
+                                                                This is the only product in your order. Clicking "Yes"
+                                                                will cancel the order and return you to the home page.
+                                                                Do you want to continue?{' '}
+                                                            </DialogBody>
+                                                        )}
+                                                        <DialogFooter className="gap-x-3">
+                                                            <Button
+                                                                variant="text"
+                                                                onClick={handleOpenDialog}
+                                                                className="text-light-error hover:bg-light-error-container"
+                                                            >
+                                                                No
+                                                            </Button>
+                                                            <Button
+                                                                ripple
+                                                                className="bg-light-primary-container text-light-on-primary"
+                                                                onClick={() => {
+                                                                    dispatch(orderRemoved({ id: item.id }));
+                                                                }}
+                                                            >
+                                                                Yes
+                                                            </Button>
+                                                        </DialogFooter>
+                                                    </Dialog>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <IconButton
+                                                size="sm"
+                                                className="rounded-full"
+                                                variant="text"
+                                                disabled={item.quantity <= 0}
+                                                onClick={() => {
+                                                    dispatch(
+                                                        orderQuantityUpdated({
+                                                            id: item.id,
+                                                            quantity: item.quantity - 1,
+                                                            optional: item.optional,
+                                                        }),
+                                                    );
+                                                }}
+                                            >
+                                                <MinusIcon color="#a6ca94" strokeWidth={2} />
+                                            </IconButton>
+                                        )}
+                                        <Typography className="text-sm font-normal">{item?.quantity}</Typography>
+                                        <IconButton
+                                            size="sm"
+                                            className="rounded-full"
+                                            variant="text"
+                                            onClick={() => {
+                                                dispatch(
+                                                    orderQuantityUpdated({
+                                                        id: item.id,
+                                                        quantity: item.quantity + 1,
+                                                        optional: item.optional,
+                                                    }),
+                                                );
+                                            }}
+                                        >
+                                            <PlusIcon color="#a6ca94" strokeWidth={2} />
+                                        </IconButton>
+                                    </div>
+                                    <img
+                                        src={item.img}
+                                        alt={item.foodName}
+                                        className="object-cover w-16 h-auto rounded-lg"
+                                    />
+                                    <div className="flex-col space-y-2 justify-between">
+                                        <Typography className="text-sm font-medium text-light-on-surface">
+                                            {item.foodName}
+                                        </Typography>
+                                        <div className="flex space-x-2">
+                                            {item.optional.map((option, index) => (
+                                                <Typography
+                                                    className="text-sm text-light-on-surface font-normal"
+                                                    key={index}
+                                                >
+                                                    {option.toppingName}
+                                                </Typography>
+                                            ))}
+                                        </div>
+                                        <Typography className="text-sm font-light text-light-on-surface-variant">
+                                            {item.note}
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className="flex-col">
+                                    <Typography className="text-sm font-normal text-light-on-surface">
+                                        {item.totalPrice}
+                                    </Typography>
+                                    <strike className="text-xs font-normal text-light-on-surface-variant">
+                                        {item.originalPrice}
+                                    </strike>
+                                </div>
                             </div>
-                            <img src={images.blogImage2} alt="Hello" className="object-cover w-16 h-auto rounded-lg" />
-                            <Typography className="text-sm font-medium text-light-on-surface">
-                                Salad & Italian bread
-                            </Typography>
-                        </div>
-                        <div className="flex-col">
-                            <Typography className="text-sm font-normal text-light-on-surface">50000</Typography>
-                            <strike className="text-xs font-normal text-light-on-surface-variant">55000</strike>
-                        </div>
+                        ))}
                     </div>
                     <div className="flex-col space-y-2 pt-4">
                         <div className="w-full inline-flex items-center justify-between ">
                             <Typography className="text-sm font-normal text-light-on-surface">Subtotal</Typography>
-                            <Typography className="text-sm font-normal text-light-on-surface">0 VND</Typography>
+                            <Typography className="text-sm font-normal text-light-on-surface">
+                                {totalPriceInCart} VND
+                            </Typography>
                         </div>
                         <div className="w-full inline-flex items-center justify-between ">
                             <div className="inline-flex items-center space-x-1">
@@ -148,7 +252,7 @@ function Checkout() {
 
                     <div className="flex-col pt-4 space-y-7">
                         <div className="w-full flex items-center justify-between gap-x-4">
-                            <Input label="Add promo code" onChange={handleOnChange} />
+                            <Input label="Add promo code" onChange={handleOnChange} value={inputValue} />
                             <Button
                                 disabled={inputValue ? false : true}
                                 className="bg-light-primary text-light-on-primary shrink-0 rounded-full"
@@ -210,7 +314,9 @@ function Checkout() {
                     <div className=" inline-flex w-[428px] items-center justify-between">
                         <div className="flex-col">
                             <Typography className="font-normal text-base text-light-on-surface">Total</Typography>
-                            <Typography className="font-medium text-xl text-light-on-surface">0 VND</Typography>
+                            <Typography className="font-medium text-xl text-light-on-surface">
+                                {totalPriceInCart + 15000} VND
+                            </Typography>
                         </div>
                         <Button size="lg" className="bg-light-primary text-light-on-primary rounded-full">
                             Order

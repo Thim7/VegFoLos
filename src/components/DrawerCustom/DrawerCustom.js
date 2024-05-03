@@ -511,7 +511,9 @@ export default function DrawerCustom({
                 {!data && haveOrdersInCart.length > 0 && (
                     <>
                         <div className="flex-col space-y-5 h-screen pt-12 pb-48 mx-[-20px] overflow-auto px-5 divide-y">
-                            <Typography className="text-xl text-light-on-surface pt-5 font-medium">{title}</Typography>
+                            <Typography className="text-xl text-light-on-surface pt-5 font-medium">
+                                {haveOrdersInCart[haveOrdersInCart.length - 1].title}
+                            </Typography>
                             {haveOrdersInCart.map((order) => (
                                 <div
                                     key={order.id}
