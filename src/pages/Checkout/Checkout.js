@@ -11,9 +11,9 @@ import {
     Typography,
 } from '@material-tailwind/react';
 import classNames from 'classnames';
-import { cloneElement, useEffect, useRef, useState } from 'react';
+import { cloneElement, useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import images from '~/assets/img';
 import CustomInput from '~/components/CustomInput';
 import { CashIcon, CreditCardIcon, DeleteIcon, InfoIcon, MinusIcon, PlusIcon } from '~/components/Icons';
@@ -21,6 +21,7 @@ import config from '~/config';
 import { orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
 import Header from '~/layouts/components/Header';
 import { getOrdersInCart, getTotalPriceInCart } from '~/selector/orders';
+import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 
 function Checkout() {
     // const location = useLocation();
@@ -61,7 +62,8 @@ function Checkout() {
                     <div className="flex-col pt-4">
                         <Typography className="font-normal text-light-on-surface-variant">Arrival time </Typography>
                         <Typography className="text-base font-semibold text-light-on-surface">
-                            20 mins (1.1 km away)
+                            {order[order?.length - 1]?.timeDelivery} mins ({order[order?.length - 1]?.distanceDelivery}{' '}
+                            km away)
                         </Typography>
                     </div>
                     <div className="flex-col space-y-8 pt-4">
@@ -171,7 +173,7 @@ function Checkout() {
                                         alt={item.foodName}
                                         className="object-cover w-16 h-auto rounded-lg"
                                     />
-                                    <div className="flex-col space-y-2 justify-between">
+                                    <div className="flex-col max-w-[200px] space-y-2 justify-between">
                                         <Typography className="text-sm font-medium text-light-on-surface">
                                             {item.foodName}
                                         </Typography>
@@ -285,14 +287,14 @@ function Checkout() {
                             Use other payment methods and enjoy exclusive promo only on Grab app.
                         </Typography>
                         <div className="w-full inline-flex items-center justify-between space-x-3">
-                            <button>
+                            <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
                                 <img
                                     src={images.googlePlayBadge}
                                     alt="Google Play Badge"
                                     className="w-[160px] h-auto object-cover"
                                 />
                             </button>
-                            <button>
+                            <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
                                 <img
                                     src={images.appStoreBadge}
                                     alt="App Store Badge"
@@ -318,9 +320,11 @@ function Checkout() {
                                 {totalPriceInCart + 15000} VND
                             </Typography>
                         </div>
-                        <Button size="lg" className="bg-light-primary text-light-on-primary rounded-full">
-                            Order
-                        </Button>
+                        <Link to={config.routes.successOrder} state={order}>
+                            <Button size="lg" className="bg-light-primary text-light-on-primary rounded-full">
+                                Order
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

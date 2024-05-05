@@ -19,10 +19,18 @@ function Footer() {
 
                 <div className="max-[639px]:w-full max-[639px]:hidden sm:flex justify-evenly sm:space-x-8 sm:justify-start flex-shrink-0 items-center">
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                        <img src={images.btnDownloadGG} alt="DownLoad on Google Play" />
+                        <img
+                            src={images.googlePlayBadge}
+                            alt="DownLoad on Google Play"
+                            className="w-[160px] h-auto object-cover"
+                        />
                     </button>
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                        <img src={images.btnDownloadAppStore} alt="DownLoad on App Store" />
+                        <img
+                            src={images.appStoreBadge}
+                            alt="DownLoad on App Store"
+                            className="w-[160px] h-auto object-cover"
+                        />
                     </button>
                 </div>
                 <div className="max-[639px]:w-full grid grid-flow-col sm:grid-rows-2 md:gap-x-2">

@@ -17,6 +17,7 @@ function Login() {
     const GoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             tokenResponse.type = 'google_login';
+            tokenResponse.timeStart = Date.now();
             localStorage.setItem('authGoogleInfo', JSON.stringify(tokenResponse));
             setTimeout(() => {
                 localStorage.removeItem('authGoogleInfo');
@@ -38,6 +39,8 @@ function Login() {
     const responseFacebook = (response) => {
         if (response.accessToken) {
             response.type = 'facebook_login';
+            response.timeStart = Date.now();
+
             localStorage.setItem('authFacebookInfo', JSON.stringify(response));
             setTimeout(() => {
                 localStorage.removeItem('authFacebookInfo');

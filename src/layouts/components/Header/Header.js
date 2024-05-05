@@ -118,6 +118,15 @@ function Header({
             setProfile(user);
         }
     }, [user]);
+    useEffect(() => {
+        const checkTime = setInterval(() => {
+            if (user) if (Date.now() - user?.timeStart >= (user?.expires_in || user?.expiresIn)) logOut();
+        }, 60000 * 3);
+
+        return () => {
+            clearInterval(checkTime);
+        };
+    }, []);
 
     return (
         <>
@@ -154,6 +163,7 @@ function Header({
                                 !isLogin && !isCheckout && <Button title="News" outline to={config.routes.news} />
                             )}
                             {!isLogin &&
+                                !isCheckout &&
                                 (Object.keys(profile).length > 0 ? (
                                     <Menu>
                                         <MenuHandler>

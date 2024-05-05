@@ -54,7 +54,8 @@ export default function DrawerCustom({
 
     const body = document.body;
 
-    const { title } = useContext(RestaurantDataContext);
+    const { title, timeDelivery, distanceDelivery } = useContext(RestaurantDataContext);
+
     const user =
         JSON.parse(localStorage.getItem('authGoogleInfo')) || JSON.parse(localStorage.getItem('authFacebookInfo'));
 
@@ -167,6 +168,8 @@ export default function DrawerCustom({
             orderAdded({
                 id: nanoid(),
                 title,
+                timeDelivery,
+                distanceDelivery,
                 img: data?.img,
                 foodName: data?.foodName,
                 quantity,
@@ -236,7 +239,7 @@ export default function DrawerCustom({
         <Fragment>
             {openDialog && (
                 <Dialog open className="bg-light-surface-container-lowest">
-                    <DialogHeader className="text-light-on-surface">You changed restaurant!</DialogHeader>
+                    <DialogHeader className="text-light-on-surface">Want to change restaurant?</DialogHeader>
                     <DialogBody className="text-light-on-surface-variant ">
                         You're adding an order from another restaurant to your cart. This action will delete previous
                         orders in cart. Do you want to continue?
@@ -519,64 +522,65 @@ export default function DrawerCustom({
                                     key={order.id}
                                     className="inline-flex items-center justify-between space-x-2 w-full pt-5"
                                 >
-                                    <div className="flex space-x-2 items-center w-full min-h-20 h-fit">
-                                        <IconButton
-                                            size="sm"
-                                            className="rounded-full"
-                                            variant="text"
-                                            disabled={order.quantity <= 0}
-                                            onClick={() => {
-                                                dispatch(
-                                                    orderQuantityUpdated({
-                                                        id: order.id,
-                                                        quantity: order.quantity - 1,
-                                                        optional: order.optional,
-                                                    }),
-                                                );
-                                            }}
-                                        >
-                                            <MinusIcon color="#a6ca94" strokeWidth={2} />
-                                        </IconButton>
-                                        <Typography className="text-base font-normal">{order.quantity}</Typography>
-                                        <IconButton
-                                            size="sm"
-                                            className="rounded-full"
-                                            variant="text"
-                                            onClick={() => {
-                                                dispatch(
-                                                    orderQuantityUpdated({
-                                                        id: order.id,
-                                                        quantity: order.quantity + 1,
-                                                        optional: order.optional,
-                                                    }),
-                                                );
-                                            }}
-                                        >
-                                            <PlusIcon color="#a6ca94" strokeWidth={2} />
-                                        </IconButton>
+                                    <div className="flex space-x-2 items-center min-h-20 h-fit">
+                                        <div className="flex space-x-2 items-center">
+                                            <IconButton
+                                                size="sm"
+                                                className="rounded-full"
+                                                variant="text"
+                                                disabled={order.quantity <= 0}
+                                                onClick={() => {
+                                                    dispatch(
+                                                        orderQuantityUpdated({
+                                                            id: order.id,
+                                                            quantity: order.quantity - 1,
+                                                            optional: order.optional,
+                                                        }),
+                                                    );
+                                                }}
+                                            >
+                                                <MinusIcon color="#a6ca94" strokeWidth={2} />
+                                            </IconButton>
+                                            <Typography className="text-base font-normal">{order.quantity}</Typography>
+                                            <IconButton
+                                                size="sm"
+                                                className="rounded-full"
+                                                variant="text"
+                                                onClick={() => {
+                                                    dispatch(
+                                                        orderQuantityUpdated({
+                                                            id: order.id,
+                                                            quantity: order.quantity + 1,
+                                                            optional: order.optional,
+                                                        }),
+                                                    );
+                                                }}
+                                            >
+                                                <PlusIcon color="#a6ca94" strokeWidth={2} />
+                                            </IconButton>
+                                        </div>
                                         <img
                                             src={order.img}
                                             alt={order.foodName}
                                             className="max-w-28 w-full h-auto object-cover rounded-xl"
                                         />
-
-                                        <div className="flex-col space-y-2 justify-between">
-                                            <Typography className="text-base font-medium text-light-on-surface">
+                                        <div className="flex-col max-w-[200px] space-y-2 justify-between">
+                                            <p className="text-base font-medium text-light-on-surface">
                                                 {order.foodName}
-                                            </Typography>
+                                            </p>
                                             <div className="flex space-x-2">
                                                 {order.optional.map((option, index) => (
-                                                    <Typography
+                                                    <p
                                                         className="text-sm text-light-on-surface font-normal"
                                                         key={index}
                                                     >
                                                         {option.toppingName}
-                                                    </Typography>
+                                                    </p>
                                                 ))}
                                             </div>
-                                            <Typography className="text-sm font-light text-light-on-surface-variant">
+                                            <p className="text-sm font-light text-light-on-surface-variant">
                                                 {order.note}
-                                            </Typography>
+                                            </p>
                                         </div>
                                     </div>
                                     {order.quantity <= 0 ? (
@@ -591,7 +595,7 @@ export default function DrawerCustom({
                                             Remove
                                         </Button>
                                     ) : (
-                                        <div className="flex-col">
+                                        <div className="flex-col flex-shrink-0">
                                             <Typography className="text-base font-normal text-light-on-surface">
                                                 {numeral(order.totalPrice).format('0,0')}
                                             </Typography>

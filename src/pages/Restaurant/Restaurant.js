@@ -16,7 +16,6 @@ function Restaurant() {
 
     let { state } = useLocation();
     const data = state?.data;
-
     const handleClick = (e) => {
         e.preventDefault();
         const target = e.target;
