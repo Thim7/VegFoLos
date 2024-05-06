@@ -11,7 +11,7 @@ import {
     Typography,
 } from '@material-tailwind/react';
 import classNames from 'classnames';
-import { cloneElement, useContext, useEffect, useRef, useState } from 'react';
+import React, { cloneElement, useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import images from '~/assets/img';
@@ -28,6 +28,8 @@ function Checkout() {
     // const order = location.state?.haveOrdersInCart;
     const [inputValue, setInputValue] = useState('');
     const [openConfirmDeleteDialog, setOpenConfirmDeleteDialog] = useState(false);
+    const [selectedValue, setSelectedValue] = useState('cash');
+
     const order = useSelector(getOrdersInCart);
     const totalPriceInCart = useSelector(getTotalPriceInCart);
 
@@ -227,23 +229,27 @@ function Checkout() {
                     <div className="pt-4">
                         <Select
                             label="Payment Method"
-                            // selected={(element) => {
-                            //     element &&
-                            //         cloneElement(element, {
-                            //             disabled: true,
-                            //             className: 'inline-flex items-center space-x-1',
-                            //         });
-                            // }}
+                            value={selectedValue}
+                            onChange={(value) => {
+                                setSelectedValue(value);
+                            }}
+                            selected={(element) =>
+                                element &&
+                                React.cloneElement(element, {
+                                    disabled: true,
+                                    className: 'flex items-center opacity-100 px-0 gap-x-1 pointer-events-none',
+                                })
+                            }
                             color="text-light-outline"
                             containerProps={{ className: '' }}
                             labelProps={{ className: 'text-light-on-surface-variant' }}
                             menuProps={{ className: '' }}
-                            className="outline-light-outline"
+                            // className="outline-light-outline"
                         >
-                            <Option className="w-full inline-flex items-center space-x-1 hover:!text-light-on-tertiary-container hover:!bg-light-tertiary-container focus:!text-light-on-tertiary-container focus:!bg-light-tertiary-container">
+                            <Option value="cash" className="w-full inline-flex items-center space-x-1">
                                 <CashIcon color="#414940" /> <p className="text-light-on-surface">Cash</p>
                             </Option>
-                            <Option className="w-full inline-flex items-center space-x-1 hover:!text-light-on-tertiary-container hover:!bg-light-tertiary-container focus:!text-light-on-tertiary-container focus:!bg-light-tertiary-container">
+                            <Option value="credit" className="w-full inline-flex items-center space-x-1">
                                 <CreditCardIcon color="#414940" /> <p className="text-light-on-surface ">Credit Card</p>
                             </Option>
                         </Select>

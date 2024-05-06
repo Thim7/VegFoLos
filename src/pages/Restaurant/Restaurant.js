@@ -1,5 +1,5 @@
-import { Breadcrumbs, Typography } from '@material-tailwind/react';
-import { createContext, useEffect } from 'react';
+import { Breadcrumbs, Option, Select, Typography } from '@material-tailwind/react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
@@ -12,7 +12,8 @@ const deliveryTime = ['Now', 'Later'];
 
 export const RestaurantDataContext = createContext({});
 function Restaurant() {
-    // const [active, setActive] = useState(false);
+    const [selectedTime, setSelectedTime] = useState('Now');
+    const [selectedDate, setSelectedDate] = useState('Today');
 
     let { state } = useLocation();
     const data = state?.data;
@@ -109,16 +110,52 @@ function Restaurant() {
                             </Typography>
                         </div>
                         <div className="flex space-x-8">
-                            <DropdownMenu
-                                title="Deliver date: Today"
-                                menuItems={deliveryDate}
-                                className="rounded-lg h-14"
-                            />
-                            <DropdownMenu
-                                title="Deliver time: Now"
-                                menuItems={deliveryTime}
-                                className="rounded-lg h-14"
-                            />
+                            <Select
+                                size="lg"
+                                label="Select delivery date"
+                                value={selectedDate}
+                                onChange={(value) => {
+                                    setSelectedDate(value);
+                                }}
+                                color="text-light-outline"
+                                labelProps={{ className: 'text-light-on-surface-variant' }}
+                                selected={(element) =>
+                                    element &&
+                                    React.cloneElement(element, {
+                                        disabled: true,
+                                        className: 'flex items-center opacity-100 px-0 gap-x-1 pointer-events-none',
+                                    })
+                                }
+                            >
+                                {deliveryDate.map((item, index) => (
+                                    <Option key={index} value={item}>
+                                        {item}
+                                    </Option>
+                                ))}
+                            </Select>
+                            <Select
+                                size="lg"
+                                label="Select delivery time"
+                                value={selectedTime}
+                                onChange={(value) => {
+                                    setSelectedTime(value);
+                                }}
+                                color="text-light-outline"
+                                labelProps={{ className: 'text-light-on-surface-variant' }}
+                                selected={(element) =>
+                                    element &&
+                                    React.cloneElement(element, {
+                                        disabled: true,
+                                        className: 'flex items-center opacity-100 px-0 gap-x-1 pointer-events-none',
+                                    })
+                                }
+                            >
+                                {deliveryTime.map((item, index) => (
+                                    <Option key={index} value={item}>
+                                        {item}
+                                    </Option>
+                                ))}
+                            </Select>
                         </div>
                     </div>
                 </section>

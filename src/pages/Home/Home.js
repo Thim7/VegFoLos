@@ -72,7 +72,7 @@ function Homepage() {
         <div className="">
             <Header hide breakPointTransition={screenHeight} />
             {/* Hero Image */}
-            <section className="w-full relative flex ">
+            <section className="w-full relative flex snap-start">
                 <img
                     id="heroImage"
                     className={`w-full h-[780px] md:h-auto max-h-[${screenHeight}px] object-cover`}
@@ -92,7 +92,7 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2">
+            <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2 snap-center">
                 <h1 className="text-4xl text-light-on-background">Popular restaurants near you</h1>
                 <div className="slider-container max-[848px]:px-8 max-[640px]:px-0">
                     <Slider className="flex mt-9 h-auto" {...settings}>
@@ -102,7 +102,7 @@ function Homepage() {
                     </Slider>
                 </div>
             </section>
-            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10  scroll-mt-2 bg-light-tertiary-container">
+            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10 scroll-mt-2 snap-center bg-light-tertiary-container">
                 <div>
                     <h1 className="text-4xl text-light-on-tertiary-container">There's something for you!</h1>
                     <div className="grid justify-items-center xl:grid-cols-6 md:grid-cols-4 max-[640px]:grid-cols-2 gap-5 mt-9 w-full h-auto">
@@ -112,7 +112,7 @@ function Homepage() {
                     </div>
                 </div>
             </section>
-            <section className="w-full mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7  scroll-mt-2">
+            <section className="w-full mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2 snap-center">
                 <div>
                     <h1 className="text-4xl text-light-on-background">Why VegFoLos?</h1>
                     <div className="mt-7 flex-col space-y-5">

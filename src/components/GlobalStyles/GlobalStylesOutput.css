@@ -2045,16 +2045,16 @@ h1,
   resize: both;
 }
 
+.snap-start{
+  scroll-snap-align: start;
+}
+
 .snap-end{
   scroll-snap-align: end;
 }
 
 .snap-center{
   scroll-snap-align: center;
-}
-
-.snap-always{
-  scroll-snap-stop: always;
 }
 
 .scroll-mt-2{
@@ -2168,6 +2168,10 @@ h1,
 
 .gap-x-8{
   column-gap: 2rem;
+}
+
+.gap-x-1{
+  column-gap: 0.25rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]){
@@ -3454,6 +3458,11 @@ h1,
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-0{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .\!pr-7{
@@ -5871,6 +5880,11 @@ h1,
 
 .focus\:bg-transparent:focus{
   background-color: transparent;
+}
+
+.focus\:bg-light-tertiary-container:focus{
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 243 216 / var(--tw-bg-opacity));
 }
 
 .focus\:bg-opacity-80:focus{
