@@ -1,10 +1,8 @@
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Typography } from '@material-tailwind/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Button, Dialog, DialogFooter, DialogHeader, Typography } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 import config from '~/config';
 
 function SuccessOrder() {
-    const location = useLocation();
-    const order = location?.state;
     return (
         <Dialog size="lg" open className="bg-light-surface-container-lowest">
             <DialogHeader>

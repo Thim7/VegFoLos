@@ -20,16 +20,16 @@ function Footer() {
                 <div className="max-[639px]:w-full max-[639px]:hidden sm:flex justify-evenly sm:space-x-8 sm:justify-start flex-shrink-0 items-center">
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
                         <img
-                            src={images.googlePlayBadge}
+                            src={images.googlePlayBtn}
                             alt="DownLoad on Google Play"
-                            className="w-[160px] h-auto object-cover"
+                            // className="w-[160px] h-auto object-cover"
                         />
                     </button>
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
                         <img
-                            src={images.appStoreBadge}
+                            src={images.appStoreBtn}
                             alt="DownLoad on App Store"
-                            className="w-[160px] h-auto object-cover"
+                            // className="w-[160px] h-auto object-cover"
                         />
                     </button>
                 </div>
@@ -50,10 +50,10 @@ function Footer() {
                 </div>
                 <div className="max-[639px]:w-full max-[639px]:flex justify-evenly sm:space-x-8 sm:justify-start flex-shrink-0 items-center sm:hidden">
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                        <img src={images.btnDownloadGG} alt="DownLoad on Google Play" />
+                        <img src={images.googlePlayBtn} alt="DownLoad on Google Play" />
                     </button>
                     <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
-                        <img src={images.btnDownloadAppStore} alt="DownLoad on App Store" />
+                        <img src={images.appStoreBtn} alt="DownLoad on App Store" />
                     </button>
                 </div>
                 <div className="inline-flex justify-evenly space-x-2 sm:justify-between items-center sm:space-x-4">

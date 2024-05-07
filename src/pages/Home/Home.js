@@ -1,16 +1,15 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import images from '~/assets/img';
-import Button from '~/components/Button';
 import DatabaseButton from '~/components/DatabaseButton';
-import { CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2 } from '~/components/Icons';
+import { CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2, SearchIcon } from '~/components/Icons';
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
 import Header from '~/layouts/components/Header';
 import { RESTAURANT_ITEMS } from '~/data';
+import { Button } from '@material-tailwind/react';
 
 const DATABASE_ITEMS = [
     { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
@@ -82,13 +81,15 @@ function Homepage() {
                 <div
                     className={`2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 sm:w-full flex-col absolute self-center max-w-3xl space-y-16`}
                 >
-                    <div className="text-light-on-surface text-center md:text-start">
+                    <div className=" text-light-on-primary text-center md:text-start">
                         <h1 className="text-4xl">Good Morning!</h1>
                         <h2 className="text-base md:text-xl">Where should we deliver your food today?</h2>
                     </div>
                     <div className="flex flex-wrap shrink w-full sm:space-x-8 max-[639px]:justify-evenly md:inline-flex items-center ">
                         <Searchbar />
-                        <Button className="ml-8 h-14 border-transparent" title="Search" leftIcon={faSearch} primary />
+                        <Button size="lg" className="flex items-center gap-3 rounded-full bg-light-primary">
+                            <SearchIcon /> Search
+                        </Button>
                     </div>
                 </div>
             </section>

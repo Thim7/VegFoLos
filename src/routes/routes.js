@@ -19,7 +19,7 @@ const publicRoutes = [
     { path: config.routes.restaurant, component: Restaurant },
     { path: config.routes.foodItem, component: FoodItem },
     { path: config.routes.checkout, component: Checkout },
-    { path: config.routes.successOrder, component: SuccessOrder },
+    { path: config.routes.successOrder, component: SuccessOrder, layout: null },
     { path: config.routes.news, component: News },
     { path: config.routes.newsDetail, component: NewsDetail },
     { path: config.routes.test, component: Test, layout: null },

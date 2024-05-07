@@ -10,18 +10,16 @@ import {
     Select,
     Typography,
 } from '@material-tailwind/react';
-import classNames from 'classnames';
-import React, { cloneElement, useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import images from '~/assets/img';
 import CustomInput from '~/components/CustomInput';
 import { CashIcon, CreditCardIcon, DeleteIcon, InfoIcon, MinusIcon, PlusIcon } from '~/components/Icons';
 import config from '~/config';
-import { orderQuantityUpdated, orderRemoved } from '~/features/orders/ordersSlice';
+import { orderQuantityUpdated, orderRemoved, orderRemovedAll } from '~/features/orders/ordersSlice';
 import Header from '~/layouts/components/Header';
 import { getOrdersInCart, getTotalPriceInCart } from '~/selector/orders';
-import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
 
 function Checkout() {
     // const location = useLocation();
@@ -48,6 +46,7 @@ function Checkout() {
         if (order.length <= 0) {
             navigation(config.routes.home);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [order]);
     return (
         <>
@@ -115,7 +114,16 @@ function Checkout() {
                                                         <DialogFooter className="gap-x-3">
                                                             <Button
                                                                 variant="text"
-                                                                onClick={handleOpenDialog}
+                                                                onClick={() => {
+                                                                    dispatch(
+                                                                        orderQuantityUpdated({
+                                                                            id: item.id,
+                                                                            quantity: item.quantity + 1,
+                                                                            optional: item.optional,
+                                                                        }),
+                                                                    );
+                                                                    handleOpenDialog();
+                                                                }}
                                                                 className="text-light-error hover:bg-light-error-container"
                                                             >
                                                                 No
@@ -297,14 +305,14 @@ function Checkout() {
                                 <img
                                     src={images.googlePlayBadge}
                                     alt="Google Play Badge"
-                                    className="w-[160px] h-auto object-cover"
+                                    className=" w-full max-w-[160px] h-auto object-cover"
                                 />
                             </button>
                             <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
                                 <img
                                     src={images.appStoreBadge}
                                     alt="App Store Badge"
-                                    className="w-[160px] h-auto object-cover"
+                                    className="w-full max-w-[160px] h-auto object-cover"
                                 />
                             </button>
                         </div>
@@ -326,7 +334,13 @@ function Checkout() {
                                 {totalPriceInCart + 15000} VND
                             </Typography>
                         </div>
-                        <Link to={config.routes.successOrder} state={order}>
+                        <Link
+                            to={config.routes.successOrder}
+                            state={order}
+                            onClick={() => {
+                                dispatch(orderRemovedAll());
+                            }}
+                        >
                             <Button size="lg" className="bg-light-primary text-light-on-primary rounded-full">
                                 Order
                             </Button>

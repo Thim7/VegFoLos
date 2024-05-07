@@ -49,7 +49,7 @@ export default function DrawerCustom({
     const [disabledBtn, setDisabledBtn] = useState(false);
     const [totalPriceValue, setTotalPrice] = useState(totalPrice);
     const [originalPriceValue, setOriginalPrice] = useState(originalPrice);
-    const [haveOrders, setHaveOrders] = useState(false);
+    // const [haveOrders, setHaveOrders] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
 
     const body = document.body;
@@ -163,7 +163,6 @@ export default function DrawerCustom({
             setOpenDialog(true);
             return;
         }
-        // let itemsInCart = [];
         dispatch(
             orderAdded({
                 id: nanoid(),
@@ -182,12 +181,7 @@ export default function DrawerCustom({
             }),
         );
 
-        // if (localStorage.getItem('itemsInCart')) {
-        //     itemsInCart = JSON.parse(localStorage.getItem('itemsInCart'));
-        // }
-        // itemsInCart.push(haveOrdersInCart[haveOrdersInCart.length - 1]);
-        // localStorage.setItem('itemsInCart', JSON.stringify(itemsInCart));
-        setHaveOrders(true);
+        // setHaveOrders(true);
         closeDrawer();
     }
 
@@ -227,14 +221,6 @@ export default function DrawerCustom({
         setCancelOutside(false);
     }, [isAdded]);
 
-    // useEffect(() => {
-    //     let itemsInCart = [];
-    //     if (localStorage.getItem('itemsInCart')) {
-    //         itemsInCart = JSON.parse(localStorage.getItem('itemsInCart'));
-    //     }
-    //     itemsInCart.push(haveOrdersInCart[haveOrdersInCart.length - 1]);
-    //     localStorage.setItem('itemsInCart', JSON.stringify(itemsInCart));
-    // }, [haveOrdersInCart]);
     return (
         <Fragment>
             {openDialog && (
@@ -271,7 +257,7 @@ export default function DrawerCustom({
                                         optional: data?.optional,
                                     }),
                                 );
-                                setHaveOrders(true);
+                                // setHaveOrders(true);
                                 handleOpenDialog();
                                 closeDrawer();
                             }}

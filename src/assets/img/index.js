@@ -21,6 +21,8 @@ const images = {
     trackingOrder: require('./TrackingOrder.png'),
     googlePlayBadge: require('./google-play-badge.png'),
     appStoreBadge: require('./appStore_badge.png'),
+    appStoreBtn: require('./Download_AppStore_Btn.png'),
+    googlePlayBtn: require('./Download_GG_Btn.png'),
 };
 
 export default images;

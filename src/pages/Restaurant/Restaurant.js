@@ -1,7 +1,6 @@
 import { Breadcrumbs, Option, Select, Typography } from '@material-tailwind/react';
 import React, { createContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import DropdownMenu from '~/components/DropdownMenu';
 import FoodCategory from '~/components/FoodCategory';
 import { EllipseIcon, HomeIcon, LotusIcon, StarIcon, TimeIcon } from '~/components/Icons';
 import config from '~/config';

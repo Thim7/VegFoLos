@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
-import { toast } from 'react-hot-toast';
 import { faBullseye, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import * as searchServices from '~/features/searchService';
@@ -11,7 +10,7 @@ import { useDebounce } from '~/hooks';
 import { Link } from 'react-router-dom';
 
 function Searchbar() {
-    const [location, setLocation] = useState(null);
+    // const [location, setLocation] = useState(null);
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(false);
@@ -56,11 +55,11 @@ function Searchbar() {
         }
     };
 
-    const handleAddressSelect = (selectedLocation) => {
-        setLocation(selectedLocation);
-        setQuery(selectedLocation.place_name);
-        toast.success(`Selected address: ${selectedLocation.place_name}`);
-    };
+    // const handleAddressSelect = (selectedLocation) => {
+    //     setLocation(selectedLocation);
+    //     setQuery(selectedLocation.place_name);
+    //     toast.success(`Selected address: ${selectedLocation.place_name}`);
+    // };
 
     return (
         // <div>
@@ -87,7 +86,7 @@ function Searchbar() {
             )}
             onClickOutside={handleHideResult}
         >
-            <div className="shrink flex-1 flex justify-between items-center max-w-[544px] h-14 bg-light-surface-container-lowest border rounded-full border-black border-solid px-4 space-x-5 max-[640px]:space-x-2 focus-within:border-light-secondary-container transition">
+            <div className="shrink flex-1 flex justify-between items-center max-w-[544px] h-[52px] bg-light-surface-container-lowest border rounded-full border-black border-solid px-4 space-x-5 max-[640px]:space-x-2 focus-within:border-light-secondary-container transition">
                 <div className="flex flex-row items-center w-full shrink">
                     <LocationIcon />
                     <input

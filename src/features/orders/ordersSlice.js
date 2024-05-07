@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { array } from 'i/lib/util';
-import images from '~/assets/img';
 const initialState = [];
 
 const ordersSlice = createSlice({
@@ -30,8 +28,8 @@ const ordersSlice = createSlice({
             if (existingOrder) {
                 if (quantity <= 0) {
                     existingOrder.quantity = 0;
-                    existingOrder.originalPrice = existingOrder.originalPricePerUnit + bonus;
-                    existingOrder.totalPrice = existingOrder.salePrice + bonus;
+                    existingOrder.originalPrice = 0;
+                    existingOrder.totalPrice = 0;
                     return;
                 }
                 existingOrder.quantity = quantity;
@@ -63,10 +61,19 @@ const ordersSlice = createSlice({
                 if (index > -1) state.splice(index, 1);
             }
         },
+        orderRemovedAll: (state, action) => {
+            state.length = 0;
+        },
     },
 });
 
-export const { orderAdded, orderQuantityUpdated, orderOptionalUpdated, orderNoteUpdated, orderRemoved } =
-    ordersSlice.actions;
+export const {
+    orderAdded,
+    orderQuantityUpdated,
+    orderOptionalUpdated,
+    orderNoteUpdated,
+    orderRemoved,
+    orderRemovedAll,
+} = ordersSlice.actions;
 
 export default ordersSlice.reducer;
