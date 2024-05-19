@@ -8,14 +8,16 @@ import IconButton from '../IconButton';
 import { LocationIcon } from '../Icons';
 import { useDebounce } from '~/hooks';
 import { Link } from 'react-router-dom';
+import { getAddressFromCoordinates } from '~/api/geocoding';
 
 function Searchbar() {
     // const [location, setLocation] = useState(null);
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(false);
+    const [address, setAddress] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState(null);
     const inputRef = useRef();
 
     const handleHideResult = () => {
@@ -55,6 +57,32 @@ function Searchbar() {
         }
     };
 
+    const handleGetUserPosition = () => {
+        setError(null);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    try {
+                        const response = await getAddressFromCoordinates(latitude, longitude);
+                        const address = response.results[0]?.formatted || 'Không tìm thấy địa chỉ';
+                        setAddress(address);
+                    } catch (err) {
+                        setError('Không thể lấy địa chỉ');
+                    } finally {
+                        setLoading(false);
+                    }
+                },
+                (geoError) => {
+                    setError('Không thể truy cập vị trí của bạn');
+                    setLoading(false);
+                },
+            );
+        } else {
+            setError('Trình duyệt của bạn không hỗ trợ Geolocation');
+            setLoading(false);
+        }
+    };
     // const handleAddressSelect = (selectedLocation) => {
     //     setLocation(selectedLocation);
     //     setQuery(selectedLocation.place_name);
@@ -92,7 +120,7 @@ function Searchbar() {
                     <input
                         ref={inputRef}
                         type="text"
-                        value={query}
+                        value={query || address}
                         spellCheck={false}
                         className="text-sm font-normal text-light-on-surface-variant ml-5 outline-none w-full bg-transparent"
                         placeholder="Enter delivery address"
@@ -106,7 +134,11 @@ function Searchbar() {
                 <div className="inline-flex items-center">
                     {!!query && !loading && <IconButton icon={faCircleXmark} onClick={handleClear} />}
                     {loading && <IconButton className="animate-spin" icon={faSpinner} />}
-                    <IconButton icon={faBullseye} className="text-light-secondary-container" />
+                    <IconButton
+                        onClick={handleGetUserPosition}
+                        icon={faBullseye}
+                        className="text-light-secondary-container"
+                    />
                 </div>
             </div>
         </HeadlessTippy>
