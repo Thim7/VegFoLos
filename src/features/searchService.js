@@ -1,14 +1,21 @@
-import * as request from '~/utils/httpRequest';
+// import * as request from '~/utils/httpRequest';
 
-export const search = async (q, type = 'less') => {
+import axios from 'axios';
+
+const GEO_CODING_BASE_URL = 'https://api.opencagedata.com/geocode/v1/json';
+const OPEN_CAGE_GEOCODING_API_KEY = 'ff59516106b44bac818d3b37d7e85492';
+
+export const search = async (q) => {
     try {
-        const res = await request.get(`users/search`, {
+        const res = await axios.get(GEO_CODING_BASE_URL, {
             params: {
-                q,
-                type,
+                q: `${q}, Vietnam`,
+                key: OPEN_CAGE_GEOCODING_API_KEY,
+                language: 'vn',
+                limit: 10,
             },
         });
-        return res.data;
+        return res.data.results;
     } catch (err) {
         console.log(err);
     }

@@ -47,6 +47,7 @@ function Searchbar() {
     const handleClear = () => {
         setQuery('');
         setSuggestions([]);
+        setAddress('');
         inputRef.current.focus();
     };
 
@@ -58,6 +59,9 @@ function Searchbar() {
     };
 
     const handleGetUserPosition = () => {
+        setQuery('');
+        setSuggestions([]);
+        setLoading(true);
         setError(null);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -83,11 +87,6 @@ function Searchbar() {
             setLoading(false);
         }
     };
-    // const handleAddressSelect = (selectedLocation) => {
-    //     setLocation(selectedLocation);
-    //     setQuery(selectedLocation.place_name);
-    //     toast.success(`Selected address: ${selectedLocation.place_name}`);
-    // };
 
     return (
         // <div>
@@ -96,18 +95,18 @@ function Searchbar() {
             visible={showResult && suggestions.length > 0}
             render={(attrs) => (
                 <div
-                    className="max-w-[544px] w-[544px] 2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 py-2 flex-shrink bg-light-surface-container-lowest rounded-lg shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),_0_1px_2px_0_rgba(0,0,0,0.3)]"
+                    className="max-w-[544px] w-[544px] 2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 py-2 flex-shrink bg-light-surface-container-lowest rounded-lg shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),_0_1px_2px_0_rgba(0,0,0,0.3)] divide-y divide-light-outline-variant"
                     tabIndex="-1"
                     {...attrs}
                 >
-                    {suggestions.map((place) => (
+                    {suggestions.map((location) => (
                         <Link
-                            to={`/@${place.nickname}`}
-                            key={place.id}
+                            // to={`/@${location.nickname}`}
+                            // key={location.id}
                             className="inline-flex py-2 w-full max-w-[544px]  hover:bg-light-on-surface/8"
-                            // onClick={() => handleAddressSelect(place)}
+                            // onClick={() => handleAddressSelect(location)}
                         >
-                            <span className="ml-2 text-light-on-surface"> {place.full_name}</span>
+                            <p className="mx-2 text-light-on-surface text-pretty"> {location.formatted}</p>
                         </Link>
                     ))}
                 </div>
@@ -132,7 +131,7 @@ function Searchbar() {
                     />
                 </div>
                 <div className="inline-flex items-center">
-                    {!!query && !loading && <IconButton icon={faCircleXmark} onClick={handleClear} />}
+                    {(!!query || !!address) && !loading && <IconButton icon={faCircleXmark} onClick={handleClear} />}
                     {loading && <IconButton className="animate-spin" icon={faSpinner} />}
                     <IconButton
                         onClick={handleGetUserPosition}
