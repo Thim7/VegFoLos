@@ -1,6 +1,16 @@
 import images from '~/assets/img';
 import NewsTabContent from '~/components/NewsTabContent';
-
+export const DATABASE_ITEMS = [
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
+];
 export const RESTAURANT_ITEMS = [
     {
         img: images.restaurantBanner,

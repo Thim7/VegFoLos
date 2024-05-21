@@ -8,20 +8,11 @@ import { CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2, SearchIcon } fro
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
 import Header from '~/layouts/components/Header';
-import { RESTAURANT_ITEMS } from '~/data';
+import { DATABASE_ITEMS, RESTAURANT_ITEMS } from '~/data';
 import { Button } from '@material-tailwind/react';
+import config from '~/config';
+import { Link } from 'react-router-dom';
 
-const DATABASE_ITEMS = [
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-    { img: images.buttonImage, alt: 'Button', title: 'Nearby' },
-];
 function Homepage() {
     const screenHeight = window.innerHeight;
 
@@ -87,9 +78,11 @@ function Homepage() {
                     </div>
                     <div className="flex flex-wrap shrink w-full sm:space-x-8 max-[639px]:justify-evenly md:inline-flex items-center ">
                         <Searchbar />
-                        <Button size="lg" className="flex items-center gap-3 rounded-full bg-light-primary">
-                            <SearchIcon /> Search
-                        </Button>
+                        <Link to={config.routes.restaurants}>
+                            <Button size="lg" className="flex items-center gap-3 rounded-full bg-light-primary">
+                                <SearchIcon /> Search
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </section>

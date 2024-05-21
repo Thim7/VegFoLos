@@ -28,6 +28,8 @@ function Checkout() {
     const [openConfirmDeleteDialog, setOpenConfirmDeleteDialog] = useState(false);
     const [selectedValue, setSelectedValue] = useState('cash');
 
+    const userAddress = JSON.parse(localStorage.getItem('userAddress'));
+
     const order = useSelector(getOrdersInCart);
     const totalPriceInCart = useSelector(getTotalPriceInCart);
 
@@ -68,11 +70,7 @@ function Checkout() {
                         </Typography>
                     </div>
                     <div className="flex-col space-y-8 pt-4">
-                        <CustomInput
-                            label="Address"
-                            placeholder="C11/4, KP2, District 9, Tang Nhon Phu A Ward, Thu Duc City, Ho Chi Minh, 70000, Vietnam"
-                            isDisabled
-                        />
+                        <CustomInput label="Address" placeholder={userAddress} isDisabled />
                         <CustomInput label="Address details" placeholder="e.g. Floor, unit number" />
                         <CustomInput
                             label="Note for Shipper"

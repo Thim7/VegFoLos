@@ -11,7 +11,7 @@ export const search = async (q) => {
             params: {
                 q: `${q}, Vietnam`,
                 key: OPEN_CAGE_GEOCODING_API_KEY,
-                language: 'vn',
+                language: 'en',
                 limit: 10,
             },
         });

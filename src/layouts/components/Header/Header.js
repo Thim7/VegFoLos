@@ -144,7 +144,7 @@ function Header({
                             <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
                         </Link>
 
-                        {!isLogin && <Searchbar />}
+                        {!isLogin && !isCheckout && <Searchbar />}
 
                         <div className="inline-flex items-center space-x-3 shrink-0 lg:hidden">
                             <IconButton

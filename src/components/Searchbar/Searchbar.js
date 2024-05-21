@@ -1,24 +1,29 @@
 import { useState, useRef } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { faBullseye, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Link, useLocation } from 'react-router-dom';
 
 import * as searchServices from '~/features/searchService';
 
 import IconButton from '../IconButton';
 import { LocationIcon } from '../Icons';
 import { useDebounce } from '~/hooks';
-import { Link } from 'react-router-dom';
 import { getAddressFromCoordinates } from '~/api/geocoding';
+import config from '~/config';
 
 function Searchbar() {
-    // const [location, setLocation] = useState(null);
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(false);
-    const [address, setAddress] = useState('');
+    const [address, setAddress] = useState(() => {
+        return JSON.parse(localStorage.getItem('userAddress')) || '';
+    });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
     const inputRef = useRef();
+
+    const locationRouter = useLocation();
 
     const handleHideResult = () => {
         setShowResult(false);
@@ -48,6 +53,7 @@ function Searchbar() {
         setQuery('');
         setSuggestions([]);
         setAddress('');
+        localStorage.removeItem('userAddress');
         inputRef.current.focus();
     };
 
@@ -71,6 +77,7 @@ function Searchbar() {
                         const response = await getAddressFromCoordinates(latitude, longitude);
                         const address = response.results[0]?.formatted || 'Không tìm thấy địa chỉ';
                         setAddress(address);
+                        localStorage.setItem('userAddress', JSON.stringify(address));
                     } catch (err) {
                         setError('Không thể lấy địa chỉ');
                     } finally {
@@ -80,6 +87,7 @@ function Searchbar() {
                 (geoError) => {
                     setError('Không thể truy cập vị trí của bạn');
                     setLoading(false);
+                    console.log(geoError);
                 },
             );
         } else {
@@ -88,6 +96,10 @@ function Searchbar() {
         }
     };
 
+    const handleAddressSelect = (location) => {
+        localStorage.setItem('userAddress', JSON.stringify(location));
+        if (locationRouter.pathname === config.routes.restaurants) locationRouter.reload();
+    };
     return (
         // <div>
         <HeadlessTippy
@@ -101,10 +113,9 @@ function Searchbar() {
                 >
                     {suggestions.map((location) => (
                         <Link
-                            // to={`/@${location.nickname}`}
-                            // key={location.id}
+                            to={config.routes.restaurants}
                             className="inline-flex py-2 w-full max-w-[544px]  hover:bg-light-on-surface/8"
-                            // onClick={() => handleAddressSelect(location)}
+                            onClick={() => handleAddressSelect(location.formatted)}
                         >
                             <p className="mx-2 text-light-on-surface text-pretty"> {location.formatted}</p>
                         </Link>
