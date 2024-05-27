@@ -368,12 +368,12 @@ export default function DrawerCustom({
                                     alt={data.foodName}
                                     className="max-w-36 w-full h-auto object-cover rounded-xl"
                                 ></img>
-                                <div className="inline-flex">
+                                <div className="inline-flex space-x-2">
                                     <div className="flex-col space-y-2">
-                                        <Typography className="text-light-on-surface font-bold text-xl">
+                                        <Typography className="text-light-on-surface font-bold text-xl text-pretty">
                                             {data.foodName}
                                         </Typography>
-                                        <p className="text-light-on-surface-variant font-normal text-base">
+                                        <p className="text-light-on-surface-variant font-normal text-base text-pretty">
                                             {data.desc}
                                         </p>
                                     </div>

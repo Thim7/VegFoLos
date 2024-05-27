@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, forwardRef } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { faBullseye, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useDebounce } from '~/hooks';
 import { getAddressFromCoordinates } from '~/api/geocoding';
 import config from '~/config';
 
-function Searchbar() {
+const Searchbar = forwardRef(function Searchbar({}, ref) {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(false);
@@ -20,8 +20,6 @@ function Searchbar() {
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
-    const inputRef = useRef();
 
     const locationRouter = useLocation();
 
@@ -54,7 +52,7 @@ function Searchbar() {
         setSuggestions([]);
         setAddress('');
         localStorage.removeItem('userAddress');
-        inputRef.current.focus();
+        ref.current?.focus();
     };
 
     const handleInputChange = (e) => {
@@ -128,7 +126,7 @@ function Searchbar() {
                 <div className="flex flex-row items-center w-full shrink">
                     <LocationIcon />
                     <input
-                        ref={inputRef}
+                        ref={ref}
                         type="text"
                         value={query || address}
                         spellCheck={false}
@@ -154,6 +152,6 @@ function Searchbar() {
         </HeadlessTippy>
         // </div>
     );
-}
+});
 
 export default Searchbar;

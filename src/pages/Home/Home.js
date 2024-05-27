@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import images from '~/assets/img';
 import DatabaseButton from '~/components/DatabaseButton';
-import { CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2, SearchIcon } from '~/components/Icons';
+import { CloseIcon, CustomLeftArrowIcon, CustomRightArrowIcon, LotusIcon2, SearchIcon } from '~/components/Icons';
 import RestaurantCard from '~/components/RestaurantCard';
 import Searchbar from '~/components/Searchbar';
 import Header from '~/layouts/components/Header';
 import { DATABASE_ITEMS, RESTAURANT_ITEMS } from '~/data';
-import { Button } from '@material-tailwind/react';
+import { Alert, Button, IconButton } from '@material-tailwind/react';
 import config from '~/config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Homepage() {
+    const [isOpenAlert, setIsOpenAlert] = useState(false);
     const screenHeight = window.innerHeight;
 
+    const navigate = useNavigate();
+    const inputRef = useRef(null);
     var settings = {
         dots: true,
         infinite: true,
@@ -58,6 +61,15 @@ function Homepage() {
         ],
     };
 
+    const handleClickSearch = () => {
+        if (inputRef.current.value === '') {
+            setIsOpenAlert(true);
+            return;
+        }
+
+        navigate(config.routes.restaurants);
+    };
+
     return (
         <div className="">
             <Header hide breakPointTransition={screenHeight} />
@@ -77,13 +89,31 @@ function Homepage() {
                         <h2 className="text-base md:text-xl">Where should we deliver your food today?</h2>
                     </div>
                     <div className="flex flex-wrap shrink w-full sm:space-x-8 max-[639px]:justify-evenly md:inline-flex items-center ">
-                        <Searchbar />
-                        <Link to={config.routes.restaurants}>
-                            <Button size="lg" className="flex items-center gap-3 rounded-full bg-light-primary">
-                                <SearchIcon /> Search
-                            </Button>
-                        </Link>
+                        <Searchbar ref={inputRef} />
+                        <Button
+                            onClick={handleClickSearch}
+                            size="lg"
+                            className="flex items-center gap-3 rounded-full bg-light-primary"
+                        >
+                            <SearchIcon /> Search
+                        </Button>
                     </div>
+                    <Alert
+                        open={isOpenAlert}
+                        className="absolute -bottom-16 w-3/4 bg-light-error-container text-light-on-error-container"
+                        action={
+                            <IconButton
+                                variant="text"
+                                size="sm"
+                                className="!absolute top-3 right-3"
+                                onClick={() => setIsOpenAlert(false)}
+                            >
+                                <CloseIcon color="#410002" />
+                            </IconButton>
+                        }
+                    >
+                        You need to fill your delivery address before continuing
+                    </Alert>
                 </div>
             </section>
             <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2 snap-center">

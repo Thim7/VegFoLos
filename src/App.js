@@ -4,11 +4,14 @@ import { Fragment } from 'react';
 import { publicRoutes } from '~/routes';
 import DefaultLayout from './layouts';
 import ScrollToTop from './components/ScrollToTop';
+import { Button } from '@material-tailwind/react';
+import { Fab } from '@mui/material';
+import { MoonIcon } from './components/Icons';
 function App() {
     return (
         <Router>
             <ScrollToTop />
-            <div className="App relative">
+            <div className="App relative w-screen h-screen">
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;
