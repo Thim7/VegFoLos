@@ -1,39 +1,74 @@
 import { useState } from 'react';
-import { Menu, MenuHandler, MenuList, Button, MenuItem, Typography } from '@material-tailwind/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import config from '~/config';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Menu, MenuHandler, MenuList, MenuItem, IconButton, Switch } from '@material-tailwind/react';
+import { ChevronDownIcon, LanguageIcon, MoonIcon, SettingIcon, SunIcon } from '../Icons';
+import { useEffect } from 'react';
 
-function DropdownMenu({ variant = 'outlined', title, menuItems, className: customClassName }) {
+function DropdownMenu({ menuItems, title }) {
     const [openMenu, setOpenMenu] = useState(false);
+    const [isLightTheme, setIsLightTheme] = useState(() => {
+        return JSON.parse(localStorage.getItem('isLightTheme') || true);
+    });
 
-    var classes =
-        'inline-flex h-10 px-5 py-2 justify-center items-center rounded-full text-sm gap-2 font-medium text-light-primary border border-light-outline hover:bg-light-primary/8';
-    if (customClassName) {
-        classes += ` ${customClassName}`;
-    }
+    const handleSwitchClick = () => {
+        setIsLightTheme(!isLightTheme);
+    };
+
+    useEffect(() => {
+        var root = document.getElementsByTagName('html')[0];
+
+        if (isLightTheme === true) {
+            localStorage.setItem('isLightTheme', JSON.stringify(true));
+            root.classList.remove('dark');
+        } else {
+            localStorage.setItem('isLightTheme', JSON.stringify(false));
+            root.classList.add('dark');
+        }
+    }, [isLightTheme]);
     return (
-        <Menu open={openMenu} handler={setOpenMenu}>
+        <Menu>
             <MenuHandler>
-                <Button variant={variant} className={classes}>
-                    {title}
-                    <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className={`h-3.5 w-3.5 transition-transform ${openMenu ? 'rotate-180' : ''}`}
-                    />
-                </Button>
+                <IconButton
+                    className="rounded-full border-light-primary dark:border-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
+                    variant="outlined"
+                >
+                    <SettingIcon color="#235b2f" />
+                </IconButton>
             </MenuHandler>
-            <MenuList className="hidden max-h-96 gap-3 overflow-visible lg:grid bg-light-surface-container-lowest">
-                <ul className="flex w-full flex-col gap-1 hover:outline-none">
-                    {menuItems.map((item, index) => (
-                        <Link to={config.routes.home} key={index} className="w-full">
-                            <MenuItem className=" hover:bg-light-tertiary-container transition-colors text-light-on-surface hover:text-light-on-tertiary-container">
+            <MenuList className="bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest w-1/5 overflow-hidden">
+                <Menu placement="right-start" open={openMenu} handler={setOpenMenu} allowHover offset={15}>
+                    <MenuHandler className="flex items-center justify-between">
+                        <MenuItem className="hover:!bg-light-tertiary-container dark:hover:!bg-dark-tertiary-container hover:!text-light-on-tertiary-container dark:hover:!text-dark-on-tertiary-container">
+                            <div className="flex items-center space-x-1 ">
+                                <LanguageIcon />
+                                <span className="text-light-on-surface dark:text-dark-on-surface ">{title}</span>
+                            </div>
+                            <ChevronDownIcon
+                                strokeWidth={2.5}
+                                className={`size-6 transition-transform ${openMenu ? 'rotate-90' : ''}`}
+                            />
+                        </MenuItem>
+                    </MenuHandler>
+                    <MenuList className="bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest">
+                        {menuItems.map((item, index) => (
+                            <MenuItem
+                                key={index}
+                                className="text-light-on-surface dark:text-dark-on-surface hover:!bg-light-tertiary-container dark:hover:!bg-dark-tertiary-container hover:!text-light-on-tertiary-container dark:hover:!text-dark-on-tertiary-container"
+                            >
                                 {item}
                             </MenuItem>
-                        </Link>
-                    ))}
-                </ul>
+                        ))}
+                    </MenuList>
+                </Menu>
+                <MenuItem
+                    onClick={handleSwitchClick}
+                    className="text-light-on-surface dark:text-dark-on-surface inline-flex justify-between items-center w-full"
+                >
+                    <div className="flex items-center space-x-1">
+                        {isLightTheme ? <SunIcon /> : <MoonIcon />}
+                        <span>Switch theme</span>
+                    </div>
+                    <Switch defaultChecked={isLightTheme} />
+                </MenuItem>
             </MenuList>
         </Menu>
     );

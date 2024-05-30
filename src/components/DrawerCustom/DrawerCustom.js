@@ -224,9 +224,11 @@ export default function DrawerCustom({
     return (
         <Fragment>
             {openDialog && (
-                <Dialog open className="bg-light-surface-container-lowest">
-                    <DialogHeader className="text-light-on-surface">Want to change restaurant?</DialogHeader>
-                    <DialogBody className="text-light-on-surface-variant ">
+                <Dialog open className="bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest">
+                    <DialogHeader className="text-light-on-surface dark:text-dark-on-surface">
+                        Want to change restaurant?
+                    </DialogHeader>
+                    <DialogBody className="text-light-on-surface-variant dark:text-dark-on-surface-variant ">
                         You're adding an order from another restaurant to your cart. This action will delete previous
                         orders in cart. Do you want to continue?
                     </DialogBody>
@@ -234,13 +236,13 @@ export default function DrawerCustom({
                         <Button
                             variant="text"
                             onClick={handleOpenDialog}
-                            className="text-light-error hover:bg-light-error-container"
+                            className="text-light-error dark:text-dark-error hover:bg-light-error-container dark:hover:bg-dark-error-container"
                         >
                             No
                         </Button>
                         <Button
                             ripple
-                            className="bg-light-primary-container text-light-on-primary"
+                            className="bg-light-primary-container dark:bg-dark-primary-container text-light-on-primary dark:text-dark-on-primary"
                             onClick={() => {
                                 dispatch(
                                     orderAdded({
@@ -271,18 +273,20 @@ export default function DrawerCustom({
                 <Button
                     onClick={_openDrawer || openDrawer}
                     size="sm"
-                    className="flex items-center gap-3 rounded-full bg-light-primary"
+                    className="flex items-center gap-3 rounded-full bg-light-primary dark:bg-dark-primary"
                 >
-                    <BagIcon color="#ffffff" />
-                    {numeral(totalPriceInCart).format('0,0')}
+                    <BagIcon className="!text-light-on-primary dark:!text-dark-on-primary" />
+                    <span className="text-light-on-primary dark:!text-dark-on-primary text-sm ">
+                        {numeral(totalPriceInCart).format('0,0')}
+                    </span>
                 </Button>
             ) : isAdded ? (
-                <div className="inline-flex space-x-2 items-center border-2 border-light-outline rounded-xl p-2">
+                <div className="inline-flex space-x-2 items-center border-2 border-light-outline dark:border-dark-outline rounded-xl p-2">
                     {isCancelOutside ? (
                         <IconButton
                             size="sm"
                             variant="text"
-                            className="rounded-full hover:bg-light-error-container"
+                            className="rounded-full hover:bg-light-error-container dark:hover:bg-dark-error-container"
                             onClick={() => {
                                 dispatch(orderRemoved({ id: isAdded.id }));
                             }}
@@ -302,12 +306,14 @@ export default function DrawerCustom({
                                 );
                             }}
                             variant="text"
-                            className="rounded-full border-light-primary text-light-primary hover:bg-light-primary/8"
+                            className="rounded-full border-light-primary dark:border-dark-primary text-light-primary dark:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
                         >
                             <MinusIcon color="#191c19" />
                         </IconButton>
                     )}
-                    <Typography className="text-sm font-normal text-light-on-surface">{isAdded.quantity}</Typography>
+                    <Typography className="text-sm font-normal text-light-on-surface dark:text-dark-on-surface">
+                        {isAdded.quantity}
+                    </Typography>
                     <IconButton
                         size="sm"
                         onClick={() => {
@@ -320,7 +326,7 @@ export default function DrawerCustom({
                             );
                         }}
                         variant="text"
-                        className="rounded-full border-light-primary text-light-primary hover:bg-light-primary/8"
+                        className="rounded-full border-light-primary dark:border-dark-primary text-light-primary dark:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
                     >
                         <PlusIcon color="#191c19" />
                     </IconButton>
@@ -344,16 +350,16 @@ export default function DrawerCustom({
             <Drawer
                 open={isOpenDrawer || open}
                 onClose={openDialog ? () => {} : _closeDrawer || closeDrawer}
-                className="p-5 flex-col space-y-5 z-[9995]"
+                className="p-5 flex-col space-y-5 z-[9995] bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest"
                 size={DRAWER_SIZE}
                 placement="right"
                 overlay={isOpenDrawer ? false : true}
             >
                 {/* Close Button */}
-                <div className="fixed top-0 py-5 border-b w-full mx-[-20px] z-50 bg-light-surface-container-lowest">
+                <div className="fixed top-0 py-5 border-b border-light-outline-variant dark:border-dark-outline-variant w-full mx-[-20px] z-50 bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest">
                     <IconButton
                         variant="text"
-                        className="left-5 rounded-full hover:bg-light-primary/8"
+                        className="left-5 rounded-full hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
                         onClick={_closeDrawer || closeDrawer}
                     >
                         <CloseIcon />
@@ -370,26 +376,26 @@ export default function DrawerCustom({
                                 ></img>
                                 <div className="inline-flex space-x-2">
                                     <div className="flex-col space-y-2">
-                                        <Typography className="text-light-on-surface font-bold text-xl text-pretty">
+                                        <Typography className="text-light-on-surface dark:text-dark-on-surface font-bold text-xl text-pretty">
                                             {data.foodName}
                                         </Typography>
-                                        <p className="text-light-on-surface-variant font-normal text-base text-pretty">
+                                        <p className="text-light-on-surface-variant dark:text-dark-on-surface-variant font-normal text-base text-pretty">
                                             {data.desc}
                                         </p>
                                     </div>
                                     <div className="flex-col space-y-2">
-                                        <Typography className="text-light-on-surface font-bold text-xl">
+                                        <Typography className="text-light-on-surface dark:text-dark-on-surface font-bold text-xl">
                                             {numeral(totalPriceValue).format('0,0')}
                                         </Typography>
-                                        <strike className="text-light-on-surface-variant font-light text-base justify-self-start">
+                                        <strike className="text-light-on-surface-variant dark:text-dark-on-surface-variant font-light text-base justify-self-start">
                                             {numeral(originalPriceValue).format('0,0')}
                                         </strike>
                                     </div>
                                 </div>
                             </div>
-                            <div className="pt-5 border-t-8 border-light-outline-variant"></div>
+                            <div className="pt-5 border-t-8 border-light-outline-variant dark:border-dark-outline-variant"></div>
                             <div className="mx-5">
-                                <Typography className="mb-3 font-medium text-light-on-surface">
+                                <Typography className="mb-3 font-medium text-light-on-surface dark:text-dark-on-surface">
                                     Optional ({data.optional.length})
                                 </Typography>
                                 <div className="flex-col space-y-2">
@@ -399,7 +405,7 @@ export default function DrawerCustom({
                                                 nameCheckboxRef.current[index] = el;
                                             }}
                                             key={index}
-                                            className="optional-bar flex justify-between items-center pt-1 border-t border-light-outline-variant"
+                                            className="optional-bar flex justify-between items-center pt-1 border-t border-light-outline-variant dark:border-dark-outline-variant"
                                         >
                                             <Checkbox
                                                 onClick={handleClickCheckBox}
@@ -411,21 +417,23 @@ export default function DrawerCustom({
                                                 labelProps={{
                                                     class: 'text-light-on-surface font-normal text-base',
                                                 }}
-                                                className="border-light-outline checked:bg-light-primary"
+                                                className="border-light-outline dark:border-dark-outline checked:bg-light-primary dark:checked:bg-dark-primary"
                                             />
-                                            <Typography className="text-base font-normal text-light-on-surface">
+                                            <Typography className="text-base font-normal text-light-on-surface dark:text-dark-on-surface">
                                                 {numeral(item.toppingPrice).format('0,0')}
                                             </Typography>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            <div className="pt-5 border-t-8 border-light-outline-variant">
+                            <div className="pt-5 border-t-8 border-light-outline-variant dark:border-dark-outline-variant">
                                 <div className="mx-5">
                                     <div className="flex-col space-y-2">
                                         <div className="inline-flex space-x-2 items-center">
-                                            <Typography className="font-medium text-light-on-surface">Note</Typography>
-                                            <Typography className="font-light text-light-on-surface-variant text-xs">
+                                            <Typography className="font-medium text-light-on-surface dark:text-dark-on-surface">
+                                                Note
+                                            </Typography>
+                                            <Typography className="font-light text-light-on-surface-variant dark:text-dark-on-surface-variant text-xs">
                                                 Optional
                                             </Typography>
                                         </div>
@@ -434,7 +442,7 @@ export default function DrawerCustom({
                                                 ref={inputRef}
                                                 type="text"
                                                 placeholder="E.g. Less sugar, please"
-                                                className="h-11 w-full px-3 border border-light-outline focus:outline focus:shadow-md bg-light-surface-container-lowest text-light-on-surface text-base font-medium focus:placeholder:font-medium placeholder:font-normal  placeholder:text-light-on-surface-variant placeholder:opacity-80 transition-opacity rounded-lg"
+                                                className="h-11 w-full px-3 border border-light-outline dark:border-dark-outline focus:outline focus:shadow-md bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest text-light-on-surface dark:text-dark-on-surface text-base font-medium focus:placeholder:font-medium placeholder:font-normal  placeholder:text-light-on-surface-variant dark:placeholder:text-dark-on-surface-variant placeholder:opacity-80 transition-opacity rounded-lg"
                                             />
                                         </div>
                                         <div></div>
@@ -443,29 +451,33 @@ export default function DrawerCustom({
                             </div>
                         </div>
                         <div
-                            className={`fixed bottom-0 bg-light-tertiary-container mx-[-20px] w-full max-w-[${DRAWER_SIZE}px] h-20 shadow-inner`}
+                            className={`fixed bottom-0 bg-light-tertiary-container dark:bg-dark-tertiary-container mx-[-20px] w-full max-w-[${DRAWER_SIZE}px] h-20 shadow-inner`}
                         >
                             <div className="inline-flex justify-between items-center space-x-5 w-full px-5 h-full">
                                 <div className="inline-flex space-x-5 items-center">
                                     {disabledBtn ? (
-                                        <IconButton disabled size="lg" className="bg-light-primary rounded-full">
+                                        <IconButton
+                                            disabled
+                                            size="lg"
+                                            className="bg-light-primary dark:bg-dark-primary rounded-full"
+                                        >
                                             <MinusIcon />
                                         </IconButton>
                                     ) : (
                                         <IconButton
                                             size="lg"
-                                            className="bg-light-primary rounded-full"
+                                            className="bg-light-primary dark:bg-dark-primary rounded-full"
                                             onClick={handleClickMinusBtn}
                                         >
                                             <MinusIcon />
                                         </IconButton>
                                     )}
-                                    <Typography className="text-2xl font-medium text-light-on-tertiary-container">
+                                    <Typography className="text-2xl font-medium text-light-on-tertiary-container dark:text-dark-on-tertiary-container">
                                         {quantity}
                                     </Typography>
                                     <IconButton
                                         size="lg"
-                                        className="bg-light-primary rounded-full"
+                                        className="bg-light-primary dark:bg-dark-primary rounded-full"
                                         onClick={handleClickPlusBtn}
                                     >
                                         <PlusIcon />
@@ -476,7 +488,7 @@ export default function DrawerCustom({
                                         <Button
                                             size="lg"
                                             fullWidth
-                                            className="bg-light-error-container text-light-on-error-container font-bolt rounded-full"
+                                            className="bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container font-bolt rounded-full"
                                             onClick={_closeDrawer || closeDrawer}
                                         >
                                             Cancel
@@ -487,7 +499,7 @@ export default function DrawerCustom({
                                             size="lg"
                                             ripple
                                             fullWidth
-                                            className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                            className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
                                         >
                                             Update Cart - {numeral(totalPriceValue).format('0,0')}
                                         </Button>
@@ -500,7 +512,7 @@ export default function DrawerCustom({
                 {!data && haveOrdersInCart.length > 0 && (
                     <>
                         <div className="flex-col space-y-5 h-screen pt-12 pb-48 mx-[-20px] overflow-auto px-5 divide-y">
-                            <Typography className="text-xl text-light-on-surface pt-5 font-medium">
+                            <Typography className="text-xl text-light-on-surface dark:text-dark-on-surface pt-5 font-medium">
                                 {haveOrdersInCart[haveOrdersInCart.length - 1].title}
                             </Typography>
                             {haveOrdersInCart.map((order) => (
@@ -527,7 +539,9 @@ export default function DrawerCustom({
                                             >
                                                 <MinusIcon color="#a6ca94" strokeWidth={2} />
                                             </IconButton>
-                                            <Typography className="text-base font-normal">{order.quantity}</Typography>
+                                            <Typography className="text-base font-normal text-light-on-surface dark:text-dark-on-surface">
+                                                {order.quantity}
+                                            </Typography>
                                             <IconButton
                                                 size="sm"
                                                 className="rounded-full"
@@ -551,20 +565,20 @@ export default function DrawerCustom({
                                             className="max-w-28 w-full h-auto object-cover rounded-xl"
                                         />
                                         <div className="flex-col max-w-[200px] space-y-2 justify-between">
-                                            <p className="text-base font-medium text-light-on-surface">
+                                            <p className="text-base font-medium text-light-on-surface dark:text-dark-on-surface">
                                                 {order.foodName}
                                             </p>
                                             <div className="flex space-x-2">
                                                 {order.optional.map((option, index) => (
                                                     <p
-                                                        className="text-sm text-light-on-surface font-normal"
+                                                        className="text-sm text-light-on-surface dark:text-dark-on-surface font-normal"
                                                         key={index}
                                                     >
                                                         {option.toppingName}
                                                     </p>
                                                 ))}
                                             </div>
-                                            <p className="text-sm font-light text-light-on-surface-variant">
+                                            <p className="text-sm font-light text-light-on-surface-variant dark:text-dark-on-surface-variant">
                                                 {order.note}
                                             </p>
                                         </div>
@@ -573,7 +587,7 @@ export default function DrawerCustom({
                                         <Button
                                             size="sm"
                                             variant="text"
-                                            className="rounded-full text-light-error hover:bg-light-error-container"
+                                            className="rounded-full text-light-error dark:text-dark-error hover:bg-light-error-container dark:hover:bg-dark-error-container"
                                             onClick={() => {
                                                 dispatch(orderRemoved({ id: order.id }));
                                             }}
@@ -582,10 +596,10 @@ export default function DrawerCustom({
                                         </Button>
                                     ) : (
                                         <div className="flex-col flex-shrink-0">
-                                            <Typography className="text-base font-normal text-light-on-surface">
+                                            <Typography className="text-base font-normal text-light-on-surface dark:text-dark-on-surface">
                                                 {numeral(order.totalPrice).format('0,0')}
                                             </Typography>
-                                            <strike className="text-base font-light text-light-on-surface-variant">
+                                            <strike className="text-base font-light text-light-on-surface-variant dark:text-dark-on-surface-variant">
                                                 {numeral(order.originalPrice).format('0,0')}
                                             </strike>
                                         </div>
@@ -594,27 +608,27 @@ export default function DrawerCustom({
                             ))}
                             <div className="pt-5 inline-flex justify-between w-full">
                                 <div className="flex-col">
-                                    <Typography className="text-base font-medium text-light-on-surface">
+                                    <Typography className="text-base font-medium text-light-on-surface dark:text-dark-on-surface">
                                         Subtotal
                                     </Typography>
-                                    <Typography className="text-base font-normal text-light-on-surface-variant">
+                                    <Typography className="text-base font-normal text-light-on-surface-variant dark:text-dark-on-surface-variant">
                                         *Delivery Fee will be shown after you review order
                                     </Typography>
                                 </div>
-                                <Typography className="text-base font-normal text-light-on-surface-variant">
+                                <Typography className="text-base font-normal text-light-on-surface-variant dark:text-dark-on-surface-variant">
                                     {numeral(totalPriceInCart).format('0,0')}
                                 </Typography>
                             </div>
                         </div>
                         <div
-                            className={`fixed bottom-0 bg-light-tertiary-container mx-[-20px] w-full max-w-[${DRAWER_SIZE}px] h-32 shadow-inner`}
+                            className={`fixed bottom-0 bg-light-tertiary-container dark:bg-dark-tertiary-container mx-[-20px] w-full max-w-[${DRAWER_SIZE}px] h-32 shadow-inner`}
                         >
                             <div className="flex-col space-y-5 items-center w-full px-5 py-5 h-full">
                                 <div className="inline-flex w-full items-center justify-between">
-                                    <Typography className="text-xl font-normal text-light-on-tertiary-container">
+                                    <Typography className="text-xl font-normal text-light-on-tertiary-container dark:text-dark-on-tertiary-container">
                                         Total
                                     </Typography>
-                                    <Typography className="text-xl font-bold text-light-on-tertiary-container">
+                                    <Typography className="text-xl font-bold text-light-on-tertiary-container dark:text-dark-on-tertiary-container">
                                         {numeral(totalPriceInCart).format('0,0')} VND
                                     </Typography>
                                 </div>
@@ -625,7 +639,7 @@ export default function DrawerCustom({
                                                 size="lg"
                                                 ripple
                                                 fullWidth
-                                                className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                                className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
                                             >
                                                 Checkout
                                             </Button>
@@ -636,7 +650,7 @@ export default function DrawerCustom({
                                                 size="lg"
                                                 ripple
                                                 fullWidth
-                                                className="bg-light-primary text-light-on-primary font-bolt rounded-full"
+                                                className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
                                             >
                                                 Log in to place order
                                             </Button>
@@ -652,13 +666,15 @@ export default function DrawerCustom({
                         <div className="flex-col space-y-10 text-center flex-grow h-full pt-20">
                             <img src={images.cartImage} alt="Cart" className="max-w-48 w-full h-auto m-auto" />
                             <div>
-                                <Typography className="text-3xl font-bold">Start Shopping!</Typography>
-                                <Typography className="text-base font-normal">
+                                <Typography className="text-3xl font-bold text-light-on-surface dark:text-dark-on-surface">
+                                    Start Shopping!
+                                </Typography>
+                                <Typography className="text-base font-normal text-light-on-surface dark:text-dark-on-surface">
                                     Add items to your basket and place order here.
                                 </Typography>
                             </div>
                             <Typography
-                                className="text-base text-light-primary font-medium opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
+                                className="text-base text-light-primary dark:text-dark-primary font-medium opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
                                 onClick={_closeDrawer || closeDrawer}
                             >
                                 Continue browsing

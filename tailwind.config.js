@@ -1,6 +1,7 @@
 const withMT = require('@material-tailwind/react/utils/withMT');
 /** @type {import('tailwindcss').Config} */
 module.exports = withMT({
+    darkMode: 'selector',
     content: ['./src/**/*.{html,js}'],
     theme: {
         corePlugins: {
@@ -42,6 +43,40 @@ module.exports = withMT({
                 },
                 outline: '#71796f',
                 'outline-variant': '#c1c9bd',
+            },
+            dark: {
+                background: '#111411',
+                primary: '#99d59d',
+                'primary-container': '#498150',
+                secondary: '#bfe3ab',
+                'secondary-container': '#96b985',
+                tertiary: '#ffffff',
+                'tertiary-container': '#d3d7bd',
+                error: '#ffb4ab',
+                'error-container': '#93000a',
+                on: {
+                    primary: '#003913',
+                    'primary-container': '#ffffff',
+                    secondary: '#1a3710',
+                    'secondary-container': '#0e2a05',
+                    'tertiary-container': '#3d412e',
+                    error: '#690005',
+                    'error-container': '#ffdad6',
+                    surface: '#e1e3dd',
+                    'surface-variant': '#c1c9bd',
+                    background: '#e1e3dd',
+                },
+                surface: '#111411',
+                'surface-variant': '#414940',
+                'surface-container': {
+                    lowest: '#0c0f0b',
+                    low: '#191c19',
+                    medium: '#1d201c',
+                    high: '#272b27',
+                    highest: '#323631',
+                },
+                outline: '#8b9388',
+                'outline-variant': '#414940',
             },
         },
         breadcrumbs: {

@@ -6,8 +6,8 @@ import IconButton from '~/components/IconButton';
 import { faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 function Footer() {
     return (
-        <footer className="mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4 w-full snap-end scroll-mt-2 bg-light-surface-container-lowest divide-y">
-            <Link to={config.routes.home} className>
+        <footer className="mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-4 w-full snap-end scroll-mt-2 bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest divide-y divide-light-outline-variant dark:divide-dark-outline-variant">
+            <Link to={config.routes.home} className="dark:contrast-125">
                 <img className="shrink-0 h-auto max-w-full w-36 z-50 py-8" src={images.logo} alt="VegFoLos" />
             </Link>
             <div className={`flex w-full justify-between py-8 flex-wrap-reverse`}>
@@ -18,14 +18,14 @@ function Footer() {
                 </div>
 
                 <div className="max-[639px]:w-full max-[639px]:hidden sm:flex justify-evenly sm:space-x-8 sm:justify-start flex-shrink-0 items-center">
-                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
+                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_3px_1px_rgba(255,255,255,0.3),_0_1px_2px_0_rgba(255,255,255,0.3)]">
                         <img
                             src={images.googlePlayBtn}
                             alt="DownLoad on Google Play"
                             // className="w-[160px] h-auto object-cover"
                         />
                     </button>
-                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
+                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_3px_1px_rgba(255,255,255,0.3),_0_1px_2px_0_rgba(255,255,255,0.3)]">
                         <img
                             src={images.appStoreBtn}
                             alt="DownLoad on App Store"
@@ -49,17 +49,17 @@ function Footer() {
                     <IconButton icon={faTwitter} />
                 </div>
                 <div className="max-[639px]:w-full max-[639px]:flex justify-evenly sm:space-x-8 sm:justify-start flex-shrink-0 items-center sm:hidden">
-                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
+                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_3px_1px_rgba(255,255,255,0.3),_0_1px_2px_0_rgba(255,255,255,0.3)]">
                         <img src={images.googlePlayBtn} alt="DownLoad on Google Play" />
                     </button>
-                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]">
+                    <button className="rounded-lg hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_3px_1px_rgba(255,255,255,0.3),_0_1px_2px_0_rgba(255,255,255,0.3)]">
                         <img src={images.appStoreBtn} alt="DownLoad on App Store" />
                     </button>
                 </div>
-                <div className="inline-flex justify-evenly space-x-2 sm:justify-between items-center sm:space-x-4">
-                    <p className="text-light-on-surface">2023 VegFoLos</p>
-                    <p className="text-light-on-surface">Terms</p>
-                    <p className="text-light-on-surface">Privacy Policy</p>
+                <div className="inline-flex justify-evenly space-x-2 sm:justify-between items-center sm:space-x-4 text-light-on-surface dark:text-dark-on-surface">
+                    <p>2023 VegFoLos</p>
+                    <p>Terms</p>
+                    <p>Privacy Policy</p>
                 </div>
             </div>
         </footer>

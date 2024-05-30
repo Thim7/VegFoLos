@@ -1,4 +1,4 @@
-import { useState, useRef, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { faBullseye, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useDebounce } from '~/hooks';
 import { getAddressFromCoordinates } from '~/api/geocoding';
 import config from '~/config';
 
-const Searchbar = forwardRef(function Searchbar({}, ref) {
+const Searchbar = forwardRef(function Searchbar({ ...props }, ref) {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(false);
@@ -105,32 +105,36 @@ const Searchbar = forwardRef(function Searchbar({}, ref) {
             visible={showResult && suggestions.length > 0}
             render={(attrs) => (
                 <div
-                    className="max-w-[544px] w-[544px] 2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 py-2 flex-shrink bg-light-surface-container-lowest rounded-lg shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),_0_1px_2px_0_rgba(0,0,0,0.3)] divide-y divide-light-outline-variant"
+                    className="max-w-[544px] w-[544px] 2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 py-2 flex-shrink bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest rounded-lg shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),_0_1px_2px_0_rgba(0,0,0,0.3)] divide-y divide-light-outline-variant dark:divide-dark-outline-variant"
                     tabIndex="-1"
                     {...attrs}
                 >
                     {suggestions.map((location) => (
                         <Link
                             to={config.routes.restaurants}
-                            className="inline-flex py-2 w-full max-w-[544px]  hover:bg-light-on-surface/8"
+                            className="inline-flex py-2 w-full max-w-[544px]  hover:bg-light-on-surface/8 dark:hover:bg-dark-on-surface/8"
                             onClick={() => handleAddressSelect(location.formatted)}
                         >
-                            <p className="mx-2 text-light-on-surface text-pretty"> {location.formatted}</p>
+                            <p className="mx-2 text-light-on-surface dark:text-dark-on-surface text-pretty">
+                                {' '}
+                                {location.formatted}
+                            </p>
                         </Link>
                     ))}
                 </div>
             )}
             onClickOutside={handleHideResult}
         >
-            <div className="shrink flex-1 flex justify-between items-center max-w-[544px] h-[52px] bg-light-surface-container-lowest border rounded-full border-black border-solid px-4 space-x-5 max-[640px]:space-x-2 focus-within:border-light-secondary-container transition">
+            <div className="shrink flex-1 flex justify-between items-center max-w-[544px] h-[52px] bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest border rounded-full border-light-outline dark:border-dark-outline border-solid px-4 space-x-5 max-[640px]:space-x-2 focus-within:border-light-secondary-container dark:focus-within:border-dark-secondary-container transition">
                 <div className="flex flex-row items-center w-full shrink">
                     <LocationIcon />
+
                     <input
                         ref={ref}
                         type="text"
                         value={query || address}
                         spellCheck={false}
-                        className="text-sm font-normal text-light-on-surface-variant ml-5 outline-none w-full bg-transparent"
+                        className="text-sm font-normal text-light-on-surface-variant dark:text-dark-on-surface-variant ml-5 outline-none w-full bg-transparent"
                         placeholder="Enter delivery address"
                         onChange={handleInputChange}
                         onFocus={(e) => {
@@ -145,7 +149,7 @@ const Searchbar = forwardRef(function Searchbar({}, ref) {
                     <IconButton
                         onClick={handleGetUserPosition}
                         icon={faBullseye}
-                        className="text-light-secondary-container"
+                        className="text-light-secondary-container dark:text-dark-secondary-container"
                     />
                 </div>
             </div>

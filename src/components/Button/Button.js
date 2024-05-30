@@ -41,13 +41,14 @@ function Button({
 
     if (primary) {
         classes +=
-            ' bg-light-primary text-light-on-primary hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)]';
+            ' bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary hover:shadow-[0_1px_3px_1px_rgba(0,0,0,0.3),_0_1px_2px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_3px_1px_rgba(255,255,255,0.3),_0_1px_2px_0_rgba(255,255,255,0.3)]';
     }
     if (outline) {
-        classes += ' text-light-primary border border-light-outline hover:bg-light-primary/8';
+        classes +=
+            ' dark:text-dark-primary text-light-primary border dark:border-dark-outline border-light-outline hover:bg-light-primary/8 dark:hover:bg-dark-primary/8';
     }
     if (text) {
-        classes += ' text-light-primary hover:bg-light-primary/8';
+        classes += ' text-light-primary dark:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8';
     }
     if (customClass) {
         classes += ` ${customClass}`;

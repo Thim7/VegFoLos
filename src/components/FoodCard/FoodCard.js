@@ -41,7 +41,7 @@ function FoodCard({ data }) {
                     <Typography className="font-bold text-base text-light-on-surface">{data.totalPrice} VND</Typography>
                     <DrawerCustom
                         ripple
-                        className="rounded-full bg-light-primary"
+                        className="rounded-full bg-light-primary dark:bg-dark-primary"
                         icon={<PlusIcon />}
                         data={data}
                         isAdded={haveOrdersInCart}

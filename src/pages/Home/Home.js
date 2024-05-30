@@ -84,7 +84,7 @@ function Homepage() {
                 <div
                     className={`2xl:mx-40 xl:mx-32 lg:mx-28 sm:mx-8 max-[639px]:mx-2 sm:w-full flex-col absolute self-center max-w-3xl space-y-16`}
                 >
-                    <div className=" text-light-on-primary text-center md:text-start">
+                    <div className=" text-light-on-primary dark:text-dark-on-primary text-center md:text-start">
                         <h1 className="text-4xl">Good Morning!</h1>
                         <h2 className="text-base md:text-xl">Where should we deliver your food today?</h2>
                     </div>
@@ -93,9 +93,10 @@ function Homepage() {
                         <Button
                             onClick={handleClickSearch}
                             size="lg"
-                            className="flex items-center gap-3 rounded-full bg-light-primary"
+                            className="flex items-center gap-3 rounded-full bg-light-primary dark:bg-dark-primary"
                         >
-                            <SearchIcon /> Search
+                            <SearchIcon className="!text-light-on-primary dark:!text-dark-on-primary" />
+                            <span className="text-light-on-primary dark:text-dark-on-primary">Search</span>
                         </Button>
                     </div>
                     <Alert
@@ -117,7 +118,9 @@ function Homepage() {
                 </div>
             </section>
             <section className="w-full mt-48 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2 snap-center">
-                <h1 className="text-4xl text-light-on-background">Popular restaurants near you</h1>
+                <h1 className="text-4xl text-light-on-background dark:text-dark-on-background">
+                    Popular restaurants near you
+                </h1>
                 <div className="slider-container max-[848px]:px-8 max-[640px]:px-0">
                     <Slider className="flex mt-9 h-auto" {...settings}>
                         {RESTAURANT_ITEMS.map((item, index) => (
@@ -126,9 +129,11 @@ function Homepage() {
                     </Slider>
                 </div>
             </section>
-            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10 scroll-mt-2 snap-center bg-light-tertiary-container">
+            <section className="w-full mt-52 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 py-10 scroll-mt-2 snap-center bg-light-secondary-container dark:bg-dark-secondary-container">
                 <div>
-                    <h1 className="text-4xl text-light-on-tertiary-container">There's something for you!</h1>
+                    <h1 className="text-4xl text-light-on-secondary-container dark:text-dark-on-secondary-container">
+                        There's something for you!
+                    </h1>
                     <div className="grid justify-items-center xl:grid-cols-6 md:grid-cols-4 max-[640px]:grid-cols-2 gap-5 mt-9 w-full h-auto">
                         {DATABASE_ITEMS.map((item, index) => (
                             <DatabaseButton data={item} key={index} />
@@ -138,24 +143,24 @@ function Homepage() {
             </section>
             <section className="w-full mt-64 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 max-[640px]:px-7 scroll-mt-2 snap-center">
                 <div>
-                    <h1 className="text-4xl text-light-on-background">Why VegFoLos?</h1>
+                    <h1 className="text-4xl text-light-on-background dark:text-dark-on-background">Why VegFoLos?</h1>
                     <div className="mt-7 flex-col space-y-5">
                         <div className="flex space-x-2">
                             <LotusIcon2 />
-                            <p className="text-light-on-background">
+                            <p className="text-light-on-background dark:text-dark-on-background">
                                 <strong>Quickest</strong> - VegFoLos provides the fastest food delivery in the market.
                             </p>
                         </div>{' '}
                         <div className="flex space-x-2">
                             <LotusIcon2 />
-                            <p className="text-light-on-background">
+                            <p className="text-light-on-background dark:text-dark-on-background">
                                 <strong>Easiest</strong> - Grabbing your food is just a few clicks or taps away. Order
                                 online or download our VegFoLos app for a faster and more rewarding experience.
                             </p>
                         </div>
                         <div className="flex space-x-2">
                             <LotusIcon2 />
-                            <p className="text-light-on-background">
+                            <p className="text-light-on-background dark:text-dark-on-background">
                                 <strong>Healthiest</strong> - Connecting healthy and high quality vegetarian food shops
                                 to consumers
                             </p>
