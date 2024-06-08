@@ -11,9 +11,10 @@ export default function UnderlineTabs({ data, className: customClassName }) {
     return (
         <Tabs value={activeTab} className={classes}>
             <TabsHeader
-                className="sticky h-10 top-32 rounded-lg border-light-surface-container-low border-b bg-light-surface-container-lowest"
+                className="sticky h-10 top-32 rounded-lg border-light-surface-container-low dark:border-dark-surface-container-low border-b bg-light-surface-container-high dark:bg-dark-surface-container-high"
                 indicatorProps={{
-                    className: 'bg-transparent border-b-2 border-light-primary shadow-none rounded-none',
+                    className:
+                        'bg-transparent border-b-2 border-light-primary dark:border-dark-primary shadow-none rounded-none',
                 }}
             >
                 {data.map(({ label, value }) => (
@@ -21,7 +22,7 @@ export default function UnderlineTabs({ data, className: customClassName }) {
                         key={value}
                         value={value}
                         onClick={() => setActiveTab(value)}
-                        className={`${activeTab === value ? 'text-light-primary' : 'text-light-on-surface-variant'} transition-transform`}
+                        className={`${activeTab === value ? 'text-light-primary dark:text-dark-primary font-medium' : 'text-light-on-surface-variant dark:text-dark-on-surface-variant'} transition-transform`}
                     >
                         {label}
                     </Tab>

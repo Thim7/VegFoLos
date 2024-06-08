@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 
@@ -24,7 +24,6 @@ function Header({
     isCheckout = false,
     className: customClassName,
 }) {
-    // let location = useLocation();
     const [hide, setHide] = useState(customHide);
     const [isOpenDrawer, setOpenDrawer] = useState(false);
     const [user, setUser] = useState(
@@ -51,16 +50,7 @@ function Header({
         document.body.classList.remove('overflow-hidden');
     };
 
-    // const totalPriceInCart = useSelector(getTotalPriceInCart);
-    // const haveOrdersInCart = useSelector(getOrdersInCart);
-
-    // const dispatch = useDispatch();
-
-    var classes =
-        'w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-white shadow-md z-50 transition-colors ease-in';
-    if (customClassName) {
-        classes += ` ${customClassName}`;
-    }
+    const ref = useRef();
 
     if (customHide) {
         const handleScroll = () => {
@@ -75,8 +65,6 @@ function Header({
             handleScroll();
         };
     }
-
-    // const positionApp = document.getElementsByClassName('App');
 
     useEffect(() => {
         if (user?.type === 'google_login') {
@@ -106,24 +94,35 @@ function Header({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        const fullHeader =
+            `dark:!bg-dark-surface-container-lowest !bg-light-surface-container-lowest dark:border-b dark:border-dark-outline-variant transition-all ease-in duration-200`.split(
+                ' ',
+            );
+        const emptyHeader = 'transition-color ease-out duration-200'.split(' ');
+        const header = ref.current;
+        if (!hide) {
+            header.classList.add(...fullHeader);
+        } else if (hide) {
+            header.classList.add(...emptyHeader);
+        }
+
+        return () => {
+            header.classList.remove(...fullHeader);
+            header.classList.remove(...emptyHeader);
+        };
+    }, [hide]);
     return (
         <>
-            {hide ? (
-                <header className="w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-transparent z-50 transition">
-                    <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden ">
-                        <img className="h-auto max-w-full w-36 z-50 " src={images.logo} alt="VegFoLos" />
-                    </Link>
-                    <div className="w-full"></div>
-                </header>
-            ) : (
-                <>
-                    <header
-                        className={`dark:bg-dark-surface-container-lowest bg-light-surface-container-lowest ${classes} transition dark:border-b dark:border-dark-outline-variant`}
-                    >
-                        <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden dark:contrast-125">
-                            <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
-                        </Link>
-
+            <header
+                ref={ref}
+                className={`w-screen md:w-full fixed 2xl:px-40 xl:px-32 lg:px-28 sm:px-8 h-32 top-0 py-1 flex items-center justify-between space-x-5 max-[640px]:space-x-2 bg-transparent z-50 duration-300`}
+            >
+                <Link to={config.routes.home} className="shrink-0 max-[640px]:hidden dark:contrast-125">
+                    <img className="h-auto max-w-full w-36 z-50" src={images.logo} alt="VegFoLos" />
+                </Link>
+                {!hide && (
+                    <>
                         {!isLogin && !isCheckout && <Searchbar />}
 
                         <div className="inline-flex items-center space-x-3 shrink-0 lg:hidden">
@@ -190,10 +189,9 @@ function Header({
                             )}
                             <DropdownMenu menuItems={menuItems} title="EN" />
                         </div>
-                    </header>
-                    {/* {isOpenDrawer && <div className="w-full h-full fixed z-50 bg-light-green-200"></div>} */}
-                </>
-            )}
+                    </>
+                )}
+            </header>
         </>
     );
 }

@@ -69,7 +69,9 @@ function NewsTabContent({ label = null }) {
             <section className="mt-14">
                 <div className="inline-flex items-center space-x-2">
                     <LotusIcon2 />
-                    <Typography className="text-[22px] font-normal text-light-on-background">{label} Posts</Typography>
+                    <Typography className="text-[22px] font-normal text-light-on-background dark:text-dark-on-background">
+                        {label} Posts
+                    </Typography>
                 </div>
                 <div className="mt-6 slider-container">
                     <Slider {...settings} className="flex h-auto">

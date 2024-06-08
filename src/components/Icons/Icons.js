@@ -28,12 +28,14 @@ import { faBookmark, faClock, faCreditCard } from '@fortawesome/free-regular-svg
 const cx = classNames.bind(styles);
 export const LotusIcon = () => (
     <img
-        className="w-6 h-6 flex-shrink-0 bg-light-secondary-container rounded"
+        className="w-6 h-6 flex-shrink-0 bg-light-secondary-container dark:bg-dark-secondary-container rounded"
         src={images.lotusIcon}
         alt="Lotus icon"
     />
 );
-export const LotusIcon2 = () => <img className="w-6 h-6 flex-shrink-0" src={images.lotusIcon2} alt="Lotus icon" />;
+export const LotusIcon2 = () => (
+    <img className="w-6 h-6 flex-shrink-0 text-light-primary" src={images.lotusIcon2} alt="Lotus icon" />
+);
 
 export const StarIcon = () => (
     <FontAwesomeIcon icon={faStar} className="w-6 h-6 text-light-primary dark:text-dark-primary" />

@@ -15,19 +15,19 @@ export default function InputDropDownCountry() {
                         ripple={false}
                         variant="text"
                         color="blue-gray"
-                        className="flex h-12 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                        className="flex h-12 items-center gap-2 rounded-r-none border border-r-0 border-light-outline dark:border-dark-outline bg-light-surface-container-low dark:bg-dark-surface-container-lowest text-light-on-surface dark:text-dark-on-surface pl-3"
                     >
                         <img src={flags.svg} alt={name} className="h-4 w-4 rounded-full object-cover" />
                         {countryCallingCode}
                     </Button>
                 </MenuHandler>
-                <MenuList className="max-h-[20rem] max-w-[18rem] z-40">
+                <MenuList className="max-h-[20rem] max-w-[18rem] z-40 bg-light-surface-container-lowest dark:bg-dark-surface-container-lowest">
                     {countries.map(({ name, flags, countryCallingCode }, index) => {
                         return (
                             <MenuItem
                                 key={name}
                                 value={name}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 text-light-on-surface dark:text-dark-on-surface hover:!bg-light-tertiary-container dark:hover:!bg-dark-tertiary-container hover:!text-light-on-tertiary-container dark:hover:!text-dark-on-tertiary-container"
                                 onClick={() => setCountry(index)}
                             >
                                 <img src={flags.svg} alt={name} className="h-5 w-5 rounded-full object-cover" />
@@ -40,7 +40,7 @@ export default function InputDropDownCountry() {
             <Input
                 type="tel"
                 placeholder="Mobile Number"
-                className=" rounded-l-none !border-t-blue-gray-200 focus:!border-t-gray-900"
+                className=" rounded-l-none !border-light-outline dark:!border-dark-outline text-light-on-surface dark:text-dark-on-surface"
                 labelProps={{
                     className: 'before:content-none after:content-none',
                 }}
