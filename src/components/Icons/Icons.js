@@ -91,15 +91,27 @@ export const HomeIcon = () => (
     <FontAwesomeIcon icon={faHouse} className="w-6 h-6 text-light-on-surface dark:text-dark-on-surface" />
 );
 
-export const PlusIcon = ({ color }) => (
-    <FontAwesomeIcon icon={faPlus} className="w-6 h-6 text-light-on-surface dark:text-dark-on-surface" />
-);
+export const PlusIcon = ({ className: customClassName }) => {
+    customClassName?.split(' ');
+    return (
+        <FontAwesomeIcon
+            icon={faPlus}
+            className={`w-6 h-6 text-light-on-primary dark:text-dark-on-primary ${customClassName}`}
+        />
+    );
+};
 
-export const MinusIcon = ({ color }) => (
-    <FontAwesomeIcon icon={faMinus} className="w-6 h-6 text-light-on-surface dark:text-dark-on-surface" />
-);
+export const MinusIcon = ({ className: customClassName }) => {
+    customClassName?.split(' ');
+    return (
+        <FontAwesomeIcon
+            icon={faMinus}
+            className={`w-6 h-6 text-light-on-primary dark:text-dark-on-primary ${customClassName}`}
+        />
+    );
+};
 
-export const CloseIcon = ({ color }) => (
+export const CloseIcon = () => (
     <FontAwesomeIcon
         icon={faXmark}
         className="w-6 h-6 text-light-on-surface-variant dark:text-dark-on-surface-variant"

@@ -19,7 +19,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { getTotalPriceInCart, getOrdersInCart } from '~/selector/orders';
 import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import config from '~/config';
 const DRAWER_SIZE = 516;
 
@@ -53,6 +53,7 @@ export default function DrawerCustom({
     const [openDialog, setOpenDialog] = useState(false);
 
     const body = document.body;
+    const navigate = useNavigate();
 
     const { title, timeDelivery, distanceDelivery } = useContext(RestaurantDataContext);
 
@@ -201,6 +202,15 @@ export default function DrawerCustom({
         }
     }
 
+    function handleCheckout() {
+        closeDrawer();
+        navigate(`${config.routes.checkout}`);
+    }
+
+    function handleLoginToCheckout() {
+        closeDrawer();
+        navigate(`${config.routes.login}`, { state: { haveOrdersInCart } });
+    }
     useEffect(() => {
         if (quantity <= 0) {
             setCancel(true);
@@ -235,7 +245,10 @@ export default function DrawerCustom({
                     <DialogFooter className="gap-x-3">
                         <Button
                             variant="text"
-                            onClick={handleOpenDialog}
+                            onClick={() => {
+                                handleOpenDialog();
+                                closeDrawer();
+                            }}
                             className="text-light-error dark:text-dark-error hover:bg-light-error-container dark:hover:bg-dark-error-container"
                         >
                             No
@@ -281,7 +294,7 @@ export default function DrawerCustom({
                     </span>
                 </Button>
             ) : isAdded ? (
-                <div className="inline-flex space-x-2 items-center border-2 border-light-outline dark:border-dark-outline rounded-xl p-2">
+                <div className="inline-flex space-x-2 items-center border-2 bg-light-surface-container-low dark:bg-dark-surface-container-low border-light-outline dark:border-dark-outline rounded-xl p-2">
                     {isCancelOutside ? (
                         <IconButton
                             size="sm"
@@ -291,7 +304,7 @@ export default function DrawerCustom({
                                 dispatch(orderRemoved({ id: isAdded.id }));
                             }}
                         >
-                            <DeleteIcon color="#ba1a1a" />
+                            <DeleteIcon />
                         </IconButton>
                     ) : (
                         <IconButton
@@ -308,7 +321,7 @@ export default function DrawerCustom({
                             variant="text"
                             className="rounded-full border-light-primary dark:border-dark-primary text-light-primary dark:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
                         >
-                            <MinusIcon color="#191c19" />
+                            <MinusIcon className="text-light-primary dark:text-dark-primary" />
                         </IconButton>
                     )}
                     <Typography className="text-sm font-normal text-light-on-surface dark:text-dark-on-surface">
@@ -328,7 +341,7 @@ export default function DrawerCustom({
                         variant="text"
                         className="rounded-full border-light-primary dark:border-dark-primary text-light-primary dark:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8"
                     >
-                        <PlusIcon color="#191c19" />
+                        <PlusIcon className="text-light-primary dark:text-dark-primary" />
                     </IconButton>
                 </div>
             ) : (
@@ -537,7 +550,7 @@ export default function DrawerCustom({
                                                     );
                                                 }}
                                             >
-                                                <MinusIcon color="#a6ca94" strokeWidth={2} />
+                                                <MinusIcon className="text-light-primary dark:text-dark-primary" />
                                             </IconButton>
                                             <Typography className="text-base font-normal text-light-on-surface dark:text-dark-on-surface">
                                                 {order.quantity}
@@ -556,7 +569,7 @@ export default function DrawerCustom({
                                                     );
                                                 }}
                                             >
-                                                <PlusIcon color="#a6ca94" strokeWidth={2} />
+                                                <PlusIcon className="text-light-primary dark:text-dark-primary" />
                                             </IconButton>
                                         </div>
                                         <img
@@ -634,27 +647,25 @@ export default function DrawerCustom({
                                 </div>
                                 <div>
                                     {user ? (
-                                        <Link to={config.routes.checkout} state={{ haveOrdersInCart }}>
-                                            <Button
-                                                size="lg"
-                                                ripple
-                                                fullWidth
-                                                className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
-                                            >
-                                                Checkout
-                                            </Button>
-                                        </Link>
+                                        <Button
+                                            onClick={handleCheckout}
+                                            size="lg"
+                                            ripple
+                                            fullWidth
+                                            className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
+                                        >
+                                            Checkout
+                                        </Button>
                                     ) : (
-                                        <Link to={config.routes.login} state={{ haveOrdersInCart }}>
-                                            <Button
-                                                size="lg"
-                                                ripple
-                                                fullWidth
-                                                className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
-                                            >
-                                                Log in to place order
-                                            </Button>
-                                        </Link>
+                                        <Button
+                                            onClick={handleLoginToCheckout}
+                                            size="lg"
+                                            ripple
+                                            fullWidth
+                                            className="bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-bolt rounded-full"
+                                        >
+                                            Log in to place order
+                                        </Button>
                                     )}
                                 </div>
                             </div>

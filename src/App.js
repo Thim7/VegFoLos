@@ -11,7 +11,7 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
-            <div className="App relative w-screen h-screen">
+            <div className="App relative h-full">
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;

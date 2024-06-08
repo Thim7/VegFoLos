@@ -18,7 +18,7 @@ const publicRoutes = [
     { path: config.routes.restaurants, component: Restaurants },
     { path: config.routes.restaurant, component: Restaurant },
     { path: config.routes.foodItem, component: FoodItem },
-    { path: config.routes.checkout, component: Checkout },
+    { path: config.routes.checkout, component: Checkout, layout: null },
     { path: config.routes.successOrder, component: SuccessOrder, layout: null },
     { path: config.routes.news, component: News },
     { path: config.routes.newsDetail, component: NewsDetail },

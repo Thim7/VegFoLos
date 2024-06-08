@@ -3590,6 +3590,22 @@ h1,
   padding-top: 1px;
 }
 
+.pb-28{
+  padding-bottom: 7rem;
+}
+
+.pb-40{
+  padding-bottom: 10rem;
+}
+
+.pb-52{
+  padding-bottom: 13rem;
+}
+
+.pb-64{
+  padding-bottom: 16rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -7346,6 +7362,11 @@ h1,
   border-color: rgb(139 147 136 / var(--tw-border-opacity)) !important;
 }
 
+.dark\:border-black:where(.dark, .dark *){
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
 .dark\:border-dark-outline:where(.dark, .dark *){
   --tw-border-opacity: 1;
   border-color: rgb(139 147 136 / var(--tw-border-opacity));
@@ -7364,21 +7385,6 @@ h1,
 .dark\:border-dark-surface-container-low:where(.dark, .dark *){
   --tw-border-opacity: 1;
   border-color: rgb(25 28 25 / var(--tw-border-opacity));
-}
-
-.dark\:border-dark-surface-container-highest:where(.dark, .dark *){
-  --tw-border-opacity: 1;
-  border-color: rgb(50 54 49 / var(--tw-border-opacity));
-}
-
-.dark\:border-light-surface-container-highest:where(.dark, .dark *){
-  --tw-border-opacity: 1;
-  border-color: rgb(225 227 221 / var(--tw-border-opacity));
-}
-
-.dark\:border-black:where(.dark, .dark *){
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .dark\:\!bg-dark-surface-container-lowest:where(.dark, .dark *){
@@ -7411,21 +7417,6 @@ h1,
   background-color: rgb(150 185 133 / var(--tw-bg-opacity));
 }
 
-.dark\:bg-dark-surface-container-lowest:where(.dark, .dark *){
-  --tw-bg-opacity: 1;
-  background-color: rgb(12 15 11 / var(--tw-bg-opacity));
-}
-
-.dark\:bg-dark-tertiary-container:where(.dark, .dark *){
-  --tw-bg-opacity: 1;
-  background-color: rgb(211 215 189 / var(--tw-bg-opacity));
-}
-
-.dark\:bg-dark-surface-container-highest:where(.dark, .dark *){
-  --tw-bg-opacity: 1;
-  background-color: rgb(50 54 49 / var(--tw-bg-opacity));
-}
-
 .dark\:bg-dark-surface-container-high:where(.dark, .dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(39 43 39 / var(--tw-bg-opacity));
@@ -7434,6 +7425,16 @@ h1,
 .dark\:bg-dark-surface-container-low:where(.dark, .dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(25 28 25 / var(--tw-bg-opacity));
+}
+
+.dark\:bg-dark-surface-container-lowest:where(.dark, .dark *){
+  --tw-bg-opacity: 1;
+  background-color: rgb(12 15 11 / var(--tw-bg-opacity));
+}
+
+.dark\:bg-dark-tertiary-container:where(.dark, .dark *){
+  --tw-bg-opacity: 1;
+  background-color: rgb(211 215 189 / var(--tw-bg-opacity));
 }
 
 .dark\:\!text-dark-on-primary:where(.dark, .dark *){
