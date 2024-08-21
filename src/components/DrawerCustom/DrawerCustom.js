@@ -19,7 +19,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { getTotalPriceInCart, getOrdersInCart } from '~/selector/orders';
 import { RestaurantDataContext } from '~/pages/Restaurant/Restaurant';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import config from '~/config';
 const DRAWER_SIZE = 516;
 

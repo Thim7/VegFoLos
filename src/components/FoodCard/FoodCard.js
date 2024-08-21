@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { PlusIcon } from '~/components/Icons';
 import DrawerCustom from '../DrawerCustom';
 import { getOrdersInCart } from '~/selector/orders';
-import { useEffect, useState } from 'react';
 
 function FoodCard({ data }) {
     const ordersInCart = useSelector(getOrdersInCart);

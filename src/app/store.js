@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { thunk } from 'redux-thunk';
 
 import ordersSlice from '~/features/orders/ordersSlice';
 

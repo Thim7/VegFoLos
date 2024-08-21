@@ -4,9 +4,7 @@ import { Fragment } from 'react';
 import { publicRoutes } from '~/routes';
 import DefaultLayout from './layouts';
 import ScrollToTop from './components/ScrollToTop';
-import { Button } from '@material-tailwind/react';
-import { Fab } from '@mui/material';
-import { MoonIcon } from './components/Icons';
+
 function App() {
     return (
         <Router>

@@ -1,4 +1,4 @@
-import { Breadcrumbs, Typography } from '@material-tailwind/react';
+import { Breadcrumbs } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import DatabaseButton from '~/components/DatabaseButton';
 import { HomeIcon, SearchIcon } from '~/components/Icons';

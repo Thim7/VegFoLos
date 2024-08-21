@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -11,7 +11,7 @@ import Header from '~/layouts/components/Header';
 import { DATABASE_ITEMS, RESTAURANT_ITEMS } from '~/data';
 import { Alert, Button, IconButton } from '@material-tailwind/react';
 import config from '~/config';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
     const [isOpenAlert, setIsOpenAlert] = useState(false);
